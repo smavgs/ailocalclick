@@ -1,7 +1,6 @@
 # ailocal.click
 
-A fast, beginner-friendly directory of every base model currently listed in
-Ollama's official model library.
+Fast, beginner-friendly Click & build with ai open models, on your computer . FREE
 
 Live site: [ailocalclick.pages.dev](https://ailocalclick.pages.dev/)
 
@@ -49,12 +48,7 @@ PUBLIC_ENABLE_GITHUB_AUTH=true
 PUBLIC_TURNSTILE_SITE_KEY=your_public_turnstile_site_key
 ```
 
-Apply `supabase/migrations/202608240001_account_profiles.sql` to a dedicated
-Supabase project before enabling the variables. Email/password authentication,
-email confirmation, and password recovery use custom production SMTP. Google and
-GitHub buttons can be enabled separately after their provider credentials are
-configured. When Turnstile protection is enabled in Supabase Auth, the matching
-public site key must be present in every production build.
+Apply supabase to a dedicated Supabase project before enabling the variables. Email/password authentication, email confirmation, and password recovery use custom production SMTP. Google and GitHub buttons can be enabled separately after their provider credentials are configured. When Turnstile protection is enabled in Supabase Auth, the matching public site key must be present in every production build.
 
 For Cloudflare Pages, use `npm run build`, publish `dist`, and set
 `PUBLIC_SITE_URL` to the production origin with `PUBLIC_BASE_PATH=/`.
@@ -84,15 +78,5 @@ is an independent directory and is not affiliated with Ollama.
 Selecting a model validates its catalog slug, copies the exact visible
 `ollama run <model>` command, and shows instructions adapted for macOS, Windows,
 or Linux. If the model is not installed, Ollama downloads it before starting it.
-
-A website cannot open, paste into, or execute Terminal commands. The user opens
-Terminal, pastes the command, and presses Enter. ailocal.click does not contact a
-local service, change browser network permissions, or install a helper program.
-
-Saving requires sign-in. Each user gets a separate RLS-protected Supabase list.
-An earlier browser-only list, when present from a previous release, can be imported
-once after sign-in and is then removed. The My models page supports selected tags,
-notes, compatibility guidance, search, capability filters, sorting, removal,
-clearing, and JSON/CSV export.
 
 Account support: [corporate@agentmail.to](mailto:corporate@agentmail.to).
