@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Find, save, and download models from Ollama's official library.",
+  "description": "Find Ollama models, save a private list, and copy one command to run them locally.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

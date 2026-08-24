@@ -9,6 +9,7 @@
   --line-strong: #aeb1a7;
   --accent: #91f25b;
   --accent-strong: #68d632;
+  --accent-text: #34751a;
   --black: #10110f;
   --white: #fbfaf7;
   --danger: #dc503c;
@@ -78,6 +79,17 @@ svg {
 
 [hidden] {
   display: none !important;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 ::selection {
@@ -867,7 +879,7 @@ svg {
 .starter-flow span,
 .section-number,
 .about-row > div:first-child > span {
-  color: var(--accent-strong);
+  color: var(--accent-text);
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 750;
@@ -1444,7 +1456,7 @@ svg {
 }
 
 .run-steps span {
-  color: var(--accent-strong);
+  color: var(--accent-text);
   font-family: var(--font-mono);
   font-size: 0.7rem;
 }
@@ -1578,6 +1590,10 @@ svg {
   margin: 4px 0 0;
   color: var(--muted);
   font-size: 0.78rem;
+}
+
+.saved-signed-out {
+  margin-block-start: 18px;
 }
 
 .saved-controls {
@@ -1958,6 +1974,7 @@ button:disabled {
 }
 
 .account-guest > p:not(.eyebrow, .account-message, .account-fine-print),
+.account-recovery > p:not(.eyebrow, .account-message),
 .account-unavailable p {
   max-width: 48ch;
   margin: 20px 0 0;
@@ -1965,7 +1982,9 @@ button:disabled {
 }
 
 .account-email-form {
+  display: grid;
   margin-block-start: 28px;
+  gap: 8px;
 }
 
 .account-email-form label {
@@ -1979,9 +1998,15 @@ button:disabled {
   text-transform: uppercase;
 }
 
-.account-email-form > div {
+.account-email-form label:not(:first-child) {
+  margin-block-start: 10px;
+}
+
+.account-form-actions {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  margin-block-start: 10px;
   gap: 8px;
 }
 
@@ -1998,6 +2023,40 @@ button:disabled {
 
 .account-email-form input:focus {
   border-color: var(--accent-strong);
+}
+
+.account-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-block-start: 26px;
+  border-block-end: 1px solid var(--line-strong);
+}
+
+.account-tabs button {
+  min-height: 46px;
+  padding: 8px 12px;
+  border: 0;
+  border-block-end: 3px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 780;
+}
+
+.account-tabs button.is-active {
+  border-block-end-color: var(--accent-strong);
+  color: var(--ink);
+}
+
+.account-text-button {
+  min-height: 44px;
+  padding: 8px 2px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 720;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .account-divider {
@@ -2162,6 +2221,65 @@ button:disabled {
   flex-wrap: wrap;
   margin-block-start: 14px;
   gap: 8px;
+}
+
+.copy-run-result {
+  margin-block-start: 22px;
+  padding: 16px 18px;
+  border-inline-start: 4px solid var(--accent-strong);
+  background: color-mix(in srgb, var(--accent) 11%, var(--surface));
+}
+
+.copy-run-result p,
+.copy-run-device-note {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.copy-run-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 22px 0 0;
+  padding: 0;
+  border-block: 1px solid var(--line-strong);
+  list-style: none;
+}
+
+.copy-run-steps li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  padding: 18px 14px;
+  border-inline-end: 1px solid var(--line);
+  gap: 10px;
+}
+
+.copy-run-steps li:last-child {
+  border-inline-end: 0;
+}
+
+.copy-run-steps li > span {
+  color: var(--accent-text);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.copy-run-steps p {
+  display: grid;
+  margin: 0;
+  gap: 6px;
+}
+
+.copy-run-steps small {
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.copy-run-device-note {
+  padding: 12px 14px;
+  border: 1px solid var(--line-strong);
 }
 
 .pull-progress,
@@ -2753,7 +2871,7 @@ button:disabled {
   .profile-hardware-grid,
   .provider-buttons,
   .account-links,
-  .account-email-form > div {
+  .account-form-actions {
     grid-template-columns: 1fr;
   }
 
@@ -2783,6 +2901,19 @@ button:disabled {
 
   .pull-actions {
     display: grid;
+  }
+
+  .copy-run-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .copy-run-steps li {
+    border-block-end: 1px solid var(--line);
+    border-inline-end: 0;
+  }
+
+  .copy-run-steps li:last-child {
+    border-block-end: 0;
   }
 
   .pull-command code {
@@ -2898,6 +3029,7 @@ button:disabled {
     --line-strong: #454b40;
     --accent: #91f25b;
     --accent-strong: #7ce347;
+    --accent-text: #7ce347;
     --black: #070806;
     --white: #f7f8f2;
   }

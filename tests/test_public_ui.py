@@ -38,7 +38,7 @@ class PublicUiContractTests(unittest.TestCase):
         index = (ROOT / "src/pages/index.astro").read_text()
         footer = (ROOT / "src/components/Footer.astro").read_text()
         header = (ROOT / "src/components/Header.astro").read_text()
-        dialog = (ROOT / "src/components/OllamaPullDialog.astro").read_text()
+        dialog = (ROOT / "src/components/CopyRunDialog.astro").read_text()
         site_script = (ROOT / "src/scripts/site.ts").read_text()
         account_script = (ROOT / "src/scripts/account.ts").read_text()
         saved_page = (ROOT / "src/pages/saved.astro").read_text()
@@ -48,14 +48,35 @@ class PublicUiContractTests(unittest.TestCase):
         self.assertIn("Click &amp; build with ai open models, on your computer.", index)
         self.assertIn("Click &amp; build with ai open models, on your computer.", footer)
         self.assertIn("data-auth-open", header)
-        self.assertIn("data-pull-start", dialog)
-        self.assertIn('fetch(`${apiBase}/pull`', site_script)
+        self.assertIn("data-copy-run-again", dialog)
+        self.assertIn("data-open-copy-run", site_script)
+        self.assertIn("navigator.clipboard.writeText", site_script)
+        self.assertNotIn("/api/pull", site_script)
+        self.assertNotIn("OLLAMA_ORIGINS", site_script)
         self.assertIn("ailocalclick:saved-models:v1", account_script)
-        self.assertIn("signInWithOtp", account_script)
+        self.assertIn("signInWithPassword", account_script)
+        self.assertIn("signUp", account_script)
+        self.assertIn("resetPasswordForEmail", account_script)
+        self.assertIn("Sign in to save models to your private list.", account_script)
+        self.assertNotIn("guestSavedRecords", account_script)
         self.assertIn('from("saved_models")', account_script)
         self.assertIn("data-saved-page", saved_page)
         self.assertIn("data-saved-note", (ROOT / "src/components/ModelRow.astro").read_text())
         self.assertIn("data-profile-form", profile_page)
+
+    def test_copy_run_replaces_browser_local_pull_setup(self) -> None:
+        sources = "\n".join(
+            path.read_text()
+            for path in (
+                ROOT / "src/scripts/site.ts",
+                ROOT / "src/pages/learn.astro",
+                ROOT / "src/pages/about.astro",
+                ROOT / "README.md",
+            )
+        )
+        for removed in ("/api/pull", "OLLAMA_ORIGINS", "Download with Ollama"):
+            self.assertNotIn(removed, sources)
+        self.assertIn("Copy &amp; run", (ROOT / "src/components/CopyRunDialog.astro").read_text())
 
     def test_supabase_migration_has_rls(self) -> None:
         migration = (ROOT / "supabase/migrations/202608240001_account_profiles.sql").read_text()

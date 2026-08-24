@@ -22,7 +22,7 @@ const href = (path: string) => `${basePath}${path}`;
 const related = models
   .filter((candidate) => candidate.slug !== model.slug && candidate.capabilities.some((capability) => model.capabilities.includes(capability)))
   .slice(0, 5);
-const title = `${model.name} — download with Ollama | ailocal.click`;
+const title = `${model.name} — Copy & run with Ollama | ailocal.click`;
 ---
 
 <BaseLayout title={title} description={model.description} canonicalPath={`/model/${model.slug}/`} pageClass="model-page">
@@ -58,29 +58,29 @@ const title = `${model.name} — download with Ollama | ailocal.click`;
 
     <section class="run-section" aria-labelledby="run-title">
       <div class="run-copy">
-        <p class="eyebrow">Download locally</p>
-        <h2 id="run-title">Confirm, then let Ollama pull it.</h2>
-        <p>The browser can ask Ollama running on this computer to download the default tag. Confirm the exact file size, license, context, and hardware requirement on the official page first.</p>
+        <p class="eyebrow">Run locally</p>
+        <h2 id="run-title">Copy one command. You stay in control.</h2>
+        <p>The command downloads the default tag if needed, then starts it. Confirm the exact file size, license, context, and hardware requirement on the official page first.</p>
       </div>
       <button
         type="button"
         class="button button-accent model-download-button"
-        data-open-pull
+        data-open-copy-run
         data-model-slug={model.slug}
         data-model-name={model.name}
         data-run-command={model.runCommand}
         data-official-url={model.officialUrl}
         data-model-cloud={model.capabilities.includes("cloud") ? "true" : "false"}
-      >Download with Ollama</button>
+      >Copy &amp; run</button>
       <div class="primary-command">
         <span class="terminal-prompt" aria-hidden="true">$</span>
         <code>{model.runCommand}</code>
         <button type="button" data-copy-command={model.runCommand}>Copy command</button>
       </div>
       <ol class="run-steps">
-        <li><span>1</span><p><strong>Install and open Ollama</strong> on this computer.</p></li>
-        <li><span>2</span><p><strong>Review the exact size</strong> and choose a compatible tag.</p></li>
-        <li><span>3</span><p><strong>Confirm the download</strong> or use the copy command fallback.</p></li>
+        <li><span>1</span><p><strong>Install Ollama</strong> on your Mac, Windows, or Linux computer.</p></li>
+        <li><span>2</span><p><strong>Open Terminal</strong> and paste the copied command.</p></li>
+        <li><span>3</span><p><strong>Press Enter</strong> to download the model if needed and start it.</p></li>
       </ol>
     </section>
 

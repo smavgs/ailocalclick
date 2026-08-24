@@ -8,17 +8,17 @@ Ollama's official model library.
 - synchronizes the complete official Ollama library listing with a standard-library Python script;
 - builds one searchable directory and one static detail page per model with Astro and TypeScript;
 - explains Ollama from first use through local APIs and coding-agent integrations;
-- saves locally for guests and privately synchronizes signed-in users through Supabase;
+- privately synchronizes signed-in users through Supabase with row-level security;
 - provides profiles with avatars, selected model tags, notes, operating system, RAM/GPU preferences, filters, remove, and JSON/CSV export;
-- asks the local Ollama `/api/pull` endpoint to download only after explicit confirmation;
-- keeps a visible copy-command fallback when the browser cannot reach local Ollama;
+- copies a visible `ollama run <model>` command and shows OS-aware Terminal steps;
+- leaves the paste-and-run action entirely under the user's control;
 - deploys as a static GitHub Pages site and refreshes the catalog every six hours.
 
 ## Stack
 
 - Astro and TypeScript for static pages and typed catalog data
 - CSS for the adaptive visual system
-- browser JavaScript and Supabase Auth for search, filters, account sync, profiles, and streamed Ollama download progress
+- browser JavaScript and Supabase Auth for search, filters, password accounts, private sync, profiles, and Copy & run guidance
 - Python for official catalog synchronization
 - Shell for one-command sync and verification
 
@@ -42,9 +42,9 @@ PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
 ```
 
 Apply `supabase/migrations/202608240001_account_profiles.sql` to a dedicated
-Supabase project before enabling the variables. Email magic-link authentication
-is the default. Google and Apple buttons can be enabled separately after their
-provider credentials are configured by setting
+Supabase project before enabling the variables. Email/password authentication,
+email confirmation, and password recovery are the default flow. Google and Apple
+buttons can be enabled separately after their provider credentials are configured by setting
 `PUBLIC_ENABLE_GOOGLE_AUTH=true` or `PUBLIC_ENABLE_APPLE_AUTH=true`.
 
 ## Verification
@@ -67,19 +67,18 @@ confirmed on each linked official Ollama page before downloading.
 Ollama names and model metadata belong to their respective owners. This project
 is an independent directory and is not affiliated with Ollama.
 
-## Local download behavior
+## Copy & run behavior
 
-The download button checks `http://localhost:11434/api/version` and, after the
-user's click, posts the catalog slug to `http://localhost:11434/api/pull` with
-streaming enabled. Model identifiers are validated against a conservative slug
-format before a request is made. No request to localhost happens on page load.
+Selecting a model validates its catalog slug, copies the exact visible
+`ollama run <model>` command, and shows instructions adapted for macOS, Windows,
+or Linux. If the model is not installed, Ollama downloads it before starting it.
 
-Browsers and Ollama can block cross-origin local-network requests. The UI keeps
-the copy command available and links to exact-origin setup help. Do not configure
-`OLLAMA_ORIGINS=*`; allow only the website origin that needs access.
+A website cannot open, paste into, or execute Terminal commands. The user opens
+Terminal, pastes the command, and presses Enter. ailocal.click does not contact a
+local service, change browser network permissions, or install a helper program.
 
-Guest models use the `ailocalclick:saved-models:v1` local-storage key. Signed-in
-users get a separate RLS-protected Supabase list and can import any missing guest
-saves without erasing the local copy. The My models page supports selected tags,
+Saving requires sign-in. Each user gets a separate RLS-protected Supabase list.
+An earlier browser-only list, when present from a previous release, can be imported
+once after sign-in and is then removed. The My models page supports selected tags,
 notes, compatibility guidance, search, capability filters, sorting, removal,
 clearing, and JSON/CSV export.

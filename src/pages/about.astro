@@ -8,7 +8,7 @@ const href = (path: string) => `${basePath}${path}`;
 
 <BaseLayout
   title="Data, scope, and safety — ailocal.click"
-  description="How ailocal.click sources model data, saves your choices, and asks local Ollama to download only after confirmation."
+  description="How ailocal.click sources model data, protects saved lists, and hands off visible Ollama commands."
   canonicalPath="/about/"
   pageClass="about-page"
 >
@@ -16,7 +16,7 @@ const href = (path: string) => `${basePath}${path}`;
     <header class="about-hero">
       <p class="eyebrow">Transparent by default</p>
       <h1>Know what happens after every click.</h1>
-      <p>Find a model, save it for later, or ask Ollama on your computer to download it.</p>
+      <p>Find a model, save it privately, or copy one command to download and run it.</p>
     </header>
 
     <section class="about-row">
@@ -36,17 +36,17 @@ const href = (path: string) => `${basePath}${path}`;
     </section>
 
     <section class="about-row">
-      <div><span>03</span><h2>Downloads require confirmation</h2></div>
+      <div><span>03</span><h2>Copy first, run when ready</h2></div>
       <div>
-        <p>Selecting a model opens a confirmation panel. Only the separate <strong>Download with Ollama</strong> button asks the local Ollama API to pull that model.</p>
-        <p>The website cannot install Ollama, open Terminal, or bypass browser and Ollama security. A visible copy command remains available when the connection cannot be made.</p>
+        <p>Selecting a model copies its visible <code>ollama run …</code> command and opens simple instructions for macOS, Windows, or Linux.</p>
+        <p>The website cannot install Ollama, open Terminal, paste, or execute commands. You choose when to paste the command and press Enter.</p>
       </div>
     </section>
 
     <section class="about-row">
-      <div><span>04</span><h2>Local first, private when synced</h2></div>
+      <div><span>04</span><h2>Private account saves</h2></div>
       <div>
-        <p>Guests can save models in local browser storage without creating an account. Signed-in users can keep a private synchronized list with selected tags, notes, and optional hardware preferences.</p>
+        <p>Saving requires an account. Signed-in users keep a private synchronized list with selected tags, notes, and optional hardware preferences.</p>
         <p>Each account can access only its own profile and saved-model records. Search, filters, remove, clear, and export controls are available in <a href={href("/saved/")}>My models</a>.</p>
       </div>
     </section>

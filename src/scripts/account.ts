@@ -48,6 +48,7 @@ export interface SavedModelRecord {
 export interface AccountState {
   configured: boolean;
   ready: boolean;
+  recovery: boolean;
   user: User | null;
   profile: AccountProfile | null;
   saved: Map<string, SavedModelRecord>;
@@ -63,6 +64,7 @@ type SavedModelRow = Pick<
 let state: AccountState = {
   configured: validConfiguration,
   ready: false,
+  recovery: false,
   user: null,
   profile: null,
   saved: new Map(),
@@ -94,22 +96,6 @@ export function readLocalSavedSlugs(): Set<string> {
   } catch {
     return new Set();
   }
-}
-
-function guestSavedRecords(): Map<string, SavedModelRecord> {
-  const now = new Date().toISOString();
-  return new Map([...readLocalSavedSlugs()].map((slug) => [slug, {
-    slug,
-    name: slug,
-    selectedTag: "latest",
-    personalNote: "",
-    savedAt: now,
-    updatedAt: now
-  }]));
-}
-
-function writeLocalSavedSlugs(saved: Set<string>): void {
-  localStorage.setItem(LOCAL_SAVED_MODELS_KEY, JSON.stringify([...saved].sort()));
 }
 
 function emitChange(): void {
@@ -153,7 +139,7 @@ async function loadForUser(user: User | null): Promise<void> {
       ready: true,
       user: null,
       profile: null,
-      saved: guestSavedRecords(),
+      saved: new Map(),
       error: ""
     };
     emitChange();
@@ -189,6 +175,7 @@ async function loadForUser(user: User | null): Promise<void> {
     records.set(row.slug, row);
   }
   state = {
+    ...state,
     configured: true,
     ready: true,
     user,
@@ -213,7 +200,12 @@ export async function initializeAccount(): Promise<void> {
       return;
     }
 
-    client.auth.onAuthStateChange((_event, session) => {
+    client.auth.onAuthStateChange((event, session) => {
+      state = {
+        ...state,
+        recovery: event === "PASSWORD_RECOVERY" ? true : event === "SIGNED_OUT" ? false : state.recovery
+      };
+      emitChange();
       window.setTimeout(() => {
         void loadForUser(session?.user ?? null).catch(setAccountError);
       }, 0);
@@ -243,18 +235,52 @@ export function getLocalImportCount(): number {
   return count;
 }
 
-export async function signInWithEmail(email: string, redirectTo: string): Promise<void> {
-  if (!client) throw new Error("Account sign-in is not configured yet.");
+function normalizedEmail(email: string): string {
   const normalized = email.trim().toLowerCase();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalized)) throw new Error("Enter a valid email address.");
-  const { error } = await client.auth.signInWithOtp({
-    email: normalized,
+  return normalized;
+}
+
+function checkedPassword(password: string): string {
+  if (password.length < 8) throw new Error("Use at least 8 characters for your password.");
+  if (password.length > 128) throw new Error("Keep your password under 128 characters.");
+  return password;
+}
+
+export async function signInWithPassword(email: string, password: string): Promise<void> {
+  if (!client) throw new Error("Account sign-in is not configured yet.");
+  const { error } = await client.auth.signInWithPassword({
+    email: normalizedEmail(email),
+    password: checkedPassword(password)
+  });
+  if (error) throw error;
+}
+
+export async function signUpWithPassword(email: string, password: string, redirectTo: string): Promise<{ needsConfirmation: boolean }> {
+  if (!client) throw new Error("Account sign-up is not configured yet.");
+  const { data, error } = await client.auth.signUp({
+    email: normalizedEmail(email),
+    password: checkedPassword(password),
     options: {
-      emailRedirectTo: redirectTo,
-      shouldCreateUser: true
+      emailRedirectTo: redirectTo
     }
   });
   if (error) throw error;
+  return { needsConfirmation: !data.session };
+}
+
+export async function requestPasswordReset(email: string, redirectTo: string): Promise<void> {
+  if (!client) throw new Error("Account recovery is not configured yet.");
+  const { error } = await client.auth.resetPasswordForEmail(normalizedEmail(email), { redirectTo });
+  if (error) throw error;
+}
+
+export async function updatePassword(password: string): Promise<void> {
+  if (!client || !state.user) throw new Error("Open the password reset link from your email first.");
+  const { error } = await client.auth.updateUser({ password: checkedPassword(password) });
+  if (error) throw error;
+  state = { ...state, recovery: false, error: "" };
+  emitChange();
 }
 
 export async function signInWithProvider(provider: "google" | "apple", redirectTo: string): Promise<void> {
@@ -280,12 +306,7 @@ export async function toggleSavedModel(slugValue: string, nameValue: string): Pr
 
   const user = state.user;
   if (!user || !client) {
-    const local = readLocalSavedSlugs();
-    existing ? local.delete(slug) : local.add(slug);
-    writeLocalSavedSlugs(local);
-    state = { ...state, saved: guestSavedRecords() };
-    emitChange();
-    return !existing;
+    throw new Error("Sign in to save models to your private list.");
   }
 
   const previous = new Map(state.saved);
@@ -357,10 +378,7 @@ export async function updateSavedModel(slugValue: string, selectedTagValue: stri
 export async function clearSavedModels(): Promise<void> {
   const user = state.user;
   if (!client || !user) {
-    writeLocalSavedSlugs(new Set());
-    state = { ...state, saved: new Map() };
-    emitChange();
-    return;
+    throw new Error("Sign in before clearing saved models.");
   }
   const previous = new Map(state.saved);
   state = { ...state, saved: new Map() };
@@ -386,9 +404,11 @@ export async function importLocalModels(models: Array<{ slug: string; name: stri
       personal_note: ""
     }];
   });
-  if (rows.length === 0) return 0;
-  const result = await client.from("saved_models").upsert(rows, { onConflict: "user_id,model_slug" });
-  if (result.error) throw result.error;
+  if (rows.length > 0) {
+    const result = await client.from("saved_models").upsert(rows, { onConflict: "user_id,model_slug" });
+    if (result.error) throw result.error;
+  }
+  localStorage.removeItem(LOCAL_SAVED_MODELS_KEY);
   await loadForUser(state.user);
   return rows.length;
 }
@@ -452,9 +472,3 @@ export async function uploadAvatar(file: File): Promise<string> {
   const { data } = client.storage.from("avatars").getPublicUrl(path);
   return `${data.publicUrl}?v=${Date.now()}`;
 }
-
-window.addEventListener("storage", (event) => {
-  if (event.key !== LOCAL_SAVED_MODELS_KEY || state.user) return;
-  state = { ...state, saved: guestSavedRecords() };
-  emitChange();
-});

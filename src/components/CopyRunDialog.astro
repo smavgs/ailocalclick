@@ -1,0 +1,47 @@
+---
+const basePath = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL.replace(/\/$/, "");
+const href = (path: string) => `${basePath}${path}`;
+---
+
+<dialog class="pull-dialog" data-copy-run-dialog aria-labelledby="copy-run-dialog-title">
+  <div class="pull-dialog-inner">
+    <button type="button" class="pull-close" data-copy-run-close aria-label="Close Copy and run panel">Close</button>
+
+    <div class="pull-heading">
+      <p class="eyebrow">Copy &amp; run</p>
+      <h2 id="copy-run-dialog-title" data-copy-run-title>Choose a model</h2>
+      <p data-copy-run-intro>One command downloads this model if needed, then starts it with Ollama.</p>
+      <p class="cloud-note" data-cloud-note hidden>This model is marked Cloud and may require an Ollama account or run remotely.</p>
+    </div>
+
+    <div class="pull-command" aria-label="Ollama Terminal command">
+      <code data-copy-run-command>ollama run</code>
+      <button type="button" data-copy-run-again>Copy again</button>
+    </div>
+
+    <div class="copy-run-result" data-copy-run-result role="status" aria-live="polite">
+      <strong data-copy-run-status>Command ready.</strong>
+      <p data-copy-run-status-detail>Copy it, then follow the three steps below.</p>
+    </div>
+
+    <ol class="copy-run-steps">
+      <li><span>1</span><p><strong data-copy-run-terminal>Open Terminal</strong><small data-copy-run-terminal-detail>on the computer where Ollama is installed.</small></p></li>
+      <li><span>2</span><p><strong data-copy-run-paste>Paste the command</strong><small data-copy-run-paste-detail>using your normal paste shortcut.</small></p></li>
+      <li><span>3</span><p><strong>Press Enter</strong><small>Ollama downloads the model if needed, then starts it.</small></p></li>
+    </ol>
+
+    <p class="copy-run-device-note" data-copy-run-device-note hidden></p>
+
+    <div class="pull-actions">
+      <button type="button" class="button button-line" data-save-model="" aria-pressed="false" disabled>Save</button>
+      <a class="button button-line" data-copy-run-official href="https://ollama.com/library" target="_blank" rel="noreferrer">Check size &amp; details ↗</a>
+      <a class="button button-line" href="https://ollama.com/download" target="_blank" rel="noreferrer">Install Ollama ↗</a>
+    </div>
+
+    <div class="pull-footnote">
+      <p>The website copies a visible command; your browser cannot open or control Terminal. You choose when to paste and press Enter.</p>
+      <p>Model files can be large. Check the exact tag, file size, license, and hardware needs first.</p>
+      <a href={href("/learn/#copy-run")}>Copy &amp; run help for beginners <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</dialog>

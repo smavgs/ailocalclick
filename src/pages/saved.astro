@@ -17,23 +17,30 @@ const href = (path: string) => `${basePath}${path}`;
     <header class="saved-hero">
       <p class="eyebrow">Personal model library</p>
       <h1 id="saved-title">My models</h1>
-      <p data-saved-intro>Save locally as a guest, or sign in to sync tags, notes, and guidance across your devices.</p>
+      <p data-saved-intro>Sign in to keep a private model list with tags, notes, filters, hardware guidance, and export controls.</p>
     </header>
 
     <div class="saved-mode-line" data-saved-mode-line>
       <span data-saved-mode>Checking your account…</span>
-      <button type="button" data-auth-open>Sign in to sync</button>
+      <button type="button" data-auth-open>Sign in</button>
     </div>
 
-    <div class="saved-import" data-saved-import hidden>
-      <div>
-        <strong><span data-local-import-count>0</span> local models can be added to your account.</strong>
-        <p>The original device list will remain untouched.</p>
+    <section class="profile-signed-out saved-signed-out" data-saved-signed-out hidden>
+      <h2>Sign in to open My models.</h2>
+      <p>Saved models belong to your private account, so the list is available only after you sign in.</p>
+      <button type="button" class="button button-accent" data-auth-open>Sign in</button>
+    </section>
+
+    <div data-saved-workspace hidden>
+      <div class="saved-import" data-saved-import hidden>
+        <div>
+          <strong><span data-local-import-count>0</span> earlier device saves can be added to your account.</strong>
+          <p>After import, this one-time browser list will be removed.</p>
+        </div>
+        <button type="button" class="button button-accent" data-import-local>Import to profile</button>
       </div>
-      <button type="button" class="button button-accent" data-import-local>Import to profile</button>
-    </div>
 
-    <div class="saved-controls">
+      <div class="saved-controls">
       <div class="search-wrap">
         <label for="saved-search">Search saved models</label>
         <input id="saved-search" type="search" inputmode="search" autocomplete="off" placeholder="Search your list…" data-saved-search />
@@ -64,19 +71,20 @@ const href = (path: string) => `${basePath}${path}`;
         <button type="button" class="button button-line" data-clear-saved disabled>Clear list</button>
       </div>
       <p class="saved-result"><strong data-saved-page-count>0</strong> <span data-saved-page-label>models</span></p>
+      </div>
+
+      <p class="saved-loading" data-saved-loading>Loading your saved models…</p>
+
+      <div class="model-list saved-model-list" data-saved-model-list>
+        {models.map((model) => <ModelRow model={model} savedOnly />)}
+      </div>
+
+      <div class="empty-state saved-empty" data-saved-empty hidden>
+        <p data-saved-empty-message>Your saved list is empty.</p>
+        <a class="button button-accent" href={href("/#directory")}>Browse models</a>
+      </div>
+
+      <p class="saved-privacy" data-saved-privacy>Saved models, selected tags, and notes are private account records protected per user.</p>
     </div>
-
-    <p class="saved-loading" data-saved-loading>Loading your saved models…</p>
-
-    <div class="model-list saved-model-list" data-saved-model-list>
-      {models.map((model) => <ModelRow model={model} savedOnly />)}
-    </div>
-
-    <div class="empty-state saved-empty" data-saved-empty hidden>
-      <p data-saved-empty-message>Your saved list is empty.</p>
-      <a class="button button-accent" href={href("/#directory")}>Browse models</a>
-    </div>
-
-    <p class="saved-privacy" data-saved-privacy>Guest saves use this browser’s local storage. Signed-in saves, selected tags, and notes are private account records protected per user.</p>
   </section>
 </BaseLayout>

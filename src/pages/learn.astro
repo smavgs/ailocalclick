@@ -31,7 +31,7 @@ const commands = [
       <nav class="guide-jumps" aria-label="Guide sections">
         <a href="#mental-model">The idea</a>
         <a href="#first-run">First run</a>
-        <a href="#browser-download">Download button</a>
+        <a href="#copy-run">Copy &amp; run</a>
         <a href="#commands">Commands</a>
         <a href="#local-cloud">Local vs cloud</a>
         <a href="#advanced">What comes next</a>
@@ -77,38 +77,21 @@ const commands = [
       </div>
     </section>
 
-    <section class="guide-section" id="browser-download">
+    <section class="guide-section" id="copy-run">
       <div class="section-number">03</div>
       <div class="guide-content">
-        <p class="eyebrow">Download from this website</p>
-        <h2>A click can hand the download to local Ollama.</h2>
-        <p>Select a model, review the confirmation, then press <strong>Download with Ollama</strong>. The page contacts Ollama at <code>localhost:11434</code> and shows the progress here. It does not open Terminal or install software.</p>
+        <p class="eyebrow">Copy &amp; run from this website</p>
+        <h2>One click copies the right command.</h2>
+        <p>Select a model and press <strong>Copy &amp; run</strong>. The site copies its visible <code>ollama run …</code> command and shows the next steps for macOS, Windows, or Linux.</p>
         <ol class="instruction-list browser-steps">
-          <li><strong>Keep Ollama open.</strong><span>The local Ollama service must be running before the website can reach it.</span></li>
-          <li><strong>Confirm the model.</strong><span>Check its official page for the exact tag, download size, license, and hardware needs.</span></li>
-          <li><strong>Allow local access.</strong><span>Your browser may ask whether this website can connect to devices or services on your local network.</span></li>
-          <li><strong>Use the fallback.</strong><span>If the connection is unavailable, copy the visible <code>ollama run …</code> command and use it in Terminal.</span></li>
+          <li><strong>Install Ollama.</strong><span>Use the official Ollama download for the computer that will run the model.</span></li>
+          <li><strong>Check the model.</strong><span>Review its exact tag, download size, license, and hardware needs on the official page.</span></li>
+          <li><strong>Open Terminal.</strong><span>Use Terminal on macOS or Linux, or Windows Terminal / PowerShell on Windows.</span></li>
+          <li><strong>Paste and press Enter.</strong><span>If the model is not installed, <code>ollama run</code> downloads it first and then starts it.</span></li>
         </ol>
-        <div class="callout origin-help">
-          <strong>If Ollama is open but still blocks the website:</strong>
-          <p>Allow only this website’s exact origin, then fully quit and reopen Ollama. Do not use <code>*</code>.</p>
-          <p class="current-origin">Current origin: <code data-site-origin>this website</code></p>
-          <details>
-            <summary>macOS</summary>
-            <p>Run this once in Terminal, then quit and reopen Ollama:</p>
-            <div class="guide-command"><code data-origin-command="mac">launchctl setenv OLLAMA_ORIGINS "this website"</code><button type="button" data-copy-origin-command="mac">Copy</button></div>
-          </details>
-          <details>
-            <summary>Windows</summary>
-            <p>Run this in Command Prompt, then quit and reopen Ollama:</p>
-            <div class="guide-command"><code data-origin-command="windows">setx OLLAMA_ORIGINS "this website"</code><button type="button" data-copy-origin-command="windows">Copy</button></div>
-          </details>
-          <details>
-            <summary>Linux</summary>
-            <p>Use <code>systemctl edit ollama</code>, add the exact environment value below under <code>[Service]</code>, then restart Ollama:</p>
-            <div class="guide-command"><code data-origin-command="linux">Environment="OLLAMA_ORIGINS=this website"</code><button type="button" data-copy-origin-command="linux">Copy</button></div>
-          </details>
-          <p><a href="https://docs.ollama.com/faq#how-do-i-configure-ollama-server" target="_blank" rel="noreferrer">Official Ollama environment instructions ↗</a></p>
+        <div class="callout">
+          <strong>You approve the final action:</strong>
+          <p>A normal website cannot open, paste into, or execute commands in Terminal. ailocal.click copies only the command you can see. You choose when to paste it and press Enter.</p>
         </div>
       </div>
     </section>

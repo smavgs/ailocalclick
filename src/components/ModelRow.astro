@@ -34,13 +34,12 @@ const tagListId = `model-tags-${model.slug.replace(/[^a-z0-9_-]/gi, "-")}`;
   <a
     class="model-primary"
     href={detailHref}
-    data-open-pull
+    data-open-copy-run
     data-model-slug={model.slug}
     data-model-name={model.name}
     data-run-command={model.runCommand}
     data-official-url={model.officialUrl}
     data-model-cloud={model.capabilities.includes("cloud") ? "true" : "false"}
-    aria-label={`Choose ${model.name} for download with Ollama`}
   >
     <div class="model-copy">
       <h3>{model.name}</h3>
@@ -72,8 +71,17 @@ const tagListId = `model-tags-${model.slug.replace(/[^a-z0-9_-]/gi, "-")}`;
         data-model-name={model.name}
         aria-pressed="false"
       >Save</button>
-      <button type="button" class="copy-button" data-copy-command={model.runCommand} aria-label={`Copy ${model.runCommand}`}>
-        Copy
+      <button
+        type="button"
+        class="copy-button"
+        data-open-copy-run
+        data-model-slug={model.slug}
+        data-model-name={model.name}
+        data-run-command={model.runCommand}
+        data-official-url={model.officialUrl}
+        data-model-cloud={model.capabilities.includes("cloud") ? "true" : "false"}
+      >
+        Copy &amp; run<span class="visually-hidden"> {model.name}</span>
       </button>
     </div>
   </div>

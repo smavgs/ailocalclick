@@ -15,15 +15,23 @@ const appleEnabled = import.meta.env.PUBLIC_ENABLE_APPLE_AUTH === "true";
     </section>
 
     <section class="account-guest" data-account-guest hidden>
-      <p class="eyebrow">Your models, everywhere</p>
-      <h2>Sign in and keep your list.</h2>
-      <p>Use one secure email link. New and returning users use the same simple form.</p>
+      <p class="eyebrow">Private model library</p>
+      <h2>Sign in to save models.</h2>
+      <p>Returning users sign in with a password. New users create an account once and confirm their email.</p>
+
+      <div class="account-tabs" role="tablist" aria-label="Account action">
+        <button type="button" role="tab" aria-selected="true" data-auth-mode="signin">Sign in</button>
+        <button type="button" role="tab" aria-selected="false" data-auth-mode="signup">Create account</button>
+      </div>
 
       <form class="account-email-form" data-account-email-form>
         <label for="account-email">Email address</label>
-        <div>
-          <input id="account-email" name="email" type="email" inputmode="email" autocomplete="email" required placeholder="you@example.com" data-account-email />
-          <button type="submit" class="button button-accent" data-account-email-submit>Send sign-in link</button>
+        <input id="account-email" name="email" type="email" inputmode="email" autocomplete="email" required placeholder="you@example.com" data-account-email />
+        <label for="account-password">Password</label>
+        <input id="account-password" name="password" type="password" minlength="8" maxlength="128" autocomplete="current-password" required placeholder="At least 8 characters" data-account-password />
+        <div class="account-form-actions">
+          <button type="submit" class="button button-accent" data-account-email-submit>Sign in</button>
+          <button type="button" class="account-text-button" data-password-reset>Forgot password?</button>
         </div>
       </form>
 
@@ -36,7 +44,21 @@ const appleEnabled = import.meta.env.PUBLIC_ENABLE_APPLE_AUTH === "true";
       )}
 
       <p class="account-message" data-account-message role="status" aria-live="polite"></p>
-      <p class="account-fine-print">Guests can still save models on this device. Signing in adds private sync, tags, notes, and profile guidance.</p>
+      <p class="account-fine-print">Used the earlier email-link sign in? Choose <strong>Forgot password?</strong> once to set a password. Browsing and Copy &amp; run never require an account.</p>
+    </section>
+
+    <section class="account-recovery" data-account-recovery hidden>
+      <p class="eyebrow">Password recovery</p>
+      <h2>Choose a new password.</h2>
+      <p>Your reset link is verified. Set a password to finish.</p>
+      <form class="account-email-form" data-password-update-form>
+        <label for="account-new-password">New password</label>
+        <input id="account-new-password" type="password" minlength="8" maxlength="128" autocomplete="new-password" required placeholder="At least 8 characters" data-account-new-password />
+        <label for="account-confirm-password">Confirm password</label>
+        <input id="account-confirm-password" type="password" minlength="8" maxlength="128" autocomplete="new-password" required placeholder="Type it again" data-account-confirm-password />
+        <button type="submit" class="button button-accent" data-password-update-submit>Save new password</button>
+      </form>
+      <p class="account-message" data-recovery-message role="status" aria-live="polite"></p>
     </section>
 
     <section class="account-member" data-account-member hidden>
@@ -59,7 +81,7 @@ const appleEnabled = import.meta.env.PUBLIC_ENABLE_APPLE_AUTH === "true";
     <section class="account-unavailable" data-account-unavailable hidden>
       <p class="eyebrow">Your account</p>
       <h2>Account setup is finishing.</h2>
-      <p>Local saving still works while the private sync service is connected.</p>
+      <p>Browsing and Copy &amp; run still work. Saving will be available when the private account service is connected.</p>
     </section>
   </div>
 </dialog>

@@ -6,10 +6,13 @@ import {
   importLocalModels,
   initializeAccount,
   readLocalSavedSlugs,
-  signInWithEmail,
+  requestPasswordReset,
+  signInWithPassword,
   signInWithProvider,
+  signUpWithPassword,
   signOut,
   toggleSavedModel,
+  updatePassword,
   updateProfile,
   updateSavedModel,
   uploadAvatar,
@@ -18,23 +21,14 @@ import {
 } from "./account";
 
 const toast = document.querySelector<HTMLElement>("[data-toast]");
-const DEFAULT_OLLAMA_API = "http://localhost:11434/api";
 let toastTimer: number | undefined;
 
-interface PullModel {
+interface CopyRunModel {
   slug: string;
   name: string;
   runCommand: string;
   officialUrl: string;
   cloud: boolean;
-}
-
-interface PullMessage {
-  status?: string;
-  digest?: string;
-  total?: number;
-  completed?: number;
-  error?: string;
 }
 
 function showToast(message: string, duration = 1800): void {
@@ -109,7 +103,9 @@ function setupSavedPage(): void {
   const importPanel = root.querySelector<HTMLElement>("[data-saved-import]");
   const importCount = root.querySelector<HTMLElement>("[data-local-import-count]");
   const importButton = root.querySelector<HTMLButtonElement>("[data-import-local]");
-  if (!search || !capability || !sort || !list || !count || !label || !loading || !empty || !emptyMessage || exportButtons.length === 0 || !clearButton || !mode || !modeSignIn || !privacy || !importPanel || !importCount || !importButton) return;
+  const signedOut = root.querySelector<HTMLElement>("[data-saved-signed-out]");
+  const workspace = root.querySelector<HTMLElement>("[data-saved-workspace]");
+  if (!search || !capability || !sort || !list || !count || !label || !loading || !empty || !emptyMessage || exportButtons.length === 0 || !clearButton || !mode || !modeSignIn || !privacy || !importPanel || !importCount || !importButton || !signedOut || !workspace) return;
 
   const collator = new Intl.Collator("en", { numeric: true, sensitivity: "base" });
 
@@ -153,9 +149,9 @@ function setupSavedPage(): void {
     const noteInput = row.querySelector<HTMLTextAreaElement>("[data-saved-note]");
     const detailButton = row.querySelector<HTMLButtonElement>("[data-save-details]");
     const guidance = row.querySelector<HTMLElement>("[data-fit-guidance]");
-    const pullTrigger = row.querySelector<HTMLElement>("[data-open-pull]");
+    const copyRunTriggers = Array.from(row.querySelectorAll<HTMLElement>("[data-open-copy-run]"));
     const command = row.querySelector<HTMLElement>(".row-command > code");
-    if (!tagInput || !noteInput || !detailButton || !guidance || !pullTrigger || !command) return;
+    if (!tagInput || !noteInput || !detailButton || !guidance || copyRunTriggers.length === 0 || !command) return;
     if (document.activeElement !== tagInput) tagInput.value = record.selectedTag;
     if (document.activeElement !== noteInput) noteInput.value = record.personalNote;
     tagInput.disabled = !signedIn;
@@ -167,8 +163,10 @@ function setupSavedPage(): void {
     const baseSlug = row.dataset.modelSlug ?? record.slug;
     const chosenSlug = exactSlug(baseSlug, record.selectedTag);
     const runCommand = `ollama run ${chosenSlug}`;
-    pullTrigger.dataset.modelSlug = chosenSlug;
-    pullTrigger.dataset.runCommand = runCommand;
+    for (const copyRunTrigger of copyRunTriggers) {
+      copyRunTrigger.dataset.modelSlug = chosenSlug;
+      copyRunTrigger.dataset.runCommand = runCommand;
+    }
     command.textContent = runCommand;
   };
 
@@ -215,15 +213,26 @@ function setupSavedPage(): void {
       ? "Checking your account…"
       : account.user
         ? `Synced privately as ${account.user.email ?? "your account"}`
-        : "Saved on this device";
+        : "Sign in to view saved models";
     modeSignIn.hidden = Boolean(account.user);
-    privacy.textContent = account.user
-      ? "Saved models, selected tags, notes, and profile preferences are synchronized as private records for this account."
-      : "Guest saves use this browser’s local storage. Sign in to sync them and add selected tags, notes, and hardware guidance.";
+    signedOut.hidden = !account.ready || Boolean(account.user);
+    workspace.hidden = !account.ready || !account.user;
+    privacy.textContent = "Saved models, selected tags, notes, and profile preferences are synchronized as private records for this account.";
 
     const localCount = getLocalImportCount();
     importCount.textContent = String(localCount);
     importPanel.hidden = !account.user || localCount === 0;
+
+    if (!account.user) {
+      for (const row of rows) row.hidden = true;
+      count.textContent = "0";
+      label.textContent = "models";
+      loading.hidden = account.ready;
+      empty.hidden = true;
+      for (const button of exportButtons) button.disabled = true;
+      clearButton.disabled = true;
+      return;
+    }
 
     for (const row of rows) {
       const slug = validModelSlug(row.dataset.modelSlug);
@@ -252,7 +261,7 @@ function setupSavedPage(): void {
     count.textContent = String(visible.length);
     label.textContent = visible.length === 1 ? "model" : "models";
     loading.hidden = account.ready;
-    empty.hidden = !account.ready || visible.length > 0;
+    empty.hidden = !account.ready || !account.user || visible.length > 0;
     emptyMessage.textContent = account.saved.size === 0
       ? "Your saved list is empty."
       : "No saved models match those filters.";
@@ -291,8 +300,7 @@ function setupSavedPage(): void {
     });
   }
   clearButton.addEventListener("click", async () => {
-    const location = getAccountState().user ? "your private account" : "this browser";
-    if (!window.confirm(`Remove every saved model from ${location}?`)) return;
+    if (!window.confirm("Remove every saved model from your private account?")) return;
     clearButton.disabled = true;
     try {
       await clearSavedModels();
@@ -369,24 +377,51 @@ function accountRedirectUrl(): string {
   return `${window.location.origin}${basePath}/profile/`;
 }
 
+function openAccountDialog(): void {
+  const dialog = document.querySelector<HTMLDialogElement>("[data-account-dialog]");
+  if (dialog && !dialog.open && typeof dialog.showModal === "function") dialog.showModal();
+}
+
 function setupAccountUi(): void {
   const dialog = document.querySelector<HTMLDialogElement>("[data-account-dialog]");
   if (!dialog) return;
   const loading = dialog.querySelector<HTMLElement>("[data-account-loading]");
   const guest = dialog.querySelector<HTMLElement>("[data-account-guest]");
+  const recovery = dialog.querySelector<HTMLElement>("[data-account-recovery]");
   const member = dialog.querySelector<HTMLElement>("[data-account-member]");
   const unavailable = dialog.querySelector<HTMLElement>("[data-account-unavailable]");
   const closeButton = dialog.querySelector<HTMLButtonElement>("[data-account-close]");
   const emailForm = dialog.querySelector<HTMLFormElement>("[data-account-email-form]");
   const emailInput = dialog.querySelector<HTMLInputElement>("[data-account-email]");
+  const passwordInput = dialog.querySelector<HTMLInputElement>("[data-account-password]");
   const emailSubmit = dialog.querySelector<HTMLButtonElement>("[data-account-email-submit]");
+  const resetButton = dialog.querySelector<HTMLButtonElement>("[data-password-reset]");
+  const modeButtons = Array.from(dialog.querySelectorAll<HTMLButtonElement>("[data-auth-mode]"));
   const guestMessage = dialog.querySelector<HTMLElement>("[data-account-message]");
+  const recoveryForm = dialog.querySelector<HTMLFormElement>("[data-password-update-form]");
+  const newPassword = dialog.querySelector<HTMLInputElement>("[data-account-new-password]");
+  const confirmPassword = dialog.querySelector<HTMLInputElement>("[data-account-confirm-password]");
+  const recoverySubmit = dialog.querySelector<HTMLButtonElement>("[data-password-update-submit]");
+  const recoveryMessage = dialog.querySelector<HTMLElement>("[data-recovery-message]");
   const memberMessage = dialog.querySelector<HTMLElement>("[data-account-member-message]");
   const memberName = dialog.querySelector<HTMLElement>("[data-account-name]");
   const memberEmail = dialog.querySelector<HTMLElement>("[data-account-email-display]");
   const memberAvatar = dialog.querySelector<HTMLElement>("[data-account-avatar]");
   const signOutButton = dialog.querySelector<HTMLButtonElement>("[data-account-sign-out]");
-  if (!loading || !guest || !member || !unavailable || !closeButton || !emailForm || !emailInput || !emailSubmit || !guestMessage || !memberMessage || !memberName || !memberEmail || !memberAvatar || !signOutButton) return;
+  if (!loading || !guest || !recovery || !member || !unavailable || !closeButton || !emailForm || !emailInput || !passwordInput || !emailSubmit || !resetButton || modeButtons.length !== 2 || !guestMessage || !recoveryForm || !newPassword || !confirmPassword || !recoverySubmit || !recoveryMessage || !memberMessage || !memberName || !memberEmail || !memberAvatar || !signOutButton) return;
+
+  let authMode: "signin" | "signup" = "signin";
+
+  const renderMode = (): void => {
+    for (const button of modeButtons) {
+      const selected = button.dataset.authMode === authMode;
+      button.setAttribute("aria-selected", String(selected));
+      button.classList.toggle("is-active", selected);
+    }
+    passwordInput.autocomplete = authMode === "signin" ? "current-password" : "new-password";
+    emailSubmit.textContent = authMode === "signin" ? "Sign in" : "Create account";
+    resetButton.hidden = authMode !== "signin";
+  };
 
   const render = (): void => {
     const account = getAccountState();
@@ -407,15 +442,19 @@ function setupAccountUi(): void {
 
     loading.hidden = account.ready || !account.configured;
     unavailable.hidden = account.configured;
-    guest.hidden = !account.ready || !account.configured || Boolean(account.user);
-    member.hidden = !account.ready || !account.user;
-    guestMessage.textContent = !account.user ? account.error : "";
-    memberMessage.textContent = account.user ? account.error : "";
+    recovery.hidden = !account.ready || !account.configured || !account.recovery;
+    guest.hidden = !account.ready || !account.configured || Boolean(account.user) || account.recovery;
+    member.hidden = !account.ready || !account.user || account.recovery;
+    if (account.error) {
+      guestMessage.textContent = !account.user ? account.error : "";
+      memberMessage.textContent = account.user ? account.error : "";
+    }
     if (account.user) {
       memberName.textContent = name;
       memberEmail.textContent = account.user.email ?? "Signed-in account";
       setAvatar(memberAvatar, avatarUrl, name);
     }
+    if (account.recovery) openAccountDialog();
   };
 
   document.addEventListener("click", (event) => {
@@ -423,7 +462,7 @@ function setupAccountUi(): void {
     if (!(target instanceof Element) || !target.closest("[data-auth-open]")) return;
     event.preventDefault();
     render();
-    if (!dialog.open && typeof dialog.showModal === "function") dialog.showModal();
+    openAccountDialog();
   });
 
   closeButton.addEventListener("click", () => dialog.close());
@@ -431,20 +470,74 @@ function setupAccountUi(): void {
     if (event.target === dialog) dialog.close();
   });
 
+  for (const button of modeButtons) {
+    button.addEventListener("click", () => {
+      authMode = button.dataset.authMode === "signup" ? "signup" : "signin";
+      guestMessage.textContent = "";
+      renderMode();
+      passwordInput.focus();
+    });
+  }
+
   emailForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     emailSubmit.disabled = true;
-    emailSubmit.textContent = "Sending…";
+    emailSubmit.textContent = authMode === "signin" ? "Signing in…" : "Creating…";
     guestMessage.textContent = "";
     try {
-      await signInWithEmail(emailInput.value, accountRedirectUrl());
-      guestMessage.textContent = "Check your email and open the secure sign-in link on this device.";
-      emailInput.value = "";
+      if (authMode === "signup") {
+        const result = await signUpWithPassword(emailInput.value, passwordInput.value, accountRedirectUrl());
+        guestMessage.textContent = result.needsConfirmation
+          ? "Check your email once to confirm the account, then return and sign in with your password."
+          : "Account created. You are signed in.";
+      } else {
+        await signInWithPassword(emailInput.value, passwordInput.value);
+        guestMessage.textContent = "Signed in.";
+        showToast("Signed in");
+      }
+      passwordInput.value = "";
     } catch (error) {
       guestMessage.textContent = errorMessage(error);
     } finally {
       emailSubmit.disabled = false;
-      emailSubmit.textContent = "Send sign-in link";
+      renderMode();
+    }
+  });
+
+  resetButton.addEventListener("click", async () => {
+    resetButton.disabled = true;
+    guestMessage.textContent = "";
+    try {
+      await requestPasswordReset(emailInput.value, accountRedirectUrl());
+      guestMessage.textContent = "Check your email for the password reset link.";
+    } catch (error) {
+      guestMessage.textContent = errorMessage(error);
+      if (!emailInput.value.trim()) emailInput.focus();
+    } finally {
+      resetButton.disabled = false;
+    }
+  });
+
+  recoveryForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    recoveryMessage.textContent = "";
+    if (newPassword.value !== confirmPassword.value) {
+      recoveryMessage.textContent = "The passwords do not match.";
+      confirmPassword.focus();
+      return;
+    }
+    recoverySubmit.disabled = true;
+    recoverySubmit.textContent = "Saving…";
+    try {
+      await updatePassword(newPassword.value);
+      newPassword.value = "";
+      confirmPassword.value = "";
+      showToast("Password updated");
+    } catch (error) {
+      recoveryMessage.textContent = errorMessage(error);
+    } finally {
+      recoverySubmit.disabled = false;
+      recoverySubmit.textContent = "Save new password";
     }
   });
 
@@ -468,7 +561,7 @@ function setupAccountUi(): void {
     memberMessage.textContent = "Signing out…";
     try {
       await signOut();
-      showToast("Signed out. Guest saves on this device are still available.");
+      showToast("Signed out. Your private saved list is unchanged.");
     } catch (error) {
       memberMessage.textContent = errorMessage(error);
     } finally {
@@ -477,6 +570,7 @@ function setupAccountUi(): void {
   });
 
   window.addEventListener(ACCOUNT_CHANGE_EVENT, render);
+  renderMode();
   render();
 }
 
@@ -594,45 +688,6 @@ function setupProfilePage(): void {
   render();
 }
 
-function setupOriginHelp(): void {
-  const origin = window.location.origin;
-  for (const element of document.querySelectorAll<HTMLElement>("[data-site-origin]")) {
-    element.textContent = origin;
-  }
-
-  const commands: Record<string, string> = {
-    mac: `launchctl setenv OLLAMA_ORIGINS "${origin}"`,
-    windows: `setx OLLAMA_ORIGINS "${origin}"`,
-    linux: `Environment="OLLAMA_ORIGINS=${origin}"`
-  };
-  for (const [platform, command] of Object.entries(commands)) {
-    for (const element of document.querySelectorAll<HTMLElement>(`[data-origin-command="${platform}"]`)) {
-      element.textContent = command;
-    }
-    for (const button of document.querySelectorAll<HTMLButtonElement>(`[data-copy-origin-command="${platform}"]`)) {
-      button.dataset.copyCommand = command;
-    }
-  }
-}
-
-function formatBytes(value: number): string {
-  if (!Number.isFinite(value) || value <= 0) return "0 B";
-  const units = ["B", "KB", "MB", "GB", "TB"];
-  const index = Math.min(Math.floor(Math.log(value) / Math.log(1024)), units.length - 1);
-  const amount = value / 1024 ** index;
-  return `${amount >= 10 || index === 0 ? amount.toFixed(0) : amount.toFixed(1)} ${units[index]}`;
-}
-
-function readableStatus(status: string): string {
-  if (status === "pulling manifest") return "Checking model files…";
-  if (status.startsWith("pulling ")) return "Downloading model…";
-  if (status.includes("verifying")) return "Verifying download…";
-  if (status.includes("writing manifest")) return "Finishing setup…";
-  if (status.includes("removing any unused layers")) return "Cleaning up…";
-  if (status === "success") return "Download complete";
-  return status ? `${status.charAt(0).toUpperCase()}${status.slice(1)}…` : "Working…";
-}
-
 function errorMessage(error: unknown): string {
   if (error && typeof error === "object" && "message" in error && typeof error.message === "string" && error.message) {
     return error.message;
@@ -640,206 +695,119 @@ function errorMessage(error: unknown): string {
   return "The request could not be completed. Check your connection and try again.";
 }
 
-function pullErrorMessage(error: unknown): string {
-  if (error instanceof DOMException && error.name === "AbortError") {
-    return "Ollama did not respond in time. Make sure it is open, then try again.";
-  }
-  if (error instanceof TypeError) {
-    return `The browser could not reach local Ollama. Open Ollama first. If it is already open, allow ${window.location.origin} in OLLAMA_ORIGINS, restart Ollama, and permit local-network access if your browser asks.`;
-  }
-  if (error instanceof Error && error.message) return error.message;
-  return "The local Ollama connection failed. Copy the command or open the beginner connection guide.";
-}
-
-function setupPullDialog(): void {
-  const dialog = document.querySelector<HTMLDialogElement>("[data-pull-dialog]");
+function setupCopyRunDialog(): void {
+  const dialog = document.querySelector<HTMLDialogElement>("[data-copy-run-dialog]");
   if (!dialog) return;
 
-  const title = dialog.querySelector<HTMLElement>("[data-pull-title]");
-  const command = dialog.querySelector<HTMLElement>("[data-pull-command]");
-  const copyButton = dialog.querySelector<HTMLButtonElement>("[data-copy-command]");
+  const title = dialog.querySelector<HTMLElement>("[data-copy-run-title]");
+  const command = dialog.querySelector<HTMLElement>("[data-copy-run-command]");
+  const copyAgain = dialog.querySelector<HTMLButtonElement>("[data-copy-run-again]");
   const saveButton = dialog.querySelector<HTMLButtonElement>("[data-save-model]");
-  const official = dialog.querySelector<HTMLAnchorElement>("[data-pull-official]");
+  const official = dialog.querySelector<HTMLAnchorElement>("[data-copy-run-official]");
   const cloudNote = dialog.querySelector<HTMLElement>("[data-cloud-note]");
-  const startButton = dialog.querySelector<HTMLButtonElement>("[data-pull-start]");
-  const closeButton = dialog.querySelector<HTMLButtonElement>("[data-pull-close]");
-  const progressRegion = dialog.querySelector<HTMLElement>("[data-pull-progress-region]");
-  const progress = dialog.querySelector<HTMLProgressElement>("[data-pull-progress]");
-  const status = dialog.querySelector<HTMLElement>("[data-pull-status]");
-  const percent = dialog.querySelector<HTMLElement>("[data-pull-percent]");
-  const detail = dialog.querySelector<HTMLElement>("[data-pull-detail]");
-  const errorBox = dialog.querySelector<HTMLElement>("[data-pull-error]");
-  const errorText = dialog.querySelector<HTMLElement>("[data-pull-error-message]");
-  const success = dialog.querySelector<HTMLElement>("[data-pull-success]");
-  if (!title || !command || !copyButton || !saveButton || !official || !cloudNote || !startButton || !closeButton || !progressRegion || !progress || !status || !percent || !detail || !errorBox || !errorText || !success) return;
+  const closeButton = dialog.querySelector<HTMLButtonElement>("[data-copy-run-close]");
+  const status = dialog.querySelector<HTMLElement>("[data-copy-run-status]");
+  const statusDetail = dialog.querySelector<HTMLElement>("[data-copy-run-status-detail]");
+  const terminal = dialog.querySelector<HTMLElement>("[data-copy-run-terminal]");
+  const terminalDetail = dialog.querySelector<HTMLElement>("[data-copy-run-terminal-detail]");
+  const paste = dialog.querySelector<HTMLElement>("[data-copy-run-paste]");
+  const pasteDetail = dialog.querySelector<HTMLElement>("[data-copy-run-paste-detail]");
+  const deviceNote = dialog.querySelector<HTMLElement>("[data-copy-run-device-note]");
+  if (!title || !command || !copyAgain || !saveButton || !official || !cloudNote || !closeButton || !status || !statusDetail || !terminal || !terminalDetail || !paste || !pasteDetail || !deviceNote) return;
 
-  let selected: PullModel | null = null;
-  let pullRunning = false;
+  let selected: CopyRunModel | null = null;
 
-  const resetState = (): void => {
-    progressRegion.hidden = true;
-    errorBox.hidden = true;
-    success.hidden = true;
-    progress.removeAttribute("value");
-    percent.textContent = "";
-    status.textContent = "Connecting to Ollama…";
-    detail.textContent = "Keep Ollama open while the model downloads.";
-    startButton.disabled = false;
-    startButton.textContent = "Download with Ollama";
-    closeButton.textContent = "Close";
-  };
+  const setPlatformInstructions = (): void => {
+    const preferred = getAccountState().profile?.preferredOs;
+    const userAgent = navigator.userAgent;
+    const mobile = /Android|iPhone|iPad|iPod|Mobile/i.test(userAgent);
+    const platform = preferred === "macos" || preferred === "windows" || preferred === "linux"
+      ? preferred
+      : /Windows/i.test(userAgent)
+        ? "windows"
+        : /Macintosh|Mac OS X/i.test(userAgent) && !mobile
+          ? "macos"
+          : /Linux/i.test(userAgent) && !mobile
+            ? "linux"
+            : "other";
 
-  const openForModel = (model: PullModel): void => {
-    if (pullRunning && selected?.slug !== model.slug) {
-      showToast(`${selected?.name ?? "A model"} is still downloading`, 2600);
-    } else if (!pullRunning) {
-      selected = model;
-      resetState();
+    if (platform === "macos") {
+      terminal.textContent = "Open Terminal";
+      terminalDetail.textContent = "on your Mac (Applications → Utilities → Terminal).";
+      paste.textContent = "Press ⌘V to paste";
+      pasteDetail.textContent = "The copied Ollama command will appear at the prompt.";
+    } else if (platform === "windows") {
+      terminal.textContent = "Open Windows Terminal or PowerShell";
+      terminalDetail.textContent = "on the Windows computer where Ollama is installed.";
+      paste.textContent = "Press Ctrl+V to paste";
+      pasteDetail.textContent = "The copied Ollama command will appear at the prompt.";
+    } else if (platform === "linux") {
+      terminal.textContent = "Open Terminal";
+      terminalDetail.textContent = "on the Linux computer where Ollama is installed.";
+      paste.textContent = "Paste the command";
+      pasteDetail.textContent = "Usually Ctrl+Shift+V or Ctrl+V, depending on your terminal.";
+    } else {
+      terminal.textContent = "Open Terminal on your computer";
+      terminalDetail.textContent = "Use a Mac, Windows, or Linux computer with Ollama installed.";
+      paste.textContent = "Paste the command";
+      pasteDetail.textContent = "Use that computer’s normal paste shortcut.";
     }
-    if (!selected) return;
 
-    title.textContent = selected.name;
-    command.textContent = selected.runCommand;
-    copyButton.dataset.copyCommand = selected.runCommand;
-    saveButton.dataset.saveModel = selected.slug.split(":", 1)[0] ?? selected.slug;
-    saveButton.dataset.modelName = selected.name;
-    saveButton.disabled = false;
-    official.href = selected.officialUrl;
-    cloudNote.hidden = !selected.cloud;
-    updateSavedUi();
-    if (!dialog.open) dialog.showModal();
+    deviceNote.hidden = !mobile;
+    deviceNote.textContent = mobile
+      ? "You are viewing this on a mobile device. Send or copy the command to the Mac, Windows, or Linux computer where Ollama is installed."
+      : "";
   };
 
-  document.addEventListener("click", (event) => {
+  const showCopyResult = (copied: boolean): void => {
+    status.textContent = copied ? "Command copied." : "Clipboard access was blocked.";
+    statusDetail.textContent = copied
+      ? "Open Terminal, paste it, and press Enter."
+      : "Press Copy again, or select the visible command and copy it manually.";
+    copyAgain.textContent = copied ? "Copy again" : "Try copying";
+  };
+
+  const openForModel = (model: CopyRunModel, copied: boolean): void => {
+    selected = model;
+    title.textContent = model.name;
+    command.textContent = model.runCommand;
+    saveButton.dataset.saveModel = model.slug.split(":", 1)[0] ?? model.slug;
+    saveButton.dataset.modelName = model.name;
+    saveButton.disabled = false;
+    official.href = model.officialUrl;
+    cloudNote.hidden = !model.cloud;
+    setPlatformInstructions();
+    showCopyResult(copied);
+    updateSavedUi();
+    if (!dialog.open && typeof dialog.showModal === "function") dialog.showModal();
+  };
+
+  document.addEventListener("click", async (event) => {
     const target = event.target;
     if (!(target instanceof Element)) return;
-    const trigger = target.closest<HTMLElement>("[data-open-pull]");
-    if (!trigger || typeof dialog.showModal !== "function") return;
+    const trigger = target.closest<HTMLElement>("[data-open-copy-run]");
+    if (!trigger) return;
     const slug = validModelSlug(trigger.dataset.modelSlug);
     const name = trigger.dataset.modelName?.trim();
     const runCommand = trigger.dataset.runCommand?.trim();
     const officialUrl = trigger.dataset.officialUrl?.trim();
     if (!slug || !name || runCommand !== `ollama run ${slug}` || !officialUrl?.startsWith("https://ollama.com/")) return;
     event.preventDefault();
-    openForModel({ slug, name, runCommand, officialUrl, cloud: trigger.dataset.modelCloud === "true" });
+    const copied = await copyText(runCommand);
+    openForModel({ slug, name, runCommand, officialUrl, cloud: trigger.dataset.modelCloud === "true" }, copied);
+    showToast(copied ? `Copied: ${runCommand}` : "Clipboard access was unavailable", copied ? 2200 : 3200);
+  });
+
+  copyAgain.addEventListener("click", async () => {
+    if (!selected) return;
+    const copied = await copyText(selected.runCommand);
+    showCopyResult(copied);
+    showToast(copied ? `Copied: ${selected.runCommand}` : "Clipboard access was unavailable", copied ? 2200 : 3200);
   });
 
   closeButton.addEventListener("click", () => dialog.close());
   dialog.addEventListener("click", (event) => {
     if (event.target === dialog) dialog.close();
-  });
-
-  startButton.addEventListener("click", async () => {
-    if (!selected || pullRunning) return;
-    pullRunning = true;
-    startButton.disabled = true;
-    startButton.textContent = "Downloading…";
-    closeButton.textContent = "Hide";
-    progressRegion.hidden = false;
-    errorBox.hidden = true;
-    success.hidden = true;
-    progress.removeAttribute("value");
-    percent.textContent = "";
-    status.textContent = "Connecting to Ollama…";
-    detail.textContent = "Your browser may ask for permission to reach the local Ollama service.";
-
-    const configuredApi = document.documentElement.dataset.ollamaApi?.replace(/\/$/, "");
-    const apiBase = configuredApi || DEFAULT_OLLAMA_API;
-
-    try {
-      const checkController = new AbortController();
-      const checkTimer = window.setTimeout(() => checkController.abort(), 7000);
-      let versionResponse: Response;
-      try {
-        versionResponse = await fetch(`${apiBase}/version`, {
-          method: "GET",
-          cache: "no-store",
-          credentials: "omit",
-          signal: checkController.signal
-        });
-      } finally {
-        window.clearTimeout(checkTimer);
-      }
-      if (!versionResponse.ok) throw new Error(`Ollama connection check returned HTTP ${versionResponse.status}.`);
-      const versionData = await versionResponse.json().catch(() => ({})) as { version?: string };
-      status.textContent = "Connected to Ollama";
-      detail.textContent = versionData.version
-        ? `Ollama ${versionData.version} is ready. Starting the download…`
-        : "Ollama is ready. Starting the download…";
-
-      const response = await fetch(`${apiBase}/pull`, {
-        method: "POST",
-        cache: "no-store",
-        credentials: "omit",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ model: selected.slug, stream: true })
-      });
-      if (!response.ok) {
-        const body = await response.json().catch(() => null) as { error?: string } | null;
-        throw new Error(body?.error || `Ollama returned HTTP ${response.status}.`);
-      }
-      if (!response.body) throw new Error("Ollama did not return download progress.");
-
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      let buffer = "";
-      let confirmedSuccess = false;
-
-      const handleLine = (line: string): void => {
-        if (!line.trim()) return;
-        let message: PullMessage;
-        try {
-          message = JSON.parse(line) as PullMessage;
-        } catch {
-          throw new Error("Ollama returned an unreadable progress update.");
-        }
-        if (message.error) throw new Error(message.error);
-        const currentStatus = message.status ?? "Working";
-        status.textContent = readableStatus(currentStatus);
-        if (typeof message.total === "number" && message.total > 0 && typeof message.completed === "number") {
-          const value = Math.min(100, Math.max(0, (message.completed / message.total) * 100));
-          progress.value = value;
-          percent.textContent = `${Math.round(value)}%`;
-          detail.textContent = `${formatBytes(message.completed)} of ${formatBytes(message.total)} for the current file`;
-        } else {
-          progress.removeAttribute("value");
-          percent.textContent = "";
-          detail.textContent = currentStatus === "success"
-            ? "The model is now available in Ollama on this computer."
-            : "Keep Ollama open. Closing this panel may not stop a pull already accepted by Ollama.";
-        }
-        if (currentStatus === "success") confirmedSuccess = true;
-      };
-
-      while (true) {
-        const { done, value } = await reader.read();
-        buffer += decoder.decode(value, { stream: !done });
-        if (buffer.length > 1_000_000) throw new Error("Ollama returned an unexpectedly large progress update.");
-        const lines = buffer.split("\n");
-        buffer = lines.pop() ?? "";
-        for (const line of lines) handleLine(line);
-        if (done) break;
-      }
-      if (buffer.trim()) handleLine(buffer);
-      if (!confirmedSuccess) throw new Error("The download ended before Ollama confirmed success.");
-
-      progress.value = 100;
-      percent.textContent = "100%";
-      status.textContent = "Download complete";
-      detail.textContent = `${selected.name} is now available in Ollama on this computer.`;
-      success.hidden = false;
-      startButton.textContent = "Downloaded";
-      showToast(`${selected.name} downloaded with Ollama`, 3200);
-    } catch (error) {
-      progressRegion.hidden = true;
-      errorText.textContent = pullErrorMessage(error);
-      errorBox.hidden = false;
-      startButton.disabled = false;
-      startButton.textContent = "Try download again";
-    } finally {
-      pullRunning = false;
-      closeButton.textContent = "Close";
-    }
   });
 }
 
@@ -863,6 +831,7 @@ function setupCatalog(): void {
   let query = parameters.get("q")?.trim().toLowerCase() ?? "";
   let capability = parameters.get("cap") ?? "all";
   let order = parameters.get("sort") ?? "newest";
+  let renderedOrder = "newest";
   if (!capButtons.some((button) => button.dataset.capability === capability)) capability = "all";
   if (!new Set(["newest", "popular", "name"]).has(order)) order = "newest";
   search.value = query;
@@ -887,12 +856,15 @@ function setupCatalog(): void {
       if (!row.hidden) visible.push(row);
     }
 
-    const sorted = [...rows].sort((a, b) => {
-      if (order === "popular") return Number(b.dataset.pulls) - Number(a.dataset.pulls);
-      if (order === "name") return collator.compare(a.dataset.name ?? "", b.dataset.name ?? "");
-      return Number(b.dataset.updated) - Number(a.dataset.updated) || collator.compare(a.dataset.name ?? "", b.dataset.name ?? "");
-    });
-    list.append(...sorted);
+    if (order !== renderedOrder) {
+      const sorted = [...rows].sort((a, b) => {
+        if (order === "popular") return Number(b.dataset.pulls) - Number(a.dataset.pulls);
+        if (order === "name") return collator.compare(a.dataset.name ?? "", b.dataset.name ?? "");
+        return Number(b.dataset.updated) - Number(a.dataset.updated) || collator.compare(a.dataset.name ?? "", b.dataset.name ?? "");
+      });
+      list.append(...sorted);
+      renderedOrder = order;
+    }
 
     for (const button of capButtons) {
       button.setAttribute("aria-pressed", String(button.dataset.capability === capability));
@@ -966,13 +938,19 @@ document.addEventListener("click", async (event) => {
   const slug = validModelSlug(saveButton.dataset.saveModel);
   if (!slug) return;
   const name = saveButton.dataset.modelName || slug;
+  if (!getAccountState().user) {
+    const copyRunDialog = document.querySelector<HTMLDialogElement>("[data-copy-run-dialog]");
+    if (copyRunDialog?.open) copyRunDialog.close();
+    openAccountDialog();
+    showToast("Sign in to save models to your private list", 3000);
+    return;
+  }
   saveButton.disabled = true;
   try {
     const wasSaved = await toggleSavedModel(slug, name);
-    const signedIn = Boolean(getAccountState().user);
     showToast(wasSaved
-      ? `${name} saved ${signedIn ? "to your profile" : "on this device — sign in to sync"}`
-      : `${name} removed from My models`, signedIn ? 2200 : 3200);
+      ? `${name} saved to your profile`
+      : `${name} removed from My models`, 2200);
   } catch (error) {
     showToast(errorMessage(error), 3800);
   } finally {
@@ -983,8 +961,7 @@ document.addEventListener("click", async (event) => {
 
 window.addEventListener(ACCOUNT_CHANGE_EVENT, updateSavedUi);
 
-setupOriginHelp();
-setupPullDialog();
+setupCopyRunDialog();
 setupCatalog();
 setupSavedPage();
 setupAccountUi();
