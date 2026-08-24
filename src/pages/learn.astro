@@ -31,6 +31,7 @@ const commands = [
       <nav class="guide-jumps" aria-label="Guide sections">
         <a href="#mental-model">The idea</a>
         <a href="#first-run">First run</a>
+        <a href="#browser-download">Download button</a>
         <a href="#commands">Commands</a>
         <a href="#local-cloud">Local vs cloud</a>
         <a href="#advanced">What comes next</a>
@@ -76,8 +77,44 @@ const commands = [
       </div>
     </section>
 
-    <section class="guide-section" id="capabilities">
+    <section class="guide-section" id="browser-download">
       <div class="section-number">03</div>
+      <div class="guide-content">
+        <p class="eyebrow">Download from this website</p>
+        <h2>A click can hand the download to local Ollama.</h2>
+        <p>Select a model, review the confirmation, then press <strong>Download with Ollama</strong>. The page contacts Ollama at <code>localhost:11434</code> and shows the progress here. It does not open Terminal or install software.</p>
+        <ol class="instruction-list browser-steps">
+          <li><strong>Keep Ollama open.</strong><span>The local Ollama service must be running before the website can reach it.</span></li>
+          <li><strong>Confirm the model.</strong><span>Check its official page for the exact tag, download size, license, and hardware needs.</span></li>
+          <li><strong>Allow local access.</strong><span>Your browser may ask whether this website can connect to devices or services on your local network.</span></li>
+          <li><strong>Use the fallback.</strong><span>If the connection is unavailable, copy the visible <code>ollama run …</code> command and use it in Terminal.</span></li>
+        </ol>
+        <div class="callout origin-help">
+          <strong>If Ollama is open but still blocks the website:</strong>
+          <p>Allow only this website’s exact origin, then fully quit and reopen Ollama. Do not use <code>*</code>.</p>
+          <p class="current-origin">Current origin: <code data-site-origin>this website</code></p>
+          <details>
+            <summary>macOS</summary>
+            <p>Run this once in Terminal, then quit and reopen Ollama:</p>
+            <div class="guide-command"><code data-origin-command="mac">launchctl setenv OLLAMA_ORIGINS "this website"</code><button type="button" data-copy-origin-command="mac">Copy</button></div>
+          </details>
+          <details>
+            <summary>Windows</summary>
+            <p>Run this in Command Prompt, then quit and reopen Ollama:</p>
+            <div class="guide-command"><code data-origin-command="windows">setx OLLAMA_ORIGINS "this website"</code><button type="button" data-copy-origin-command="windows">Copy</button></div>
+          </details>
+          <details>
+            <summary>Linux</summary>
+            <p>Use <code>systemctl edit ollama</code>, add the exact environment value below under <code>[Service]</code>, then restart Ollama:</p>
+            <div class="guide-command"><code data-origin-command="linux">Environment="OLLAMA_ORIGINS=this website"</code><button type="button" data-copy-origin-command="linux">Copy</button></div>
+          </details>
+          <p><a href="https://docs.ollama.com/faq#how-do-i-configure-ollama-server" target="_blank" rel="noreferrer">Official Ollama environment instructions ↗</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section" id="capabilities">
+      <div class="section-number">04</div>
       <div class="guide-content">
         <p class="eyebrow">What the labels mean</p>
         <h2>Models are good at different things.</h2>
@@ -94,7 +131,7 @@ const commands = [
     </section>
 
     <section class="guide-section" id="commands">
-      <div class="section-number">04</div>
+      <div class="section-number">05</div>
       <div class="guide-content">
         <p class="eyebrow">The ten useful commands</p>
         <h2>You do not need to memorize them today.</h2>
@@ -111,7 +148,7 @@ const commands = [
     </section>
 
     <section class="guide-section" id="local-cloud">
-      <div class="section-number">05</div>
+      <div class="section-number">06</div>
       <div class="guide-content">
         <p class="eyebrow">A crucial distinction</p>
         <h2>Local and cloud models are not the same.</h2>
@@ -141,7 +178,7 @@ const commands = [
     </section>
 
     <section class="guide-section" id="localhost">
-      <div class="section-number">06</div>
+      <div class="section-number">07</div>
       <div class="guide-content">
         <p class="eyebrow">When software talks to Ollama</p>
         <h2><code>localhost:11434</code> means “Ollama on this computer.”</h2>
@@ -154,7 +191,7 @@ const commands = [
     </section>
 
     <section class="guide-section" id="advanced">
-      <div class="section-number">07</div>
+      <div class="section-number">08</div>
       <div class="guide-content">
         <p class="eyebrow">A calm learning path</p>
         <h2>Go one level at a time.</h2>

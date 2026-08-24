@@ -4,9 +4,10 @@ import { capabilityLabels, formatUpdatedDate } from "../lib/catalog";
 
 interface Props {
   model: Model;
+  savedOnly?: boolean;
 }
 
-const { model } = Astro.props;
+const { model, savedOnly = false } = Astro.props;
 const basePath = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL.replace(/\/$/, "");
 const detailHref = `${basePath}/model/${encodeURIComponent(model.slug)}/`;
 const searchable = [model.name, model.description, ...model.capabilities, ...model.sizes].join(" ").toLowerCase();
@@ -21,8 +22,24 @@ const updatedNumber = model.updatedAt ? Date.parse(model.updatedAt) : 0;
   data-caps={model.capabilities.join(" ")}
   data-pulls={model.pullCount}
   data-updated={updatedNumber}
+  data-model-slug={model.slug}
+  data-model-name={model.name}
+  data-model-command={model.runCommand}
+  data-model-url={model.officialUrl}
+  data-saved-only={savedOnly ? "true" : undefined}
+  hidden={savedOnly}
 >
-  <a class="model-primary" href={detailHref}>
+  <a
+    class="model-primary"
+    href={detailHref}
+    data-open-pull
+    data-model-slug={model.slug}
+    data-model-name={model.name}
+    data-run-command={model.runCommand}
+    data-official-url={model.officialUrl}
+    data-model-cloud={model.capabilities.includes("cloud") ? "true" : "false"}
+    aria-label={`Choose ${model.name} for download with Ollama`}
+  >
     <div class="model-copy">
       <h3>{model.name}</h3>
       <p>{model.description}</p>
@@ -44,8 +61,18 @@ const updatedNumber = model.updatedAt ? Date.parse(model.updatedAt) : 0;
   </a>
   <div class="row-command">
     <code>{model.runCommand}</code>
-    <button type="button" class="copy-button" data-copy-command={model.runCommand} aria-label={`Copy ${model.runCommand}`}>
-      Copy
-    </button>
+    <div class="row-actions">
+      <a class="row-detail" href={detailHref}>Details</a>
+      <button
+        type="button"
+        class="save-button"
+        data-save-model={model.slug}
+        data-model-name={model.name}
+        aria-pressed="false"
+      >Save</button>
+      <button type="button" class="copy-button" data-copy-command={model.runCommand} aria-label={`Copy ${model.runCommand}`}>
+        Copy
+      </button>
+    </div>
   </div>
 </article>

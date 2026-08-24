@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ModelRow from "../components/ModelRow.astro";
+import { models } from "../lib/catalog";
+
+const basePath = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL.replace(/\/$/, "");
+const href = (path: string) => `${basePath}${path}`;
+---
+
+<BaseLayout
+  title="My saved models — ailocal.click"
+  description="Your personal list of Ollama models, saved only in this browser on this device."
+  canonicalPath="/saved/"
+  pageClass="saved-page"
+>
+  <section class="saved-shell" data-saved-page aria-labelledby="saved-title">
+    <header class="saved-hero">
+      <p class="eyebrow">Stored on this device</p>
+      <h1 id="saved-title">My models</h1>
+      <p>Save useful models without an account. This list stays in this browser and can be exported whenever you want.</p>
+    </header>
+
+    <div class="saved-controls">
+      <div class="search-wrap">
+        <label for="saved-search">Search saved models</label>
+        <input id="saved-search" type="search" inputmode="search" autocomplete="off" placeholder="Search your list…" data-saved-search />
+      </div>
+      <div class="saved-tools">
+        <button type="button" class="button button-line" data-export-saved disabled>Export list</button>
+        <button type="button" class="button button-line" data-clear-saved disabled>Clear list</button>
+      </div>
+      <p class="saved-result"><strong data-saved-page-count>0</strong> <span data-saved-page-label>models</span></p>
+    </div>
+
+    <p class="saved-loading" data-saved-loading>Loading your saved models…</p>
+
+    <div class="model-list saved-model-list" data-saved-model-list>
+      {models.map((model) => <ModelRow model={model} savedOnly />)}
+    </div>
+
+    <div class="empty-state saved-empty" data-saved-empty hidden>
+      <p data-saved-empty-message>Your saved list is empty.</p>
+      <a class="button button-accent" href={href("/#directory")}>Browse models</a>
+    </div>
+
+    <p class="saved-privacy">Saved models use local browser storage. Clearing site data or changing browsers removes this list unless you export it first.</p>
+  </section>
+</BaseLayout>

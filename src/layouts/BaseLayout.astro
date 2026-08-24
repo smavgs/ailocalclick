@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import OllamaPullDialog from "../components/OllamaPullDialog.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -22,10 +23,11 @@ const canonical = Astro.site
   : Astro.url;
 const favicon = `${basePath}/favicon.svg`;
 const manifest = `${basePath}/site.webmanifest`;
+const localApiOverride = import.meta.env.DEV ? import.meta.env.PUBLIC_OLLAMA_API : undefined;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-ollama-api={localApiOverride}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -51,6 +53,7 @@ const manifest = `${basePath}/site.webmanifest`;
       <slot />
     </main>
     <Footer />
+    <OllamaPullDialog />
     <div class="toast" data-toast role="status" aria-live="polite"></div>
     <script>
       import "../scripts/site.ts";

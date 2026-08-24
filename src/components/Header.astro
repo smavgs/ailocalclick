@@ -12,7 +12,10 @@ const active = (path: string) => path === "/" ? current === "/" : current.starts
     </a>
     <nav class="main-nav" aria-label="Primary navigation">
       <a href={href("/")} aria-current={active("/") ? "page" : undefined}>Models</a>
-      <a href={href("/learn/")} aria-current={active("/learn/") ? "page" : undefined}>Beginner guide</a>
+      <a href={href("/saved/")} aria-current={active("/saved/") ? "page" : undefined}>
+        Saved <span class="saved-count" data-saved-count hidden>0</span>
+      </a>
+      <a href={href("/learn/")} aria-current={active("/learn/") ? "page" : undefined}>I'm new</a>
       <a href={href("/about/")} aria-current={active("/about/") ? "page" : undefined}>About</a>
     </nav>
     <a class="header-source" href="https://ollama.com/library" target="_blank" rel="noreferrer">

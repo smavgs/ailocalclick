@@ -1,16 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Catalog from "../components/Catalog.astro";
-import { catalog, formatSyncDate, models } from "../lib/catalog";
+import { catalog, models } from "../lib/catalog";
 
 const basePath = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL.replace(/\/$/, "");
 const href = (path: string) => `${basePath}${path}`;
-const syncDate = formatSyncDate(catalog.source.generatedAt);
 ---
 
 <BaseLayout
   title="ailocal.click — every model in Ollama’s official library"
-  description="Search every base model in Ollama's official library, copy the right command, and learn local AI from the beginning."
+  description="Find, save, and download base models from Ollama's official library, with beginner help and a copy-command fallback."
   canonicalPath="/"
   pageClass="home-page"
 >
@@ -18,10 +17,9 @@ const syncDate = formatSyncDate(catalog.source.generatedAt);
     <div class="hero-inner">
       <p class="hero-kicker">Open models, clearly indexed</p>
       <h1><span>ailocal</span><em>.click</em></h1>
-      <p class="hero-promise">Every model in Ollama’s official library. One fast, searchable directory.</p>
       <div class="hero-actions">
         <a class="button button-accent" href="#directory">Browse {models.length} models</a>
-        <a class="button button-quiet-dark" href={href("/learn/")}>I’m new to Ollama</a>
+        <a class="button button-quiet-dark" href={href("/learn/")}>I'm new</a>
       </div>
       <div class="terminal-line" aria-label="Example Ollama command">
         <span class="terminal-prompt" aria-hidden="true">$</span>
@@ -30,8 +28,6 @@ const syncDate = formatSyncDate(catalog.source.generatedAt);
       </div>
       <div class="hero-foot">
         <span>{models.length} base models</span>
-        <span>Static Astro build</span>
-        <span>Synced {syncDate} UTC</span>
       </div>
     </div>
   </section>
@@ -47,15 +43,16 @@ const syncDate = formatSyncDate(catalog.source.generatedAt);
     </div>
     <ol class="starter-flow">
       <li><span>01</span><strong>Install Ollama</strong><p>It is the engine that manages and runs models.</p></li>
-      <li><span>02</span><strong>Choose a model</strong><p>A model is the actual AI brain you want to use.</p></li>
-      <li><span>03</span><strong>Run one command</strong><p><code>ollama run gemma3</code> downloads and starts it.</p></li>
-      <li><span>04</span><strong>Start talking</strong><p>Ask questions locally in the app or Terminal.</p></li>
+      <li><span>02</span><strong>Choose a model</strong><p>Click a model and check its size on Ollama.</p></li>
+      <li><span>03</span><strong>Confirm the download</strong><p>The page asks Ollama on your computer to pull it.</p></li>
+      <li><span>04</span><strong>Start building</strong><p>Open Ollama or copy the run command when ready.</p></li>
     </ol>
   </section>
 
   <section class="trust-strip" aria-label="Site principles">
-    <p><strong>Fast by design.</strong> Static HTML, a small TypeScript enhancement, no UI framework.</p>
-    <p><strong>Safe by design.</strong> Commands are copied only; this website never silently downloads a model.</p>
+    <p><strong>Fast to browse.</strong> Search, filter, and compare the complete directory in one place.</p>
+    <p><strong>Your click stays in control.</strong> A local download begins only after you confirm it.</p>
+    <p><strong>Saved on this device.</strong> Keep a personal model list without creating an account.</p>
     <p><strong>Source-bounded.</strong> Catalog data comes from the <a href={catalog.source.url}>official Ollama library</a>.</p>
   </section>
 </BaseLayout>

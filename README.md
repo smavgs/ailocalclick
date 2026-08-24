@@ -8,14 +8,16 @@ Ollama's official model library.
 - synchronizes the complete official Ollama library listing with a standard-library Python script;
 - builds one searchable directory and one static detail page per model with Astro and TypeScript;
 - explains Ollama from first use through local APIs and coding-agent integrations;
-- copies commands only—this site never silently downloads or launches a model;
+- saves a personal model list in browser storage without an account;
+- asks the local Ollama `/api/pull` endpoint to download only after explicit confirmation;
+- keeps a visible copy-command fallback when the browser cannot reach local Ollama;
 - deploys as a static GitHub Pages site and refreshes the catalog every six hours.
 
 ## Stack
 
 - Astro and TypeScript for static pages and typed catalog data
 - CSS for the adaptive visual system
-- browser JavaScript for instant search, filters, sorting, and command copying
+- browser JavaScript for search, filters, sorting, local saves, and streamed Ollama download progress
 - Python for official catalog synchronization
 - Shell for one-command sync and verification
 
@@ -50,3 +52,18 @@ confirmed on each linked official Ollama page before downloading.
 
 Ollama names and model metadata belong to their respective owners. This project
 is an independent directory and is not affiliated with Ollama.
+
+## Local download behavior
+
+The download button checks `http://localhost:11434/api/version` and, after the
+user's click, posts the catalog slug to `http://localhost:11434/api/pull` with
+streaming enabled. Model identifiers are validated against a conservative slug
+format before a request is made. No request to localhost happens on page load.
+
+Browsers and Ollama can block cross-origin local-network requests. The UI keeps
+the copy command available and links to exact-origin setup help. Do not configure
+`OLLAMA_ORIGINS=*`; allow only the website origin that needs access.
+
+Saved models use the `ailocalclick:saved-models:v1` local-storage key. They are
+not uploaded or synchronized between devices. The My models page supports
+searching, removing, clearing, and exporting the local list.

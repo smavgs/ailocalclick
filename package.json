@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "A fast, beginner-friendly directory of every model in Ollama's official library.",
+  "description": "Find, save, and download models from Ollama's official library.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

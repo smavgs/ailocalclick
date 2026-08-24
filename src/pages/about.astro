@@ -1,60 +1,61 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { catalog, formatSyncDate } from "../lib/catalog";
+import { catalog } from "../lib/catalog";
 
-const synced = formatSyncDate(catalog.source.generatedAt);
+const basePath = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL.replace(/\/$/, "");
+const href = (path: string) => `${basePath}${path}`;
 ---
 
 <BaseLayout
   title="Data, scope, and safety — ailocal.click"
-  description="How ailocal.click sources Ollama model data, what the directory covers, and why the site copies commands instead of silently running them."
+  description="How ailocal.click sources model data, saves your choices, and asks local Ollama to download only after confirmation."
   canonicalPath="/about/"
   pageClass="about-page"
 >
   <article class="about-shell">
     <header class="about-hero">
       <p class="eyebrow">Transparent by default</p>
-      <h1>What this directory is—and what it is not.</h1>
-      <p>ailocal.click is an independent, static index of base models in Ollama’s official library. It is designed for discovery and education, not invisible control of your computer.</p>
+      <h1>Know what happens after every click.</h1>
+      <p>Find a model, save it for later, or ask Ollama on your computer to download it.</p>
     </header>
 
     <section class="about-row">
       <div><span>01</span><h2>One official catalog source</h2></div>
       <div>
-        <p>The catalog synchronizer reads <a href={catalog.source.url}>Ollama’s official library sorted by newest</a>. The current snapshot contains <strong>{catalog.source.modelCount} base models</strong> and was generated <strong>{synced} UTC</strong>.</p>
+        <p>The directory follows <a href={catalog.source.url}>Ollama’s official library sorted by newest</a> and refreshes automatically.</p>
         <p>Community/user namespaces form an open-ended search surface and are not represented as a supposedly complete list.</p>
       </div>
     </section>
 
     <section class="about-row">
-      <div><span>02</span><h2>Fresh, but never disguised as live</h2></div>
+      <div><span>02</span><h2>Fresh catalog, precise details</h2></div>
       <div>
-        <p>GitHub Pages rebuilds the site every six hours. Pull totals and update labels can still change between synchronizations, so the timestamp remains visible.</p>
+        <p>The directory refreshes every six hours. Pull totals and update labels can still change between refreshes.</p>
         <p>Exact variants, licenses, context lengths, modalities, and file sizes must be confirmed on the linked Ollama model page.</p>
       </div>
     </section>
 
     <section class="about-row">
-      <div><span>03</span><h2>Commands, not surprise downloads</h2></div>
+      <div><span>03</span><h2>Downloads require confirmation</h2></div>
       <div>
-        <p>Copy buttons place a visible command on your clipboard. This website does not post directly to your local Ollama API, install software, start a pull, or weaken Ollama’s origin protections.</p>
-        <p>You choose the exact model and execute the command yourself after checking its requirements.</p>
+        <p>Selecting a model opens a confirmation panel. Only the separate <strong>Download with Ollama</strong> button asks the local Ollama API to pull that model.</p>
+        <p>The website cannot install Ollama, open Terminal, or bypass browser and Ollama security. A visible copy command remains available when the connection cannot be made.</p>
       </div>
     </section>
 
     <section class="about-row">
-      <div><span>04</span><h2>No account and no profile theatre</h2></div>
+      <div><span>04</span><h2>Your saved list stays local</h2></div>
       <div>
-        <p>There is no ailocal.click sign-in, simulated OAuth, or server-side profile. The deployed site is static. Search and filtering happen in your browser.</p>
-        <p>Links to Ollama and GitHub are external and follow those services’ own policies.</p>
+        <p>Save and remove models without signing in. Your list is stored in this browser on this device and is not uploaded to ailocal.click.</p>
+        <p>You can search, export, or clear that list from <a href={href("/saved/")}>My models</a>. It does not automatically sync between browsers or devices.</p>
       </div>
     </section>
 
     <section class="about-row">
-      <div><span>05</span><h2>Built for inspection</h2></div>
+      <div><span>05</span><h2>Open for inspection</h2></div>
       <div>
-        <p>Astro and TypeScript generate static pages. CSS handles the adaptive visual system. A small JavaScript enhancement powers search and command copying. Python synchronizes the catalog, and Shell runs verification.</p>
         <p><a href="https://github.com/smavgs/ailocalclick">Read the source on GitHub ↗</a></p>
+        <p>Links to Ollama and GitHub are external and follow those services’ own policies.</p>
       </div>
     </section>
   </article>

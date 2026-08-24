@@ -22,7 +22,7 @@ const href = (path: string) => `${basePath}${path}`;
 const related = models
   .filter((candidate) => candidate.slug !== model.slug && candidate.capabilities.some((capability) => model.capabilities.includes(capability)))
   .slice(0, 5);
-const title = `${model.name} — run with Ollama | ailocal.click`;
+const title = `${model.name} — download with Ollama | ailocal.click`;
 ---
 
 <BaseLayout title={title} description={model.description} canonicalPath={`/model/${model.slug}/`} pageClass="model-page">
@@ -35,7 +35,16 @@ const title = `${model.name} — run with Ollama | ailocal.click`;
         <h1>{model.name}</h1>
         <p>{model.description}</p>
       </div>
-      <a class="button button-line" href={model.officialUrl} target="_blank" rel="noreferrer">Official Ollama page ↗</a>
+      <div class="model-hero-actions">
+        <button
+          type="button"
+          class="button button-line"
+          data-save-model={model.slug}
+          data-model-name={model.name}
+          aria-pressed="false"
+        >Save</button>
+        <a class="button button-line" href={model.officialUrl} target="_blank" rel="noreferrer">Official Ollama page ↗</a>
+      </div>
     </header>
 
     <div class="model-facts">
@@ -49,19 +58,29 @@ const title = `${model.name} — run with Ollama | ailocal.click`;
 
     <section class="run-section" aria-labelledby="run-title">
       <div class="run-copy">
-        <p class="eyebrow">Run locally</p>
-        <h2 id="run-title">Check the variant, then run it yourself.</h2>
-        <p>Ollama downloads the default tag if it is not installed. Confirm the exact file size, license, context, and hardware requirement on the official page first.</p>
+        <p class="eyebrow">Download locally</p>
+        <h2 id="run-title">Confirm, then let Ollama pull it.</h2>
+        <p>The browser can ask Ollama running on this computer to download the default tag. Confirm the exact file size, license, context, and hardware requirement on the official page first.</p>
       </div>
+      <button
+        type="button"
+        class="button button-accent model-download-button"
+        data-open-pull
+        data-model-slug={model.slug}
+        data-model-name={model.name}
+        data-run-command={model.runCommand}
+        data-official-url={model.officialUrl}
+        data-model-cloud={model.capabilities.includes("cloud") ? "true" : "false"}
+      >Download with Ollama</button>
       <div class="primary-command">
         <span class="terminal-prompt" aria-hidden="true">$</span>
         <code>{model.runCommand}</code>
         <button type="button" data-copy-command={model.runCommand}>Copy command</button>
       </div>
       <ol class="run-steps">
-        <li><span>1</span><p><strong>Install Ollama</strong> from the official download.</p></li>
-        <li><span>2</span><p><strong>Review this model’s Ollama page</strong> and choose a compatible tag.</p></li>
-        <li><span>3</span><p><strong>Paste the command</strong> into Terminal or use the Ollama app.</p></li>
+        <li><span>1</span><p><strong>Install and open Ollama</strong> on this computer.</p></li>
+        <li><span>2</span><p><strong>Review the exact size</strong> and choose a compatible tag.</p></li>
+        <li><span>3</span><p><strong>Confirm the download</strong> or use the copy command fallback.</p></li>
       </ol>
     </section>
 
