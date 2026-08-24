@@ -3,6 +3,10 @@
 A fast, beginner-friendly directory of every base model currently listed in
 Ollama's official model library.
 
+Live site: [ailocalclick.pages.dev](https://ailocalclick.pages.dev/)
+
+Fallback: [smavgs.github.io/ailocalclick](https://smavgs.github.io/ailocalclick/)
+
 ## What it does
 
 - synchronizes the complete official Ollama library listing with a standard-library Python script;
