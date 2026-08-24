@@ -399,6 +399,7 @@ function setupAccountUi(): void {
   const modeButtons = Array.from(dialog.querySelectorAll<HTMLButtonElement>("[data-auth-mode]"));
   const guestMessage = dialog.querySelector<HTMLElement>("[data-account-message]");
   const recoveryForm = dialog.querySelector<HTMLFormElement>("[data-password-update-form]");
+  const recoveryEmail = dialog.querySelector<HTMLInputElement>("[data-recovery-email]");
   const newPassword = dialog.querySelector<HTMLInputElement>("[data-account-new-password]");
   const confirmPassword = dialog.querySelector<HTMLInputElement>("[data-account-confirm-password]");
   const recoverySubmit = dialog.querySelector<HTMLButtonElement>("[data-password-update-submit]");
@@ -408,7 +409,7 @@ function setupAccountUi(): void {
   const memberEmail = dialog.querySelector<HTMLElement>("[data-account-email-display]");
   const memberAvatar = dialog.querySelector<HTMLElement>("[data-account-avatar]");
   const signOutButton = dialog.querySelector<HTMLButtonElement>("[data-account-sign-out]");
-  if (!loading || !guest || !recovery || !member || !unavailable || !closeButton || !emailForm || !emailInput || !passwordInput || !emailSubmit || !resetButton || modeButtons.length !== 2 || !guestMessage || !recoveryForm || !newPassword || !confirmPassword || !recoverySubmit || !recoveryMessage || !memberMessage || !memberName || !memberEmail || !memberAvatar || !signOutButton) return;
+  if (!loading || !guest || !recovery || !member || !unavailable || !closeButton || !emailForm || !emailInput || !passwordInput || !emailSubmit || !resetButton || modeButtons.length !== 2 || !guestMessage || !recoveryForm || !recoveryEmail || !newPassword || !confirmPassword || !recoverySubmit || !recoveryMessage || !memberMessage || !memberName || !memberEmail || !memberAvatar || !signOutButton) return;
 
   let authMode: "signin" | "signup" = "signin";
 
@@ -450,6 +451,7 @@ function setupAccountUi(): void {
       memberMessage.textContent = account.user ? account.error : "";
     }
     if (account.user) {
+      recoveryEmail.value = account.user.email ?? "";
       memberName.textContent = name;
       memberEmail.textContent = account.user.email ?? "Signed-in account";
       setAvatar(memberAvatar, avatarUrl, name);

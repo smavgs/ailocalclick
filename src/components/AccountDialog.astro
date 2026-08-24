@@ -52,6 +52,7 @@ const appleEnabled = import.meta.env.PUBLIC_ENABLE_APPLE_AUTH === "true";
       <h2>Choose a new password.</h2>
       <p>Your reset link is verified. Set a password to finish.</p>
       <form class="account-email-form" data-password-update-form>
+        <input type="email" name="email" autocomplete="username" class="visually-hidden" tabindex="-1" aria-hidden="true" data-recovery-email />
         <label for="account-new-password">New password</label>
         <input id="account-new-password" type="password" minlength="8" maxlength="128" autocomplete="new-password" required placeholder="At least 8 characters" data-account-new-password />
         <label for="account-confirm-password">Confirm password</label>
