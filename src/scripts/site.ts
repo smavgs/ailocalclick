@@ -19,6 +19,12 @@ import {
   type AccountProfile,
   type SavedModelRecord
 } from "./account";
+import {
+  initializeI18n,
+  LANGUAGE_CHANGE_EVENT,
+  refreshTranslations,
+  tr
+} from "./i18n";
 
 const toast = document.querySelector<HTMLElement>("[data-toast]");
 let toastTimer: number | undefined;
@@ -29,6 +35,23 @@ interface CopyRunModel {
   runCommand: string;
   officialUrl: string;
   cloud: boolean;
+}
+
+interface TurnstileApi {
+  render(container: HTMLElement, options: {
+    sitekey: string;
+    theme: "auto";
+    size: "flexible";
+    appearance: "always";
+    callback(token: string): void;
+    "expired-callback"(): void;
+    "error-callback"(): void;
+  }): string;
+  reset(widgetId?: string): void;
+}
+
+function turnstileApi(): TurnstileApi | undefined {
+  return (window as typeof window & { turnstile?: TurnstileApi }).turnstile;
 }
 
 function showToast(message: string, duration = 1800): void {
@@ -72,7 +95,7 @@ function updateSavedUi(): void {
     const isSavedList = button.closest<HTMLElement>('[data-saved-only="true"]') !== null;
     button.setAttribute("aria-pressed", String(isSaved));
     button.classList.toggle("is-saved", isSaved);
-    button.textContent = isSaved ? (isSavedList ? "Remove" : "Saved") : "Save";
+    button.textContent = tr(isSaved ? (isSavedList ? "Remove" : "Saved") : "Save");
   }
 
   for (const count of document.querySelectorAll<HTMLElement>("[data-saved-count]")) {
@@ -122,26 +145,26 @@ function setupSavedPage(): void {
 
   const compatibilityText = (row: HTMLElement, record: SavedModelRecord, profile: AccountProfile | null): string => {
     if ((row.dataset.caps ?? "").split(" ").includes("cloud") && !(row.dataset.modelSizes ?? "").trim()) {
-      return "Cloud model: local RAM is not the primary limit. Check Ollama account requirements.";
+      return tr("Cloud model: local RAM is not the primary limit. Check Ollama account requirements.");
     }
     if (!profile || (profile.ramGb === null && profile.gpuMemoryGb === null)) {
-      return "Add RAM or GPU memory in your profile for a rough compatibility guide.";
+      return tr("Add RAM or GPU memory in your profile for a rough compatibility guide.");
     }
     const scale = modelScale(record.selectedTag, row.dataset.modelSizes ?? "");
     const hardware = profile.preferredOs === "macos"
       ? profile.ramGb
       : Math.max(profile.ramGb ?? 0, profile.gpuMemoryGb ?? 0) || null;
     if (scale === null || hardware === null) {
-      return "Hardware profile saved. Confirm this exact tag’s file size and quantization on Ollama.";
+      return tr("Hardware profile saved. Confirm this exact tag’s file size and quantization on Ollama.");
     }
     const roughNeed = Math.ceil(scale * 0.75 + 4);
     if (hardware >= roughNeed * 1.25) {
-      return `Likely a practical starting point for your ${hardware} GB profile with a compact quantization. Verify the exact tag size.`;
+      return tr("Likely a practical starting point for your {{hardware}} GB profile with a compact quantization. Verify the exact tag size.", { hardware });
     }
     if (hardware >= roughNeed) {
-      return `May fit your ${hardware} GB profile, but context length and quantization can change memory use. Verify before pulling.`;
+      return tr("May fit your {{hardware}} GB profile, but context length and quantization can change memory use. Verify before pulling.", { hardware });
     }
-    return `This ${record.selectedTag} selection may be tight for your ${hardware} GB profile. Consider a smaller tag and verify its file size.`;
+    return tr("This {{tag}} selection may be tight for your {{hardware}} GB profile. Consider a smaller tag and verify its file size.", { tag: record.selectedTag, hardware });
   };
 
   const updateRowDetails = (row: HTMLElement, record: SavedModelRecord, signedIn: boolean, profile: AccountProfile | null): void => {
@@ -157,7 +180,7 @@ function setupSavedPage(): void {
     tagInput.disabled = !signedIn;
     noteInput.disabled = !signedIn;
     detailButton.disabled = !signedIn;
-    detailButton.textContent = signedIn ? "Update details" : "Sign in for tags & notes";
+    detailButton.textContent = tr(signedIn ? "Update details" : "Sign in for tags & notes");
     guidance.textContent = compatibilityText(row, record, profile);
 
     const baseSlug = row.dataset.modelSlug ?? record.slug;
@@ -210,14 +233,14 @@ function setupSavedPage(): void {
     const visible: HTMLElement[] = [];
 
     mode.textContent = !account.ready
-      ? "Checking your account…"
+      ? tr("Checking your account…")
       : account.user
-        ? `Synced privately as ${account.user.email ?? "your account"}`
-        : "Sign in to view saved models";
+        ? tr("Synced privately as {{email}}", { email: account.user.email ?? tr("your account") })
+        : tr("Sign in to view saved models");
     modeSignIn.hidden = Boolean(account.user);
     signedOut.hidden = !account.ready || Boolean(account.user);
     workspace.hidden = !account.ready || !account.user;
-    privacy.textContent = "Saved models, selected tags, notes, and profile preferences are synchronized as private records for this account.";
+    privacy.textContent = tr("Saved models, selected tags, notes, and profile preferences are synchronized as private records for this account.");
 
     const localCount = getLocalImportCount();
     importCount.textContent = String(localCount);
@@ -226,7 +249,7 @@ function setupSavedPage(): void {
     if (!account.user) {
       for (const row of rows) row.hidden = true;
       count.textContent = "0";
-      label.textContent = "models";
+      label.textContent = tr("models");
       loading.hidden = account.ready;
       empty.hidden = true;
       for (const button of exportButtons) button.disabled = true;
@@ -259,12 +282,12 @@ function setupSavedPage(): void {
     list.append(...sorted);
 
     count.textContent = String(visible.length);
-    label.textContent = visible.length === 1 ? "model" : "models";
+    label.textContent = tr(visible.length === 1 ? "model" : "models");
     loading.hidden = account.ready;
     empty.hidden = !account.ready || !account.user || visible.length > 0;
     emptyMessage.textContent = account.saved.size === 0
-      ? "Your saved list is empty."
-      : "No saved models match those filters.";
+      ? tr("Your saved list is empty.")
+      : tr("No saved models match those filters.");
     for (const button of exportButtons) button.disabled = account.saved.size === 0;
     clearButton.disabled = account.saved.size === 0;
   };
@@ -296,15 +319,15 @@ function setupSavedPage(): void {
           models
         }, null, 2), "application/json", "json");
       }
-      showToast(`Exported ${models.length} saved ${models.length === 1 ? "model" : "models"}`);
+      showToast(tr("Exported {{count}} saved {{models}}", { count: models.length, models: tr(models.length === 1 ? "model" : "models") }));
     });
   }
   clearButton.addEventListener("click", async () => {
-    if (!window.confirm("Remove every saved model from your private account?")) return;
+    if (!window.confirm(tr("Remove every saved model from your private account?"))) return;
     clearButton.disabled = true;
     try {
       await clearSavedModels();
-      showToast("Saved list cleared");
+      showToast(tr("Saved list cleared"));
     } catch (error) {
       showToast(errorMessage(error), 3600);
     } finally {
@@ -322,7 +345,7 @@ function setupSavedPage(): void {
     importButton.disabled = true;
     try {
       const imported = await importLocalModels(models);
-      showToast(`Imported ${imported} local ${imported === 1 ? "model" : "models"} to your profile`, 3200);
+      showToast(tr("Imported {{count}} local {{models}} to your profile", { count: imported, models: tr(imported === 1 ? "model" : "models") }), 3200);
     } catch (error) {
       showToast(errorMessage(error), 3600);
     } finally {
@@ -342,10 +365,10 @@ function setupSavedPage(): void {
     const note = row?.querySelector<HTMLTextAreaElement>("[data-saved-note]");
     if (!row || !slug || !tag || !note) return;
     detailsButton.disabled = true;
-    detailsButton.textContent = "Saving…";
+    detailsButton.textContent = tr("Saving…");
     try {
       await updateSavedModel(slug, tag.value, note.value);
-      showToast(`${row.dataset.modelName ?? slug} details updated`);
+      showToast(tr("{{name}} details updated", { name: row.dataset.modelName ?? slug }));
     } catch (error) {
       showToast(errorMessage(error), 3800);
     } finally {
@@ -369,7 +392,7 @@ function accountName(): string {
   return account.profile?.displayName
     || String(account.user?.user_metadata.full_name ?? account.user?.user_metadata.name ?? "")
     || account.user?.email?.split("@")[0]
-    || "Your account";
+    || tr("Your account");
 }
 
 function accountRedirectUrl(): string {
@@ -409,9 +432,75 @@ function setupAccountUi(): void {
   const memberEmail = dialog.querySelector<HTMLElement>("[data-account-email-display]");
   const memberAvatar = dialog.querySelector<HTMLElement>("[data-account-avatar]");
   const signOutButton = dialog.querySelector<HTMLButtonElement>("[data-account-sign-out]");
+  const turnstileShell = dialog.querySelector<HTMLElement>("[data-turnstile-shell]");
+  const turnstileWidget = dialog.querySelector<HTMLElement>("[data-turnstile-widget]");
+  const turnstileMessage = dialog.querySelector<HTMLElement>("[data-turnstile-message]");
   if (!loading || !guest || !recovery || !member || !unavailable || !closeButton || !emailForm || !emailInput || !passwordInput || !emailSubmit || !resetButton || modeButtons.length !== 2 || !guestMessage || !recoveryForm || !recoveryEmail || !newPassword || !confirmPassword || !recoverySubmit || !recoveryMessage || !memberMessage || !memberName || !memberEmail || !memberAvatar || !signOutButton) return;
 
   let authMode: "signin" | "signup" = "signin";
+  let captchaToken = "";
+  let turnstileWidgetId = "";
+  let turnstileRenderPromise: Promise<void> | null = null;
+
+  const renderTurnstile = (): Promise<void> => {
+    if (!turnstileShell || !turnstileWidget || turnstileWidgetId) return Promise.resolve();
+    if (turnstileRenderPromise) return turnstileRenderPromise;
+    const sitekey = turnstileShell.dataset.sitekey?.trim() ?? "";
+    if (!sitekey) return Promise.resolve();
+    const rendering = new Promise<void>((resolve, reject) => {
+      const startedAt = Date.now();
+      const attempt = (): void => {
+        const api = turnstileApi();
+        if (api) {
+          turnstileWidgetId = api.render(turnstileWidget, {
+            sitekey,
+            theme: "auto",
+            size: "flexible",
+            appearance: "always",
+            callback: (token) => {
+              captchaToken = token;
+              if (turnstileMessage) turnstileMessage.textContent = tr("Security check complete.");
+            },
+            "expired-callback": () => {
+              captchaToken = "";
+              if (turnstileMessage) turnstileMessage.textContent = tr("Security check expired. Complete it again.");
+            },
+            "error-callback": () => {
+              captchaToken = "";
+              if (turnstileMessage) turnstileMessage.textContent = tr("Security check could not load. Check your connection and try again.");
+            }
+          });
+          resolve();
+          return;
+        }
+        if (Date.now() - startedAt > 8000) {
+          reject(new Error(tr("Security check could not load. Check your connection and try again.")));
+          return;
+        }
+        window.setTimeout(attempt, 80);
+      };
+      attempt();
+    }).catch((error) => {
+      turnstileRenderPromise = null;
+      throw error;
+    });
+    turnstileRenderPromise = rendering;
+    return rendering;
+  };
+
+  const requiredCaptchaToken = async (): Promise<string | undefined> => {
+    if (!turnstileShell) return undefined;
+    await renderTurnstile();
+    if (!captchaToken) throw new Error(tr("Complete the security check, then try again."));
+    return captchaToken;
+  };
+
+  const resetTurnstile = (): void => {
+    if (!turnstileShell || !turnstileWidgetId) return;
+    captchaToken = "";
+    turnstileApi()?.reset(turnstileWidgetId);
+    if (turnstileMessage) turnstileMessage.textContent = tr("Complete the security check.");
+  };
 
   const renderMode = (): void => {
     for (const button of modeButtons) {
@@ -420,7 +509,7 @@ function setupAccountUi(): void {
       button.classList.toggle("is-active", selected);
     }
     passwordInput.autocomplete = authMode === "signin" ? "current-password" : "new-password";
-    emailSubmit.textContent = authMode === "signin" ? "Sign in" : "Create account";
+    emailSubmit.textContent = tr(authMode === "signin" ? "Sign in" : "Create account");
     resetButton.hidden = authMode !== "signin";
   };
 
@@ -434,7 +523,7 @@ function setupAccountUi(): void {
       trigger.classList.toggle("is-signed-in", Boolean(account.user));
     }
     for (const label of document.querySelectorAll<HTMLElement>("[data-account-trigger-label]")) {
-      label.textContent = account.user ? "Profile" : "Sign in";
+      label.textContent = tr(account.user ? "Profile" : "Sign in");
     }
     for (const avatar of document.querySelectorAll<HTMLElement>("[data-header-avatar]")) {
       avatar.hidden = !account.user;
@@ -453,7 +542,7 @@ function setupAccountUi(): void {
     if (account.user) {
       recoveryEmail.value = account.user.email ?? "";
       memberName.textContent = name;
-      memberEmail.textContent = account.user.email ?? "Signed-in account";
+      memberEmail.textContent = account.user.email ?? tr("Signed-in account");
       setAvatar(memberAvatar, avatarUrl, name);
     }
     if (account.recovery) openAccountDialog();
@@ -465,6 +554,9 @@ function setupAccountUi(): void {
     event.preventDefault();
     render();
     openAccountDialog();
+    void renderTurnstile().catch((error) => {
+      guestMessage.textContent = errorMessage(error);
+    });
   });
 
   closeButton.addEventListener("click", () => dialog.close());
@@ -484,24 +576,26 @@ function setupAccountUi(): void {
   emailForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     emailSubmit.disabled = true;
-    emailSubmit.textContent = authMode === "signin" ? "Signing in…" : "Creating…";
+    emailSubmit.textContent = tr(authMode === "signin" ? "Signing in…" : "Creating…");
     guestMessage.textContent = "";
     try {
+      const token = await requiredCaptchaToken();
       if (authMode === "signup") {
-        const result = await signUpWithPassword(emailInput.value, passwordInput.value, accountRedirectUrl());
+        const result = await signUpWithPassword(emailInput.value, passwordInput.value, accountRedirectUrl(), token);
         guestMessage.textContent = result.needsConfirmation
-          ? "Check your email once to confirm the account, then return and sign in with your password."
-          : "Account created. You are signed in.";
+          ? tr("Check your email once to confirm the account, then return and sign in with your password.")
+          : tr("Account created. You are signed in.");
       } else {
-        await signInWithPassword(emailInput.value, passwordInput.value);
-        guestMessage.textContent = "Signed in.";
-        showToast("Signed in");
+        await signInWithPassword(emailInput.value, passwordInput.value, token);
+        guestMessage.textContent = tr("Signed in.");
+        showToast(tr("Signed in"));
       }
       passwordInput.value = "";
     } catch (error) {
       guestMessage.textContent = errorMessage(error);
     } finally {
       emailSubmit.disabled = false;
+      resetTurnstile();
       renderMode();
     }
   });
@@ -510,13 +604,15 @@ function setupAccountUi(): void {
     resetButton.disabled = true;
     guestMessage.textContent = "";
     try {
-      await requestPasswordReset(emailInput.value, accountRedirectUrl());
-      guestMessage.textContent = "Check your email for the password reset link.";
+      const token = await requiredCaptchaToken();
+      await requestPasswordReset(emailInput.value, accountRedirectUrl(), token);
+      guestMessage.textContent = tr("Check your email for the password reset link.");
     } catch (error) {
       guestMessage.textContent = errorMessage(error);
       if (!emailInput.value.trim()) emailInput.focus();
     } finally {
       resetButton.disabled = false;
+      resetTurnstile();
     }
   });
 
@@ -524,31 +620,31 @@ function setupAccountUi(): void {
     event.preventDefault();
     recoveryMessage.textContent = "";
     if (newPassword.value !== confirmPassword.value) {
-      recoveryMessage.textContent = "The passwords do not match.";
+      recoveryMessage.textContent = tr("The passwords do not match.");
       confirmPassword.focus();
       return;
     }
     recoverySubmit.disabled = true;
-    recoverySubmit.textContent = "Saving…";
+    recoverySubmit.textContent = tr("Saving…");
     try {
       await updatePassword(newPassword.value);
       newPassword.value = "";
       confirmPassword.value = "";
-      showToast("Password updated");
+      showToast(tr("Password updated"));
     } catch (error) {
       recoveryMessage.textContent = errorMessage(error);
     } finally {
       recoverySubmit.disabled = false;
-      recoverySubmit.textContent = "Save new password";
+      recoverySubmit.textContent = tr("Save new password");
     }
   });
 
   for (const providerButton of dialog.querySelectorAll<HTMLButtonElement>("[data-auth-provider]")) {
     providerButton.addEventListener("click", async () => {
       const provider = providerButton.dataset.authProvider;
-      if (provider !== "google" && provider !== "apple") return;
+      if (provider !== "google" && provider !== "github") return;
       providerButton.disabled = true;
-      guestMessage.textContent = "Opening the secure provider…";
+      guestMessage.textContent = tr("Opening the secure provider…");
       try {
         await signInWithProvider(provider, accountRedirectUrl());
       } catch (error) {
@@ -560,10 +656,10 @@ function setupAccountUi(): void {
 
   signOutButton.addEventListener("click", async () => {
     signOutButton.disabled = true;
-    memberMessage.textContent = "Signing out…";
+    memberMessage.textContent = tr("Signing out…");
     try {
       await signOut();
-      showToast("Signed out. Your private saved list is unchanged.");
+      showToast(tr("Signed out. Your private saved list is unchanged."));
     } catch (error) {
       memberMessage.textContent = errorMessage(error);
     } finally {
@@ -624,9 +720,9 @@ function setupProfilePage(): void {
     currentAvatarUrl = profile?.avatarUrl
       || String(account.user.user_metadata.avatar_url ?? account.user.user_metadata.picture ?? "");
     summaryName.textContent = name;
-    email.textContent = account.user.email ?? "Signed-in account";
+    email.textContent = account.user.email ?? tr("Signed-in account");
     savedCount.textContent = String(account.saved.size);
-    osSummary.textContent = osLabels[profile?.preferredOs ?? ""] ?? "Not set";
+    osSummary.textContent = tr(osLabels[profile?.preferredOs ?? ""] ?? "Not set");
     if (!previewUrl) setAvatar(preview, currentAvatarUrl, name);
 
     if (hydratedUser !== account.user.id || !dirty) {
@@ -655,7 +751,7 @@ function setupProfilePage(): void {
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     submitButton.disabled = true;
-    submitButton.textContent = "Saving…";
+    submitButton.textContent = tr("Saving…");
     status.textContent = "";
     try {
       const file = avatarInput.files?.[0];
@@ -675,13 +771,13 @@ function setupProfilePage(): void {
       avatarInput.value = "";
       if (previewUrl) URL.revokeObjectURL(previewUrl);
       previewUrl = "";
-      status.textContent = "Profile saved.";
-      showToast("Profile saved");
+      status.textContent = tr("Profile saved.");
+      showToast(tr("Profile saved"));
     } catch (error) {
       status.textContent = errorMessage(error);
     } finally {
       submitButton.disabled = false;
-      submitButton.textContent = "Save profile";
+      submitButton.textContent = tr("Save profile");
       render();
     }
   });
@@ -694,7 +790,7 @@ function errorMessage(error: unknown): string {
   if (error && typeof error === "object" && "message" in error && typeof error.message === "string" && error.message) {
     return error.message;
   }
-  return "The request could not be completed. Check your connection and try again.";
+  return tr("The request could not be completed. Check your connection and try again.");
 }
 
 function setupCopyRunDialog(): void {
@@ -734,39 +830,39 @@ function setupCopyRunDialog(): void {
             : "other";
 
     if (platform === "macos") {
-      terminal.textContent = "Open Terminal";
-      terminalDetail.textContent = "on your Mac (Applications → Utilities → Terminal).";
-      paste.textContent = "Press ⌘V to paste";
-      pasteDetail.textContent = "The copied Ollama command will appear at the prompt.";
+      terminal.textContent = tr("Open Terminal");
+      terminalDetail.textContent = tr("on your Mac (Applications → Utilities → Terminal).");
+      paste.textContent = tr("Press ⌘V to paste");
+      pasteDetail.textContent = tr("The copied Ollama command will appear at the prompt.");
     } else if (platform === "windows") {
-      terminal.textContent = "Open Windows Terminal or PowerShell";
-      terminalDetail.textContent = "on the Windows computer where Ollama is installed.";
-      paste.textContent = "Press Ctrl+V to paste";
-      pasteDetail.textContent = "The copied Ollama command will appear at the prompt.";
+      terminal.textContent = tr("Open Windows Terminal or PowerShell");
+      terminalDetail.textContent = tr("on the Windows computer where Ollama is installed.");
+      paste.textContent = tr("Press Ctrl+V to paste");
+      pasteDetail.textContent = tr("The copied Ollama command will appear at the prompt.");
     } else if (platform === "linux") {
-      terminal.textContent = "Open Terminal";
-      terminalDetail.textContent = "on the Linux computer where Ollama is installed.";
-      paste.textContent = "Paste the command";
-      pasteDetail.textContent = "Usually Ctrl+Shift+V or Ctrl+V, depending on your terminal.";
+      terminal.textContent = tr("Open Terminal");
+      terminalDetail.textContent = tr("on the Linux computer where Ollama is installed.");
+      paste.textContent = tr("Paste the command");
+      pasteDetail.textContent = tr("Usually Ctrl+Shift+V or Ctrl+V, depending on your terminal.");
     } else {
-      terminal.textContent = "Open Terminal on your computer";
-      terminalDetail.textContent = "Use a Mac, Windows, or Linux computer with Ollama installed.";
-      paste.textContent = "Paste the command";
-      pasteDetail.textContent = "Use that computer’s normal paste shortcut.";
+      terminal.textContent = tr("Open Terminal on your computer");
+      terminalDetail.textContent = tr("Use a Mac, Windows, or Linux computer with Ollama installed.");
+      paste.textContent = tr("Paste the command");
+      pasteDetail.textContent = tr("Use that computer’s normal paste shortcut.");
     }
 
     deviceNote.hidden = !mobile;
     deviceNote.textContent = mobile
-      ? "You are viewing this on a mobile device. Send or copy the command to the Mac, Windows, or Linux computer where Ollama is installed."
+      ? tr("You are viewing this on a mobile device. Send or copy the command to the Mac, Windows, or Linux computer where Ollama is installed.")
       : "";
   };
 
   const showCopyResult = (copied: boolean): void => {
-    status.textContent = copied ? "Command copied." : "Clipboard access was blocked.";
+    status.textContent = tr(copied ? "Command copied." : "Clipboard access was blocked.");
     statusDetail.textContent = copied
-      ? "Open Terminal, paste it, and press Enter."
-      : "Press Copy again, or select the visible command and copy it manually.";
-    copyAgain.textContent = copied ? "Copy again" : "Try copying";
+      ? tr("Open Terminal, paste it, and press Enter.")
+      : tr("Press Copy again, or select the visible command and copy it manually.");
+    copyAgain.textContent = tr(copied ? "Copy again" : "Try copying");
   };
 
   const openForModel = (model: CopyRunModel, copied: boolean): void => {
@@ -797,14 +893,14 @@ function setupCopyRunDialog(): void {
     event.preventDefault();
     const copied = await copyText(runCommand);
     openForModel({ slug, name, runCommand, officialUrl, cloud: trigger.dataset.modelCloud === "true" }, copied);
-    showToast(copied ? `Copied: ${runCommand}` : "Clipboard access was unavailable", copied ? 2200 : 3200);
+    showToast(copied ? tr("Copied: {{command}}", { command: runCommand }) : tr("Clipboard access was unavailable"), copied ? 2200 : 3200);
   });
 
   copyAgain.addEventListener("click", async () => {
     if (!selected) return;
     const copied = await copyText(selected.runCommand);
     showCopyResult(copied);
-    showToast(copied ? `Copied: ${selected.runCommand}` : "Clipboard access was unavailable", copied ? 2200 : 3200);
+    showToast(copied ? tr("Copied: {{command}}", { command: selected.runCommand }) : tr("Clipboard access was unavailable"), copied ? 2200 : 3200);
   });
 
   closeButton.addEventListener("click", () => dialog.close());
@@ -872,7 +968,7 @@ function setupCatalog(): void {
       button.setAttribute("aria-pressed", String(button.dataset.capability === capability));
     }
     resultCount.textContent = String(visible.length);
-    resultLabel.textContent = visible.length === 1 ? "model" : "models";
+    resultLabel.textContent = tr(visible.length === 1 ? "model" : "models");
     empty.hidden = visible.length !== 0;
     clear.hidden = !query && capability === "all" && order === "newest";
     updateUrl();
@@ -923,11 +1019,11 @@ document.addEventListener("click", async (event) => {
   if (copyButton) {
     const command = copyButton.dataset.copyCommand;
     if (!command) return;
-    const original = copyButton.textContent ?? "Copy";
+    const original = copyButton.textContent ?? tr("Copy");
     const copied = await copyText(command);
-    copyButton.textContent = copied ? "Copied" : "Select command";
+    copyButton.textContent = tr(copied ? "Copied" : "Select command");
     copyButton.classList.toggle("is-copied", copied);
-    showToast(copied ? `Copied: ${command}` : "Clipboard access was unavailable");
+    showToast(copied ? tr("Copied: {{command}}", { command }) : tr("Clipboard access was unavailable"));
     window.setTimeout(() => {
       copyButton.textContent = original;
       copyButton.classList.remove("is-copied");
@@ -944,15 +1040,15 @@ document.addEventListener("click", async (event) => {
     const copyRunDialog = document.querySelector<HTMLDialogElement>("[data-copy-run-dialog]");
     if (copyRunDialog?.open) copyRunDialog.close();
     openAccountDialog();
-    showToast("Sign in to save models to your private list", 3000);
+    showToast(tr("Sign in to save models to your private list"), 3000);
     return;
   }
   saveButton.disabled = true;
   try {
     const wasSaved = await toggleSavedModel(slug, name);
     showToast(wasSaved
-      ? `${name} saved to your profile`
-      : `${name} removed from My models`, 2200);
+      ? tr("{{name}} saved to your profile", { name })
+      : tr("{{name}} removed from My models", { name }), 2200);
   } catch (error) {
     showToast(errorMessage(error), 3800);
   } finally {
@@ -962,11 +1058,21 @@ document.addEventListener("click", async (event) => {
 });
 
 window.addEventListener(ACCOUNT_CHANGE_EVENT, updateSavedUi);
+window.addEventListener(LANGUAGE_CHANGE_EVENT, () => {
+  updateSavedUi();
+  window.dispatchEvent(new CustomEvent(ACCOUNT_CHANGE_EVENT));
+  window.setTimeout(() => refreshTranslations(), 0);
+});
 
-setupCopyRunDialog();
-setupCatalog();
-setupSavedPage();
-setupAccountUi();
-setupProfilePage();
-updateSavedUi();
-void initializeAccount();
+async function start(): Promise<void> {
+  await initializeI18n();
+  setupCopyRunDialog();
+  setupCatalog();
+  setupSavedPage();
+  setupAccountUi();
+  setupProfilePage();
+  updateSavedUi();
+  await initializeAccount();
+}
+
+void start();

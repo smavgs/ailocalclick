@@ -18,7 +18,7 @@ const href = (path: string) => `${basePath}${path}`;
       <h1><span>ailocal</span><em>.click</em></h1>
       <p class="hero-promise">Click &amp; build with ai open models, on your computer.</p>
       <div class="hero-actions">
-        <a class="button button-accent" href="#directory">Browse {models.length} models</a>
+        <a class="button button-accent" href="#directory"><span>Browse</span>&nbsp;{models.length}&nbsp;<span>models</span></a>
         <a class="button button-quiet-dark" href={href("/learn/")}>I'm new</a>
       </div>
       <div class="terminal-line" aria-label="Example Ollama command">
@@ -27,7 +27,7 @@ const href = (path: string) => `${basePath}${path}`;
         <span class="terminal-status">local AI starts here</span>
       </div>
       <div class="hero-foot">
-        <span>{models.length} base models</span>
+        <span>{models.length}&nbsp;<span>base models</span></span>
       </div>
     </div>
   </section>

@@ -2,7 +2,8 @@
 const basePath = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL.replace(/\/$/, "");
 const href = (path: string) => `${basePath}${path}`;
 const googleEnabled = import.meta.env.PUBLIC_ENABLE_GOOGLE_AUTH === "true";
-const appleEnabled = import.meta.env.PUBLIC_ENABLE_APPLE_AUTH === "true";
+const githubEnabled = import.meta.env.PUBLIC_ENABLE_GITHUB_AUTH === "true";
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? "";
 ---
 
 <dialog class="account-dialog" data-account-dialog aria-label="Account">
@@ -29,17 +30,23 @@ const appleEnabled = import.meta.env.PUBLIC_ENABLE_APPLE_AUTH === "true";
         <input id="account-email" name="email" type="email" inputmode="email" autocomplete="email" required placeholder="you@example.com" data-account-email />
         <label for="account-password">Password</label>
         <input id="account-password" name="password" type="password" minlength="8" maxlength="128" autocomplete="current-password" required placeholder="At least 8 characters" data-account-password />
+        {turnstileSiteKey && (
+          <div class="turnstile-shell" data-turnstile-shell data-sitekey={turnstileSiteKey}>
+            <div data-turnstile-widget></div>
+            <p data-turnstile-message role="status" aria-live="polite">Security check loads when needed.</p>
+          </div>
+        )}
         <div class="account-form-actions">
           <button type="submit" class="button button-accent" data-account-email-submit>Sign in</button>
           <button type="button" class="account-text-button" data-password-reset>Forgot password?</button>
         </div>
       </form>
 
-      {(googleEnabled || appleEnabled) && <div class="account-divider"><span>or</span></div>}
-      {(googleEnabled || appleEnabled) && (
+      {(googleEnabled || githubEnabled) && <div class="account-divider"><span>or</span></div>}
+      {(googleEnabled || githubEnabled) && (
         <div class="provider-buttons">
           {googleEnabled && <button type="button" class="button button-line" data-auth-provider="google">Continue with Google</button>}
-          {appleEnabled && <button type="button" class="button button-line" data-auth-provider="apple">Continue with Apple</button>}
+          {githubEnabled && <button type="button" class="button button-line" data-auth-provider="github">Continue with GitHub</button>}
         </div>
       )}
 

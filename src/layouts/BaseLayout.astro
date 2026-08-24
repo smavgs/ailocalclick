@@ -24,6 +24,7 @@ const canonical = Astro.site
   : Astro.url;
 const favicon = `${basePath}/favicon.svg`;
 const manifest = `${basePath}/site.webmanifest`;
+const turnstileEnabled = Boolean(import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim());
 ---
 
 <!doctype html>
@@ -44,6 +45,7 @@ const manifest = `${basePath}/site.webmanifest`;
     <link rel="canonical" href={canonical} />
     <link rel="icon" href={favicon} type="image/svg+xml" />
     <link rel="manifest" href={manifest} />
+    {turnstileEnabled && <link rel="preconnect" href="https://challenges.cloudflare.com" />}
     <title>{title}</title>
   </head>
   <body class={pageClass}>
@@ -59,5 +61,6 @@ const manifest = `${basePath}/site.webmanifest`;
     <script>
       import "../scripts/site.ts";
     </script>
+    {turnstileEnabled && <script is:inline async defer src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>}
   </body>
 </html>

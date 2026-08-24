@@ -247,31 +247,33 @@ function checkedPassword(password: string): string {
   return password;
 }
 
-export async function signInWithPassword(email: string, password: string): Promise<void> {
+export async function signInWithPassword(email: string, password: string, captchaToken?: string): Promise<void> {
   if (!client) throw new Error("Account sign-in is not configured yet.");
   const { error } = await client.auth.signInWithPassword({
     email: normalizedEmail(email),
-    password: checkedPassword(password)
+    password: checkedPassword(password),
+    options: captchaToken ? { captchaToken } : undefined
   });
   if (error) throw error;
 }
 
-export async function signUpWithPassword(email: string, password: string, redirectTo: string): Promise<{ needsConfirmation: boolean }> {
+export async function signUpWithPassword(email: string, password: string, redirectTo: string, captchaToken?: string): Promise<{ needsConfirmation: boolean }> {
   if (!client) throw new Error("Account sign-up is not configured yet.");
   const { data, error } = await client.auth.signUp({
     email: normalizedEmail(email),
     password: checkedPassword(password),
     options: {
-      emailRedirectTo: redirectTo
+      emailRedirectTo: redirectTo,
+      captchaToken
     }
   });
   if (error) throw error;
   return { needsConfirmation: !data.session };
 }
 
-export async function requestPasswordReset(email: string, redirectTo: string): Promise<void> {
+export async function requestPasswordReset(email: string, redirectTo: string, captchaToken?: string): Promise<void> {
   if (!client) throw new Error("Account recovery is not configured yet.");
-  const { error } = await client.auth.resetPasswordForEmail(normalizedEmail(email), { redirectTo });
+  const { error } = await client.auth.resetPasswordForEmail(normalizedEmail(email), { redirectTo, captchaToken });
   if (error) throw error;
 }
 
@@ -283,7 +285,7 @@ export async function updatePassword(password: string): Promise<void> {
   emitChange();
 }
 
-export async function signInWithProvider(provider: "google" | "apple", redirectTo: string): Promise<void> {
+export async function signInWithProvider(provider: "google" | "github", redirectTo: string): Promise<void> {
   if (!client) throw new Error("Account sign-in is not configured yet.");
   const { error } = await client.auth.signInWithOAuth({
     provider: provider as Provider,

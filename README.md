@@ -10,9 +10,10 @@ Ollama's official model library.
 - explains Ollama from first use through local APIs and coding-agent integrations;
 - privately synchronizes signed-in users through Supabase with row-level security;
 - provides profiles with avatars, selected model tags, notes, operating system, RAM/GPU preferences, filters, remove, and JSON/CSV export;
+- supports English, Russian, Korean, Japanese, and Simplified Chinese without duplicating the static catalog;
 - copies a visible `ollama run <model>` command and shows OS-aware Terminal steps;
 - leaves the paste-and-run action entirely under the user's control;
-- deploys as a static GitHub Pages site and refreshes the catalog every six hours.
+- deploys as a static Cloudflare Pages site, retains GitHub Pages as a fallback, and refreshes the catalog every six hours.
 
 ## Stack
 
@@ -39,13 +40,21 @@ Account features require these public build variables:
 ```sh
 PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
+PUBLIC_ENABLE_GOOGLE_AUTH=true
+PUBLIC_ENABLE_GITHUB_AUTH=true
+PUBLIC_TURNSTILE_SITE_KEY=your_public_turnstile_site_key
 ```
 
 Apply `supabase/migrations/202608240001_account_profiles.sql` to a dedicated
 Supabase project before enabling the variables. Email/password authentication,
-email confirmation, and password recovery are the default flow. Google and Apple
-buttons can be enabled separately after their provider credentials are configured by setting
-`PUBLIC_ENABLE_GOOGLE_AUTH=true` or `PUBLIC_ENABLE_APPLE_AUTH=true`.
+email confirmation, and password recovery use custom production SMTP. Google and
+GitHub buttons can be enabled separately after their provider credentials are
+configured. When Turnstile protection is enabled in Supabase Auth, the matching
+public site key must be present in every production build.
+
+For Cloudflare Pages, use `npm run build`, publish `dist`, and set
+`PUBLIC_SITE_URL` to the production origin with `PUBLIC_BASE_PATH=/`. The
+`wrangler.jsonc` file also supports direct Pages deployment from the CLI.
 
 ## Verification
 
@@ -82,3 +91,5 @@ An earlier browser-only list, when present from a previous release, can be impor
 once after sign-in and is then removed. The My models page supports selected tags,
 notes, compatibility guidance, search, capability filters, sorting, removal,
 clearing, and JSON/CSV export.
+
+Account support: [corporate@agentmail.to](mailto:corporate@agentmail.to).

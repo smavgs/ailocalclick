@@ -1,4 +1,5 @@
 from pathlib import Path
+import re
 import unittest
 
 
@@ -43,6 +44,7 @@ class PublicUiContractTests(unittest.TestCase):
         account_script = (ROOT / "src/scripts/account.ts").read_text()
         saved_page = (ROOT / "src/pages/saved.astro").read_text()
         profile_page = (ROOT / "src/pages/profile.astro").read_text()
+        account_dialog = (ROOT / "src/components/AccountDialog.astro").read_text()
 
         self.assertIn(">I'm new</a>", index)
         self.assertIn("Click &amp; build with ai open models, on your computer.", index)
@@ -63,6 +65,33 @@ class PublicUiContractTests(unittest.TestCase):
         self.assertIn("data-saved-page", saved_page)
         self.assertIn("data-saved-note", (ROOT / "src/components/ModelRow.astro").read_text())
         self.assertIn("data-profile-form", profile_page)
+        self.assertIn('data-auth-provider="google"', account_dialog)
+        self.assertIn('data-auth-provider="github"', account_dialog)
+        self.assertNotIn('data-auth-provider="apple"', account_dialog)
+        self.assertIn("data-turnstile-shell", account_dialog)
+        self.assertIn("captchaToken", account_script)
+        self.assertIn("corporate@agentmail.to", footer)
+
+    def test_all_supported_languages_have_the_same_full_ui_contract(self) -> None:
+        key_pattern = re.compile(r'^\s*"((?:[^"\\]|\\.)+)":', re.MULTILINE)
+        language_files = [
+            ROOT / "src/i18n/ru.ts",
+            ROOT / "src/i18n/ko.ts",
+            ROOT / "src/i18n/ja.ts",
+            ROOT / "src/i18n/zh-CN.ts",
+        ]
+        key_sets = []
+        for path in language_files:
+            keys = key_pattern.findall(path.read_text(encoding="utf-8"))
+            self.assertEqual(len(keys), len(set(keys)), f"duplicate translation key in {path.name}")
+            self.assertGreaterEqual(len(keys), 390, f"incomplete translation catalog in {path.name}")
+            key_sets.append(set(keys))
+        for keys in key_sets[1:]:
+            self.assertEqual(key_sets[0], keys)
+
+        header = (ROOT / "src/components/Header.astro").read_text()
+        for locale in ("en", "ru", "ko", "ja", "zh-CN"):
+            self.assertIn(f'value="{locale}"', header)
 
     def test_copy_run_replaces_browser_local_pull_setup(self) -> None:
         sources = "\n".join(

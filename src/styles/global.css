@@ -207,6 +207,23 @@ svg {
   gap: 8px;
 }
 
+.language-control {
+  display: inline-flex;
+  align-items: center;
+}
+
+.language-control select {
+  min-height: 42px;
+  padding: 6px 28px 6px 11px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background-color: transparent;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 760;
+}
+
 .account-trigger {
   display: inline-flex;
   align-items: center;
@@ -2028,6 +2045,22 @@ button:disabled {
   border-color: var(--accent-strong);
 }
 
+.turnstile-shell {
+  min-height: 50px;
+  margin-block-start: 14px;
+  overflow: hidden;
+}
+
+.turnstile-shell > [data-turnstile-widget] {
+  min-height: 0;
+}
+
+.turnstile-shell > p {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 0.68rem;
+}
+
 .account-tabs {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -2876,6 +2909,11 @@ button:disabled {
   .account-links,
   .account-form-actions {
     grid-template-columns: 1fr;
+  }
+
+  .language-control select {
+    width: 50px;
+    padding-inline: 8px 20px;
   }
 
   .account-dialog {

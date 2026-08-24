@@ -19,6 +19,16 @@ const active = (path: string) => path === "/" ? current === "/" : current.starts
       <a href={href("/about/")} aria-current={active("/about/") ? "page" : undefined}>About</a>
     </nav>
     <div class="header-actions">
+      <label class="language-control" data-i18n-skip>
+        <span class="visually-hidden">Language</span>
+        <select data-language-select aria-label="Language">
+          <option value="en">EN</option>
+          <option value="ru">RU</option>
+          <option value="ko">KO</option>
+          <option value="ja">JA</option>
+          <option value="zh-CN">中文</option>
+        </select>
+      </label>
       <a class="header-source" href="https://ollama.com/library" target="_blank" rel="noreferrer">
         Ollama library <span aria-hidden="true">↗</span>
       </a>

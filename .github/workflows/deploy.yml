@@ -40,7 +40,8 @@ jobs:
           PUBLIC_SUPABASE_URL: ${{ vars.PUBLIC_SUPABASE_URL }}
           PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ vars.PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
           PUBLIC_ENABLE_GOOGLE_AUTH: ${{ vars.PUBLIC_ENABLE_GOOGLE_AUTH }}
-          PUBLIC_ENABLE_APPLE_AUTH: ${{ vars.PUBLIC_ENABLE_APPLE_AUTH }}
+          PUBLIC_ENABLE_GITHUB_AUTH: ${{ vars.PUBLIC_ENABLE_GITHUB_AUTH }}
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.PUBLIC_TURNSTILE_SITE_KEY }}
         with:
           node-version: 22
           package-manager: npm@latest
