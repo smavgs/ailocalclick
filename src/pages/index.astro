@@ -1,22 +1,22 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Catalog from "../components/Catalog.astro";
-import { catalog, models } from "../lib/catalog";
+import { models } from "../lib/catalog";
 
 const basePath = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL.replace(/\/$/, "");
 const href = (path: string) => `${basePath}${path}`;
 ---
 
 <BaseLayout
-  title="ailocal.click — every model in Ollama’s official library"
+  title="ailocal.click — click & build with open models"
   description="Find, save, and download base models from Ollama's official library, with beginner help and a copy-command fallback."
   canonicalPath="/"
   pageClass="home-page"
 >
   <section class="hero">
     <div class="hero-inner">
-      <p class="hero-kicker">Open models, clearly indexed</p>
       <h1><span>ailocal</span><em>.click</em></h1>
+      <p class="hero-promise">Click &amp; build with ai open models, on your computer.</p>
       <div class="hero-actions">
         <a class="button button-accent" href="#directory">Browse {models.length} models</a>
         <a class="button button-quiet-dark" href={href("/learn/")}>I'm new</a>
@@ -47,12 +47,5 @@ const href = (path: string) => `${basePath}${path}`;
       <li><span>03</span><strong>Confirm the download</strong><p>The page asks Ollama on your computer to pull it.</p></li>
       <li><span>04</span><strong>Start building</strong><p>Open Ollama or copy the run command when ready.</p></li>
     </ol>
-  </section>
-
-  <section class="trust-strip" aria-label="Site principles">
-    <p><strong>Fast to browse.</strong> Search, filter, and compare the complete directory in one place.</p>
-    <p><strong>Your click stays in control.</strong> A local download begins only after you confirm it.</p>
-    <p><strong>Saved on this device.</strong> Keep a personal model list without creating an account.</p>
-    <p><strong>Source-bounded.</strong> Catalog data comes from the <a href={catalog.source.url}>official Ollama library</a>.</p>
   </section>
 </BaseLayout>

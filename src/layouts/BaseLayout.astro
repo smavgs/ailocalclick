@@ -2,6 +2,7 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import OllamaPullDialog from "../components/OllamaPullDialog.astro";
+import AccountDialog from "../components/AccountDialog.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -27,7 +28,7 @@ const localApiOverride = import.meta.env.DEV ? import.meta.env.PUBLIC_OLLAMA_API
 ---
 
 <!doctype html>
-<html lang="en" data-ollama-api={localApiOverride}>
+<html lang="en" data-ollama-api={localApiOverride} data-base-path={basePath}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -53,6 +54,7 @@ const localApiOverride = import.meta.env.DEV ? import.meta.env.PUBLIC_OLLAMA_API
       <slot />
     </main>
     <Footer />
+    <AccountDialog />
     <OllamaPullDialog />
     <div class="toast" data-toast role="status" aria-live="polite"></div>
     <script>

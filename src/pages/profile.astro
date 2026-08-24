@@ -1,0 +1,104 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const basePath = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL.replace(/\/$/, "");
+const href = (path: string) => `${basePath}${path}`;
+---
+
+<BaseLayout
+  title="Your profile — ailocal.click"
+  description="Manage your ailocal.click profile, saved models, selected tags, notes, operating system, RAM, and GPU guidance."
+  canonicalPath="/profile/"
+  pageClass="profile-page"
+>
+  <section class="profile-shell" data-profile-page aria-labelledby="profile-title">
+    <header class="profile-hero">
+      <p class="eyebrow">Private account</p>
+      <h1 id="profile-title">Your profile.</h1>
+      <p>Keep the details that make model guidance and your saved library more useful.</p>
+    </header>
+
+    <p class="profile-loading" data-profile-loading>Loading your account…</p>
+
+    <section class="profile-signed-out" data-profile-signed-out hidden>
+      <h2>Sign in to create your profile.</h2>
+      <p>Your guest saves remain on this device. After signing in, you can import them into your private account.</p>
+      <button type="button" class="button button-accent" data-auth-open>Sign in</button>
+    </section>
+
+    <div class="profile-workspace" data-profile-workspace hidden>
+      <aside class="profile-summary" aria-label="Account summary">
+        <div class="profile-avatar-preview" data-profile-avatar-preview aria-hidden="true">A</div>
+        <strong data-profile-summary-name>Your account</strong>
+        <span data-profile-email></span>
+        <dl>
+          <div><dt>Saved models</dt><dd data-profile-saved-count>0</dd></div>
+          <div><dt>Preferred system</dt><dd data-profile-os-summary>Not set</dd></div>
+        </dl>
+        <a class="button button-line" href={href("/saved/")}>Open My models</a>
+      </aside>
+
+      <form class="profile-form" data-profile-form>
+        <section class="profile-form-section">
+          <div class="profile-section-heading">
+            <p class="eyebrow">Identity</p>
+            <h2>Name and avatar</h2>
+          </div>
+          <div class="profile-fields">
+            <label class="profile-field">
+              <span>Display name</span>
+              <input type="text" maxlength="80" autocomplete="name" placeholder="Your name" data-profile-name />
+            </label>
+            <label class="profile-field profile-avatar-field">
+              <span>Avatar image</span>
+              <input type="file" accept="image/jpeg,image/png,image/webp,image/gif" data-profile-avatar-file />
+              <small>JPG, PNG, WebP, or GIF. Maximum 2 MB.</small>
+            </label>
+          </div>
+        </section>
+
+        <section class="profile-form-section">
+          <div class="profile-section-heading">
+            <p class="eyebrow">Compatibility guidance</p>
+            <h2>Your computer</h2>
+          </div>
+          <p class="profile-section-copy">These fields are optional and manually entered. They are used only to provide rough, tag-aware guidance—not a guarantee.</p>
+          <div class="profile-fields profile-hardware-grid">
+            <label class="profile-field">
+              <span>Operating system</span>
+              <select data-profile-os>
+                <option value="">Not set</option>
+                <option value="macos">macOS</option>
+                <option value="windows">Windows</option>
+                <option value="linux">Linux</option>
+                <option value="other">Other</option>
+              </select>
+            </label>
+            <label class="profile-field">
+              <span>RAM / unified memory (GB)</span>
+              <input type="number" min="1" max="4096" step="1" inputmode="numeric" placeholder="16" data-profile-ram />
+            </label>
+            <label class="profile-field">
+              <span>GPU</span>
+              <input type="text" maxlength="120" placeholder="Apple M-series, RTX 4070…" data-profile-gpu />
+            </label>
+            <label class="profile-field">
+              <span>GPU memory (GB)</span>
+              <input type="number" min="0" max="4096" step="0.5" inputmode="decimal" placeholder="12" data-profile-gpu-memory />
+            </label>
+          </div>
+        </section>
+
+        <div class="profile-form-actions">
+          <button type="submit" class="button button-accent" data-profile-submit>Save profile</button>
+          <span data-profile-status role="status" aria-live="polite"></span>
+        </div>
+      </form>
+    </div>
+
+    <section class="profile-privacy">
+      <h2>Your choices stay yours.</h2>
+      <p>Account records are private to your signed-in user. Hardware information is optional, and ailocal.click never needs your prompts or local Ollama conversations.</p>
+    </section>
+  </section>
+</BaseLayout>

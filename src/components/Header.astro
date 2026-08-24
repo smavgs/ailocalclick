@@ -18,8 +18,14 @@ const active = (path: string) => path === "/" ? current === "/" : current.starts
       <a href={href("/learn/")} aria-current={active("/learn/") ? "page" : undefined}>I'm new</a>
       <a href={href("/about/")} aria-current={active("/about/") ? "page" : undefined}>About</a>
     </nav>
-    <a class="header-source" href="https://ollama.com/library" target="_blank" rel="noreferrer">
-      Ollama library <span aria-hidden="true">↗</span>
-    </a>
+    <div class="header-actions">
+      <a class="header-source" href="https://ollama.com/library" target="_blank" rel="noreferrer">
+        Ollama library <span aria-hidden="true">↗</span>
+      </a>
+      <button type="button" class="account-trigger" data-account-trigger data-auth-open aria-label="Open sign in and profile">
+        <span class="account-avatar" data-header-avatar aria-hidden="true" hidden>A</span>
+        <span data-account-trigger-label>Sign in</span>
+      </button>
+    </div>
   </div>
 </header>

@@ -8,7 +8,8 @@ Ollama's official model library.
 - synchronizes the complete official Ollama library listing with a standard-library Python script;
 - builds one searchable directory and one static detail page per model with Astro and TypeScript;
 - explains Ollama from first use through local APIs and coding-agent integrations;
-- saves a personal model list in browser storage without an account;
+- saves locally for guests and privately synchronizes signed-in users through Supabase;
+- provides profiles with avatars, selected model tags, notes, operating system, RAM/GPU preferences, filters, remove, and JSON/CSV export;
 - asks the local Ollama `/api/pull` endpoint to download only after explicit confirmation;
 - keeps a visible copy-command fallback when the browser cannot reach local Ollama;
 - deploys as a static GitHub Pages site and refreshes the catalog every six hours.
@@ -17,7 +18,7 @@ Ollama's official model library.
 
 - Astro and TypeScript for static pages and typed catalog data
 - CSS for the adaptive visual system
-- browser JavaScript for search, filters, sorting, local saves, and streamed Ollama download progress
+- browser JavaScript and Supabase Auth for search, filters, account sync, profiles, and streamed Ollama download progress
 - Python for official catalog synchronization
 - Shell for one-command sync and verification
 
@@ -32,6 +33,19 @@ npm run dev
 ```
 
 Open the local URL printed by Astro.
+
+Account features require these public build variables:
+
+```sh
+PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
+```
+
+Apply `supabase/migrations/202608240001_account_profiles.sql` to a dedicated
+Supabase project before enabling the variables. Email magic-link authentication
+is the default. Google and Apple buttons can be enabled separately after their
+provider credentials are configured by setting
+`PUBLIC_ENABLE_GOOGLE_AUTH=true` or `PUBLIC_ENABLE_APPLE_AUTH=true`.
 
 ## Verification
 
@@ -64,6 +78,8 @@ Browsers and Ollama can block cross-origin local-network requests. The UI keeps
 the copy command available and links to exact-origin setup help. Do not configure
 `OLLAMA_ORIGINS=*`; allow only the website origin that needs access.
 
-Saved models use the `ailocalclick:saved-models:v1` local-storage key. They are
-not uploaded or synchronized between devices. The My models page supports
-searching, removing, clearing, and exporting the local list.
+Guest models use the `ailocalclick:saved-models:v1` local-storage key. Signed-in
+users get a separate RLS-protected Supabase list and can import any missing guest
+saves without erasing the local copy. The My models page supports selected tags,
+notes, compatibility guidance, search, capability filters, sorting, removal,
+clearing, and JSON/CSV export.

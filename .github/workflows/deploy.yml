@@ -36,6 +36,11 @@ jobs:
 
       - name: Build and upload Astro site
         uses: withastro/action@v6
+        env:
+          PUBLIC_SUPABASE_URL: ${{ vars.PUBLIC_SUPABASE_URL }}
+          PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ vars.PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
+          PUBLIC_ENABLE_GOOGLE_AUTH: ${{ vars.PUBLIC_ENABLE_GOOGLE_AUTH }}
+          PUBLIC_ENABLE_APPLE_AUTH: ${{ vars.PUBLIC_ENABLE_APPLE_AUTH }}
         with:
           node-version: 22
           package-manager: npm@latest

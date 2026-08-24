@@ -1,0 +1,65 @@
+---
+const basePath = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL.replace(/\/$/, "");
+const href = (path: string) => `${basePath}${path}`;
+const googleEnabled = import.meta.env.PUBLIC_ENABLE_GOOGLE_AUTH === "true";
+const appleEnabled = import.meta.env.PUBLIC_ENABLE_APPLE_AUTH === "true";
+---
+
+<dialog class="account-dialog" data-account-dialog aria-label="Account">
+  <div class="account-dialog-inner">
+    <button type="button" class="account-close" data-account-close aria-label="Close account panel">Close</button>
+
+    <section class="account-loading" data-account-loading>
+      <p class="eyebrow">Your account</p>
+      <h2>Loading…</h2>
+    </section>
+
+    <section class="account-guest" data-account-guest hidden>
+      <p class="eyebrow">Your models, everywhere</p>
+      <h2>Sign in and keep your list.</h2>
+      <p>Use one secure email link. New and returning users use the same simple form.</p>
+
+      <form class="account-email-form" data-account-email-form>
+        <label for="account-email">Email address</label>
+        <div>
+          <input id="account-email" name="email" type="email" inputmode="email" autocomplete="email" required placeholder="you@example.com" data-account-email />
+          <button type="submit" class="button button-accent" data-account-email-submit>Send sign-in link</button>
+        </div>
+      </form>
+
+      {(googleEnabled || appleEnabled) && <div class="account-divider"><span>or</span></div>}
+      {(googleEnabled || appleEnabled) && (
+        <div class="provider-buttons">
+          {googleEnabled && <button type="button" class="button button-line" data-auth-provider="google">Continue with Google</button>}
+          {appleEnabled && <button type="button" class="button button-line" data-auth-provider="apple">Continue with Apple</button>}
+        </div>
+      )}
+
+      <p class="account-message" data-account-message role="status" aria-live="polite"></p>
+      <p class="account-fine-print">Guests can still save models on this device. Signing in adds private sync, tags, notes, and profile guidance.</p>
+    </section>
+
+    <section class="account-member" data-account-member hidden>
+      <p class="eyebrow">Signed in</p>
+      <div class="account-identity">
+        <span class="account-avatar account-avatar-large" data-account-avatar aria-hidden="true">A</span>
+        <div>
+          <h2 data-account-name>Your account</h2>
+          <p data-account-email-display></p>
+        </div>
+      </div>
+      <nav class="account-links" aria-label="Account shortcuts">
+        <a class="button button-accent" href={href("/profile/")}>Open profile</a>
+        <a class="button button-line" href={href("/saved/")}>My models</a>
+      </nav>
+      <button type="button" class="account-sign-out" data-account-sign-out>Sign out</button>
+      <p class="account-message" data-account-member-message role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="account-unavailable" data-account-unavailable hidden>
+      <p class="eyebrow">Your account</p>
+      <h2>Account setup is finishing.</h2>
+      <p>Local saving still works while the private sync service is connected.</p>
+    </section>
+  </div>
+</dialog>

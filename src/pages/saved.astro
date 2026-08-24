@@ -9,24 +9,58 @@ const href = (path: string) => `${basePath}${path}`;
 
 <BaseLayout
   title="My saved models — ailocal.click"
-  description="Your personal list of Ollama models, saved only in this browser on this device."
+  description="Your personal Ollama model library with account sync, selected tags, notes, filters, compatibility guidance, and export controls."
   canonicalPath="/saved/"
   pageClass="saved-page"
 >
   <section class="saved-shell" data-saved-page aria-labelledby="saved-title">
     <header class="saved-hero">
-      <p class="eyebrow">Stored on this device</p>
+      <p class="eyebrow">Personal model library</p>
       <h1 id="saved-title">My models</h1>
-      <p>Save useful models without an account. This list stays in this browser and can be exported whenever you want.</p>
+      <p data-saved-intro>Save locally as a guest, or sign in to sync tags, notes, and guidance across your devices.</p>
     </header>
+
+    <div class="saved-mode-line" data-saved-mode-line>
+      <span data-saved-mode>Checking your account…</span>
+      <button type="button" data-auth-open>Sign in to sync</button>
+    </div>
+
+    <div class="saved-import" data-saved-import hidden>
+      <div>
+        <strong><span data-local-import-count>0</span> local models can be added to your account.</strong>
+        <p>The original device list will remain untouched.</p>
+      </div>
+      <button type="button" class="button button-accent" data-import-local>Import to profile</button>
+    </div>
 
     <div class="saved-controls">
       <div class="search-wrap">
         <label for="saved-search">Search saved models</label>
         <input id="saved-search" type="search" inputmode="search" autocomplete="off" placeholder="Search your list…" data-saved-search />
       </div>
+      <div class="sort-control saved-filter-control">
+        <label for="saved-capability">Capability</label>
+        <select id="saved-capability" data-saved-capability>
+          <option value="all">All capabilities</option>
+          <option value="vision">Vision</option>
+          <option value="tools">Tools</option>
+          <option value="thinking">Thinking</option>
+          <option value="embedding">Embedding</option>
+          <option value="audio">Audio</option>
+          <option value="cloud">Cloud</option>
+        </select>
+      </div>
+      <div class="sort-control saved-sort-control">
+        <label for="saved-sort">Sort</label>
+        <select id="saved-sort" data-saved-sort>
+          <option value="recent">Recently saved</option>
+          <option value="name">Name A–Z</option>
+          <option value="tag">Selected tag</option>
+        </select>
+      </div>
       <div class="saved-tools">
-        <button type="button" class="button button-line" data-export-saved disabled>Export list</button>
+        <button type="button" class="button button-line" data-export-saved="json" disabled>Export JSON</button>
+        <button type="button" class="button button-line" data-export-saved="csv" disabled>Export CSV</button>
         <button type="button" class="button button-line" data-clear-saved disabled>Clear list</button>
       </div>
       <p class="saved-result"><strong data-saved-page-count>0</strong> <span data-saved-page-label>models</span></p>
@@ -43,6 +77,6 @@ const href = (path: string) => `${basePath}${path}`;
       <a class="button button-accent" href={href("/#directory")}>Browse models</a>
     </div>
 
-    <p class="saved-privacy">Saved models use local browser storage. Clearing site data or changing browsers removes this list unless you export it first.</p>
+    <p class="saved-privacy" data-saved-privacy>Guest saves use this browser’s local storage. Signed-in saves, selected tags, and notes are private account records protected per user.</p>
   </section>
 </BaseLayout>

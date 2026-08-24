@@ -12,6 +12,7 @@ const basePath = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_UR
 const detailHref = `${basePath}/model/${encodeURIComponent(model.slug)}/`;
 const searchable = [model.name, model.description, ...model.capabilities, ...model.sizes].join(" ").toLowerCase();
 const updatedNumber = model.updatedAt ? Date.parse(model.updatedAt) : 0;
+const tagListId = `model-tags-${model.slug.replace(/[^a-z0-9_-]/gi, "-")}`;
 ---
 
 <article
@@ -26,6 +27,7 @@ const updatedNumber = model.updatedAt ? Date.parse(model.updatedAt) : 0;
   data-model-name={model.name}
   data-model-command={model.runCommand}
   data-model-url={model.officialUrl}
+  data-model-sizes={model.sizes.join(" ")}
   data-saved-only={savedOnly ? "true" : undefined}
   hidden={savedOnly}
 >
@@ -75,4 +77,40 @@ const updatedNumber = model.updatedAt ? Date.parse(model.updatedAt) : 0;
       </button>
     </div>
   </div>
+  {savedOnly && (
+    <section class="saved-model-editor" data-saved-editor aria-label={`${model.name} saved model details`}>
+      <div class="saved-detail-field saved-tag-field">
+        <label for={`${tagListId}-input`}>Selected tag</label>
+        <input
+          id={`${tagListId}-input`}
+          type="text"
+          maxlength="120"
+          value="latest"
+          list={tagListId}
+          autocomplete="off"
+          spellcheck="false"
+          placeholder="latest, 7b, q4_K_M…"
+          data-saved-tag
+        />
+        <datalist id={tagListId}>
+          <option value="latest"></option>
+          {model.sizes.map((size) => <option value={size}></option>)}
+        </datalist>
+      </div>
+      <div class="saved-detail-field saved-note-field">
+        <label for={`${tagListId}-note`}>Personal note</label>
+        <textarea
+          id={`${tagListId}-note`}
+          rows="2"
+          maxlength="4000"
+          placeholder="Why this model is useful to you…"
+          data-saved-note
+        ></textarea>
+      </div>
+      <div class="saved-editor-actions">
+        <button type="button" class="button button-line" data-save-details>Update details</button>
+        <p data-fit-guidance>Sign in and add your RAM or GPU for compatibility guidance.</p>
+      </div>
+    </section>
+  )}
 </article>
