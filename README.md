@@ -80,3 +80,5 @@ Selecting a model validates its catalog slug, copies the exact visible
 or Linux. If the model is not installed, Ollama downloads it before starting it.
 
 Account support: [corporate@agentmail.to](mailto:corporate@agentmail.to).
+
+Donate : https://donatr.ee/aegiswizard?utm_source=copy&utm_medium=share
