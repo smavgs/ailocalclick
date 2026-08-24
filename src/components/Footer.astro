@@ -7,7 +7,10 @@ const href = (path: string) => `${basePath}${path}`;
   <div class="footer-inner">
     <div>
       <a class="footer-mark" href={href("/")}>ailocal.click</a>
-      <p>Click &amp; build with ai open models, on your computer.</p>
+      <p class="footer-support" data-i18n-skip>
+        <a href="https://donatr.ee/aegiswizard?utm_source=copy&amp;utm_medium=share" target="_blank" rel="noreferrer">Donate</a>
+        <span aria-hidden="true"> - </span>Aegis Wizard <span aria-label="wizard">🧙‍♂️</span>
+      </p>
     </div>
     <nav aria-label="Footer navigation">
       <a href={href("/profile/")}>Profile</a>

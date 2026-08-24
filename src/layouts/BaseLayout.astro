@@ -10,25 +10,62 @@ interface Props {
   description: string;
   canonicalPath?: string;
   pageClass?: string;
+  locale?: "en" | "ru" | "ko" | "ja" | "zh-CN";
+  localeRoute?: boolean;
+  localizedHome?: boolean;
+  englishTitle?: string;
 }
 
 const {
   title,
   description,
   canonicalPath = Astro.url.pathname,
-  pageClass = ""
+  pageClass = "",
+  locale = "en",
+  localeRoute = false,
+  localizedHome = false,
+  englishTitle = title
 } = Astro.props;
 const basePath = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL.replace(/\/$/, "");
 const canonical = Astro.site
   ? new URL(`${basePath}${canonicalPath.startsWith("/") ? canonicalPath : `/${canonicalPath}`}`, Astro.site)
   : Astro.url;
+const localeImageName = locale === "zh-CN" ? "zh-cn" : locale.toLowerCase();
+const socialImagePath = `${basePath}/social/ailocalclick-${localeImageName}-v1.png`;
+const socialImage = new URL(socialImagePath, Astro.site ?? Astro.url.origin);
+const socialImageAlt: Record<typeof locale, string> = {
+  en: "ailocal.click — Click and build with open AI models on your computer",
+  ru: "ailocal.click — открытые ИИ-модели на вашем компьютере",
+  ko: "ailocal.click — 내 컴퓨터에서 사용하는 오픈 AI 모델",
+  ja: "ailocal.click — 自分のコンピューターで使うオープンAIモデル",
+  "zh-CN": "ailocal.click — 在你的电脑上使用开放 AI 模型"
+};
+const openGraphLocales: Record<typeof locale, string> = {
+  en: "en_US",
+  ru: "ru_RU",
+  ko: "ko_KR",
+  ja: "ja_JP",
+  "zh-CN": "zh_CN"
+};
+const homeAlternates = [
+  { locale: "en", hrefLang: "en", path: "/" },
+  { locale: "ru", hrefLang: "ru", path: "/ru/" },
+  { locale: "ko", hrefLang: "ko", path: "/ko/" },
+  { locale: "ja", hrefLang: "ja", path: "/ja/" },
+  { locale: "zh-CN", hrefLang: "zh-CN", path: "/zh-cn/" }
+] as const;
 const favicon = `${basePath}/favicon.svg`;
 const manifest = `${basePath}/site.webmanifest`;
 const turnstileEnabled = Boolean(import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim());
 ---
 
 <!doctype html>
-<html lang="en" data-base-path={basePath}>
+<html
+  lang={locale}
+  data-base-path={basePath}
+  data-locale-route={localeRoute ? locale : undefined}
+  data-english-title={englishTitle}
+>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -38,11 +75,35 @@ const turnstileEnabled = Boolean(import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim
     <meta name="generator" content={Astro.generator} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="ailocal.click" />
+    <meta property="og:locale" content={openGraphLocales[locale]} />
+    {localizedHome && homeAlternates.filter((alternate) => alternate.locale !== locale).map((alternate) => (
+      <meta property="og:locale:alternate" content={openGraphLocales[alternate.locale]} />
+    ))}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:secure_url" content={socialImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={socialImageAlt[locale]} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content={socialImageAlt[locale]} />
     <link rel="canonical" href={canonical} />
+    {localizedHome && homeAlternates.map((alternate) => (
+      <link
+        rel="alternate"
+        hreflang={alternate.hrefLang}
+        href={new URL(`${basePath}${alternate.path}`, Astro.site ?? Astro.url.origin)}
+      />
+    ))}
+    {localizedHome && (
+      <link rel="alternate" hreflang="x-default" href={new URL(`${basePath}/`, Astro.site ?? Astro.url.origin)} />
+    )}
     <link rel="icon" href={favicon} type="image/svg+xml" />
     <link rel="manifest" href={manifest} />
     {turnstileEnabled && <link rel="preconnect" href="https://challenges.cloudflare.com" />}

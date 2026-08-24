@@ -33,7 +33,7 @@ const title = `${model.name} — Copy & run with Ollama | ailocal.click`;
       <div>
         <p class="eyebrow">Ollama model</p>
         <h1>{model.name}</h1>
-        <p>{model.description}</p>
+        <p data-model-description data-model-slug={model.slug}>{model.description}</p>
       </div>
       <div class="model-hero-actions">
         <button

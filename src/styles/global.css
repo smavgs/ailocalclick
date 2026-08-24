@@ -2427,6 +2427,11 @@ button:disabled {
   font-size: 0.78rem;
 }
 
+.footer-support a {
+  color: var(--accent);
+  font-weight: 760;
+}
+
 .footer-inner nav {
   display: grid;
   grid-template-columns: repeat(2, auto);

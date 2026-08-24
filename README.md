@@ -13,7 +13,8 @@ Fallback: [smavgs.github.io/ailocalclick](https://smavgs.github.io/ailocalclick/
 - explains Ollama from first use through local APIs and coding-agent integrations;
 - supports email, Google, and GitHub sign-in, then privately synchronizes each user through Supabase with row-level security;
 - provides profiles with avatars, selected model tags, notes, operating system, RAM/GPU preferences, filters, remove, and JSON/CSV export;
-- supports English, Russian, Korean, Japanese, and Simplified Chinese without duplicating the static catalog;
+- supports English, Russian, Korean, Japanese, and Simplified Chinese, including native model descriptions;
+- publishes locale-specific homepage URLs and 1200×630 social cards for large WhatsApp and Open Graph previews;
 - copies a visible `ollama run <model>` command and shows OS-aware Terminal steps;
 - leaves the paste-and-run action entirely under the user's control;
 - deploys as a static Cloudflare Pages site, retains GitHub Pages as a fallback, and refreshes the catalog every six hours.
@@ -52,6 +53,22 @@ Apply supabase to a dedicated Supabase project before enabling the variables. Em
 
 For Cloudflare Pages, use `npm run build`, publish `dist`, and set
 `PUBLIC_SITE_URL` to the production origin with `PUBLIC_BASE_PATH=/`.
+
+The homepage share routes are `/`, `/ru/`, `/ko/`, `/ja/`, and `/zh-cn/`.
+Changing the homepage language updates the address bar to the matching static
+route, so social crawlers receive native-language metadata and artwork.
+
+Model-description translations are static, validated build assets. To refresh
+new or changed descriptions with a capable local Ollama translation model:
+
+```sh
+python3 scripts/generate_model_translations.py --model qwen3.5:9b
+```
+
+Until that maintenance pass runs, a newly listed model receives a native
+language maintenance message rather than leaking its English description into a
+non-English interface. The five reviewed social cards are committed build assets;
+regenerate them deliberately with `npm run social:generate` after a design change.
 
 ## Verification
 

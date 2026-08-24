@@ -43,7 +43,7 @@ const tagListId = `model-tags-${model.slug.replace(/[^a-z0-9_-]/gi, "-")}`;
   >
     <div class="model-copy">
       <h3>{model.name}</h3>
-      <p>{model.description}</p>
+      <p data-model-description data-model-slug={model.slug}>{model.description}</p>
       <div class="badges" aria-label="Model attributes">
         {model.capabilities.map((capability) => (
           <span class:list={["badge", `badge-${capability}`]}>{capabilityLabels[capability] ?? capability}</span>

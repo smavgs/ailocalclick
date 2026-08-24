@@ -9,6 +9,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
+    "social:generate": "node scripts/generate_social_cards.mjs",
     "sync": "./scripts/sync_catalog.sh",
     "test:data": "python3 -m unittest discover -s tests -p 'test_*.py'",
     "verify": "./scripts/verify.sh"
@@ -20,6 +21,7 @@
     "@astrojs/check": "0.9.10",
     "@types/node": "26.2.0",
     "astro": "7.2.4",
+    "sharp": "^0.35.3",
     "typescript": "6.0.3"
   },
   "dependencies": {

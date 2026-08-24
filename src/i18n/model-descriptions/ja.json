@@ -1,0 +1,1177 @@
+{
+  "gemma4": {
+    "source": "Gemma 4 models are designed to deliver frontier-level performance at each size. They are well-suited for reasoning, agentic workflows, coding, and multimodal understanding.",
+    "sourceHash": "328f43392e3489d2",
+    "text": "Gemma 4 モデルは、それぞれのサイズで最先端レベルのパフォーマンスを提供するように設計されています。推論、エージェントワークフロー、コーディング、マルチモーダル理解に適しています。"
+  },
+  "laguna-s-2.1": {
+    "source": "Our most capable model to date, designed for long-horizon work. 70.2% on Terminal-Bench 2.1 at 118B-A8B.",
+    "sourceHash": "1fa6430c85ae0094",
+    "text": "現在最も高性能なモデルであり、長期的なタスク向けに設計されています。Terminal-Bench 2.1 で 118B-A8B の設定において 70.2% のスコアを記録しました。"
+  },
+  "laguna-xs-2.1": {
+    "source": "Laguna XS 2.1 is a 33B total parameter Mixture-of-Experts model with 3B activated parameters per token designed for agentic coding and long-horizon work on a local machine.",
+    "sourceHash": "36ded02f201a86ed",
+    "text": "Laguna XS 2.1 は、エージェント向けコーディングおよびローカルマシンでの長期的なタスク向けに設計された、33B の総パラメータを持つ Mixture-of-Experts モデルで、トークンあたり 3B のアクティブパラメータを備えています。"
+  },
+  "ornith-1.5": {
+    "source": "Chirp Chirp! 🐦 We are introducing Ornith-1.5, a major step toward building foundation models through end-to-end self-improvement.",
+    "sourceHash": "4a516a98af3e597a",
+    "text": "チュンチュン！🐦 エンドツーエンドの自己改善を通じて基礎モデルを構築する大きな一歩となる Ornith-1.5 を発表します。"
+  },
+  "qwen3.8": {
+    "source": "Qwen3.8 delivers substantial gains across coding, professional work, research, and long-horizon agentic tasks.",
+    "sourceHash": "bca8818f57366c81",
+    "text": "Qwen3.8 は、コーディング、プロフェッショナルワーク、研究、長期的なエージェントタスクにおいて大幅な向上をもたらします。"
+  },
+  "muse-glimmer": {
+    "source": "Meta's latest open model built for always-on local agents. 30B parameters, licensed under Apache 2.0 and runs on a single GPU — tuned for tool use, long tasks, and failure recovery.",
+    "sourceHash": "b55523998236c0dd",
+    "text": "Meta の最新のオープンモデルで、常時稼働するローカルエージェント向けに設計されています。300 億パラメータを備え、Apache 2.0 ライセンスの下で利用でき、単一の GPU で動作します。ツール使用、長期的なタスク、および障害回復に最適化されています。"
+  },
+  "qwen3.6": {
+    "source": "Qwen3.6 delivers substantial upgrades in agentic coding and thinking preservation than previous Qwen models.",
+    "sourceHash": "fd697db2e6e63cae",
+    "text": "Qwen3.6 は、以前の Qwen モデルと比較して、エージェント向けコーディングおよび思考の保持において大幅な向上をもたらします。"
+  },
+  "deepseek-v4-pro": {
+    "source": "DeepSeek-V4-Pro is a frontier Mixture-of-Experts model with a large context window and three reasoning modes.",
+    "sourceHash": "eedcb08a4fdab862",
+    "text": "DeepSeek-V4-Pro は、大きなコンテキストウィンドウと 3 つの推論モードを備えた最先端の Mixture-of-Experts モデルです。"
+  },
+  "nemotron-3.5-lightning": {
+    "source": "NVIDIA Nemotron 3.5 Lightning is an open 30B mixture-of-experts (MoE) model with 3B active parameters built for always-on agents.",
+    "sourceHash": "0b7d12ad8e3a1cbc",
+    "text": "NVIDIA Nemotron 3.5 Lightning は、常時稼働するエージェント向けに設計された、30B の Mixture-of-Experts（MoE）モデルで、3B のアクティブパラメータを備えたオープンモデルです。"
+  },
+  "deepseek-v4-flash": {
+    "source": "DeepSeek-V4-Flash is a preview of the DeepSeek-V4 series, a Mixture-of-Experts model with 284B total parameters and 13B activated, built for efficient reasoning across a 1M-token context window.",
+    "sourceHash": "e896eba59911824c",
+    "text": "DeepSeek-V4-Flash は、DeepSeek-V4 シリーズのプレビュー版であり、284B の総パラメータと 13B のアクティブパラメータを備えた Mixture-of-Experts モデルで、1M トークンのコンテキストウィンドウを跨ぐ効率的な推論向けに設計されています。"
+  },
+  "kimi-k3": {
+    "source": "Kimi K3 is an open-weight, native multimodal agentic model and our most capable model to date.",
+    "sourceHash": "65949cba63667f63",
+    "text": "Kimi K3 は、オープンウェイトのネイティブマルチモーダルエージェントモデルであり、現在最も高性能なモデルです。"
+  },
+  "laguna-xs.2": {
+    "source": "Laguna XS.2 is a 33B total parameter Mixture-of-Experts model with 3B activated parameters per token designed for agentic coding and long-horizon work on a local machine.",
+    "sourceHash": "5f158b02a7ce6e04",
+    "text": "Laguna XS.2 は、エージェント向けコーディングおよびローカルマシンでの長期的なタスク向けに設計された、33B の総パラメータを持つ Mixture-of-Experts モデルで、トークンあたり 3B のアクティブパラメータを備えています。"
+  },
+  "ornith": {
+    "source": "A self-improving family of open-source models for agentic coding",
+    "sourceHash": "3f2c4922a2ede420",
+    "text": "エージェント向けコーディングのための自己改善型のオープンソースモデルファミリーです。"
+  },
+  "north-mini-code-1.0": {
+    "source": "North Mini Code is Cohere's first model for developers — a 30B Mixture-of-Experts model with 3B active parameters, built for agentic software engineering.",
+    "sourceHash": "bc6c72a9a2163d0a",
+    "text": "North Mini Code は、開発者向けの Cohere の最初のモデルであり、30B の Mixture-of-Experts モデルで 3B のアクティブパラメータを備え、エージェント向けソフトウェアエンジニアリング向けに設計されています。"
+  },
+  "glm-5.2": {
+    "source": "GLM-5.2 is Z.ai’s flagship model for the era of long-horizon tasks.",
+    "sourceHash": "6afb7596e541514d",
+    "text": "GLM-5.2 は、長期的なタスクの時代における Z.ai のフラッグシップモデルです。"
+  },
+  "kimi-k2.7-code": {
+    "source": "Kimi K2.7 Code is Moonshot AI's coding-focused agentic model built upon Kimi K2.6, with substantial improvements on real-world long-horizon coding tasks and roughly 30% lower thinking-token usage.",
+    "sourceHash": "93df770ee5451cce",
+    "text": "Kimi K2.7 Code は、Kimi K2.6 を基盤とした Moonshot AI のコーディング特化型エージェントモデルで、実世界の長期的なコーディングタスクにおいて大幅な改善と、約 30% の思考トークン使用量の削減を実現しています。"
+  },
+  "granite4.1-guardian": {
+    "source": "Granite Guardian 4.1 is a specialized safety and judging model from IBM Research that evaluates whether LLM prompts and responses meet specified harm criteria.",
+    "sourceHash": "e3c5f06a9f164865",
+    "text": "IBM Research から提供される Granite Guardian 4.1 は、LLM のプロンプトとレスポンスが指定された危害基準を満たすかを評価するための専門的な安全性および判定モデルです。"
+  },
+  "glm-4.7-flash": {
+    "source": "As the strongest model in the 30B class, GLM-4.7-Flash offers a new option for lightweight deployment that balances performance and efficiency.",
+    "sourceHash": "cff8e2f28ad56ce1",
+    "text": "30B クラスで最も強力なモデルとして、性能と効率性をバランスよく兼ね備えた軽量デプロイメントの新しい選択肢を提供する GLM-4.7-Flash です。"
+  },
+  "nemotron-3-ultra": {
+    "source": "NVIDIA Nemotron 3 Ultra is built for high-throughput reasoning and long-running agent workflows.",
+    "sourceHash": "d211cf273fd9501e",
+    "text": "高スループットの推論および長時間実行されるエージェントワークフロー向けに構築された NVIDIA Nemotron 3 Ultra です。"
+  },
+  "minicpm-v4.5": {
+    "source": "A GPT-4o Level MLLM for Single Image, Multi Image and High-FPS Video Understanding on Your Phone",
+    "sourceHash": "63cc0e708cbff1f9",
+    "text": "スマートフォン上で単一画像、複数画像、および高フレームレートビデオの理解を実現する GPT-4o レベルの MLLM です。"
+  },
+  "minicpm-v4.6": {
+    "source": "A Pocket-Sized MLLM for Ultra-Efficient Image and Video Understanding on Your Phone",
+    "sourceHash": "1c282e2e9a8d94e0",
+    "text": "スマートフォン上で超効率的な画像およびビデオの理解を実現するポケットサイズの MLLM です。"
+  },
+  "minimax-m3": {
+    "source": "MiniMax M3: Coding & Agentic Frontier. 1M context window. Native Multimodality.",
+    "sourceHash": "fe3efaa173a10984",
+    "text": "MiniMax M3：コーディングとエージェントのフロンティア。100 万トークンのコンテキストウィンドウ。ネイティブマルチモーダル機能。"
+  },
+  "lfm2.5": {
+    "source": "LFM2.5-8B-A1B, an edge model built for fast, reliable tool calling on consumer hardware.",
+    "sourceHash": "1ab7e9dee66697a0",
+    "text": "消費向けハードウェア上で高速かつ信頼性の高いツールコールを実行するために構築されたエッジモデル LFM2.5-8B-A1B です。"
+  },
+  "qwen3.5": {
+    "source": "Qwen 3.5 is a family of open-source multimodal models that delivers exceptional utility and performance.",
+    "sourceHash": "fd0082019ac4605a",
+    "text": "Qwen 3.5 は、卓越した実用性と性能を提供するオープンソースマルチモーダルモデルファミリーです。"
+  },
+  "granite4.1": {
+    "source": "IBM Granite Models are a family of enterprise-ready, open foundation models that support multilingual capabilities, coding, retrieval-augmented generation (RAG), tool use, and structured JSON output. Released under Apache 2.0 license.",
+    "sourceHash": "cb10c2a5260022f3",
+    "text": "Apache 2.0 ライセンスの下でリリースされた IBM Granite Models は、多言語機能、コーディング、検索拡張生成（RAG）、ツールの使用、および構造化 JSON 出力をサポートするエンタープライズ対応オープン基礎モデルファミリーです。"
+  },
+  "mistral-medium-3.5": {
+    "source": "Mistral Medium 3.5 is the first flagship model of Mistral AI that merged instruction-following, reasoning, and coding in a single set of 128B weights.",
+    "sourceHash": "e9eb50b868255c0d",
+    "text": "Mistral Medium 3.5 は、指示追従、推論、およびコーディングを単一の 128B 重みのセットに統合した Mistral AI の最初のフラッグシップモデルです。"
+  },
+  "nemotron3": {
+    "source": "NVIDIA Nemotron 3 Nano Omni is a multimodal large language model that unifies video, audio, image, and text understanding to support enterprise-grade Q&A, summarization, transcription, and document intelligence workflows.",
+    "sourceHash": "dcbd896da3d4dd8a",
+    "text": "企業グレードの Q&A、要約、トランスクリプション、およびドキュメントインテリジェンスワークフローをサポートするために、ビデオ、オーディオ、画像、およびテキストの理解を統合するマルチモーダル大規模言語モデルである NVIDIA Nemotron 3 Nano Omni です。"
+  },
+  "kimi-k2.6": {
+    "source": "Kimi K2.6 is an open-source, native multimodal agentic model that advances practical capabilities in long-horizon coding, coding-driven design, proactive autonomous execution, and swarm-based task orchestration.",
+    "sourceHash": "e11ed879645d84ac",
+    "text": "Kimi K2.6 は、長期的なコーディング、コーディング駆動設計、能動的自律実行、およびスワームベースタスクオーケストレーションにおける実用的な能力を向上させるオープンソースネイティブマルチモーダルエージェントモデルです。"
+  },
+  "medgemma": {
+    "source": "MedGemma is a collection of Gemma 3 variants that are trained for performance on medical text and image comprehension.",
+    "sourceHash": "85c8739bf4a7e8c3",
+    "text": "医療テキストおよび画像理解の性能にトレーニングされた Gemma 3 バリアントのコレクションである MedGemma です。"
+  },
+  "medgemma1.5": {
+    "source": "MedGemma 1.5 4B is an updated version of the MedGemma 4B model.",
+    "sourceHash": "4e4166e1a349054b",
+    "text": "MedGemma 4B モデルの更新バージョンである MedGemma 1.5 4B です。"
+  },
+  "glm-5.1": {
+    "source": "GLM-5.1 is our next-generation flagship model for agentic engineering, with significantly stronger coding capabilities than its predecessor. It achieves state-of-the-art performance on SWE-Bench Pro and leads GLM-5 by a wide margin.",
+    "sourceHash": "581b5728260ea566",
+    "text": "GLM-5.1 は、エージェントエンジニアリング向けの次世代フラッグシップモデルであり、その先行モデルよりも著しく強力なコーディング能力を備えています。SWE-Bench Pro で最先端の性能を達成し、GLM-5 を大幅にリードしています。"
+  },
+  "nemotron-cascade-2": {
+    "source": "An open 30B MoE model from NVIDIA with 3B activated parameters that delivers strong reasoning and agentic capabilities.",
+    "sourceHash": "cc15780de07255bf",
+    "text": "30B MoE モデルで 3B のアクティブ化パラメータを持ち、強力な推論およびエージェント能力を提供する NVIDIA 製のオープンソースモデルです。"
+  },
+  "minimax-m2.7": {
+    "source": "MiniMax's M2-series model for coding, agentic workflows, and professional productivity.",
+    "sourceHash": "a311e55a174aef92",
+    "text": "MiniMax の M2 シリーズモデルは、コーディング、エージェントワークフロー、およびプロフェッショナルな生産性を目的としています。"
+  },
+  "nemotron-3-nano": {
+    "source": "Nemotron-3-Nano is a new Standard for Efficient, Open, and Intelligent Agentic Models, now updated with a 4B parameter count model.",
+    "sourceHash": "7404dc0aa43284ba",
+    "text": "Nemotron-3-Nano は、効率的でオープンかつインテリジェントなエージェントモデルの新しい標準であり、現在、40 億パラメータのモデルが追加されました。"
+  },
+  "nemotron-3-super": {
+    "source": "NVIDIA Nemotron 3 Super is a 120B open MoE model activating just 12B parameters to deliver maximum compute efficiency and accuracy for complex multi-agent applications.",
+    "sourceHash": "ab6ed819524581a6",
+    "text": "NVIDIA Nemotron 3 Super は、複雑なマルチエージェントアプリケーションのために最大限の計算効率と精度を提供するために、1200 億パラメータのオープン MoE モデルであり、実際に 120 億パラメータのみを活性化します。"
+  },
+  "lfm2": {
+    "source": "LFM2 is a family of hybrid models designed for on-device deployment. LFM2-24B-A2B is the largest model in the family, scaling the architecture to 24 billion parameters while keeping inference efficient.",
+    "sourceHash": "c62cfe4c04b43f39",
+    "text": "LFM2 は、オンデバイス展開用に設計されたハイブリッドモデルファミリーです。LFM2-24B-A2B はこのファミリーで最大のモデルであり、アーキテクチャを 240 億パラメータにスケールさせながら推論を効率的に保っています。"
+  },
+  "qwen3-coder-next": {
+    "source": "Qwen3-Coder-Next is a coding-focused language model from Alibaba's Qwen team, optimized for agentic coding workflows and local development.",
+    "sourceHash": "c8186d200248bfad",
+    "text": "Qwen3-Coder-Next は、Alibaba の Qwen チームから提供されるコーディングに特化した言語モデルで、エージェントコーディングワークフローとローカル開発のために最適化されています。"
+  },
+  "glm-ocr": {
+    "source": "GLM-OCR is a multimodal OCR model for complex document understanding, built on the GLM-V encoder–decoder architecture.",
+    "sourceHash": "59462790e45e04d0",
+    "text": "GLM-OCR は、複雑なドキュメント理解のために設計されたマルチモーダル OCR モデルで、GLM-V エンコーダー–デコーダーアーキテクチャに基づいています。"
+  },
+  "lfm2.5-thinking": {
+    "source": "LFM2.5 is a new family of hybrid models designed for on-device deployment.",
+    "sourceHash": "3137a3f7b2e44013",
+    "text": "LFM2.5 は、オンデバイス展開用に設計された新しいハイブリッドモデルファミリーです。"
+  },
+  "translategemma": {
+    "source": "A new collection of open translation models built on Gemma 3, helping people communicate across 55 languages.",
+    "sourceHash": "4553785f7d43a280",
+    "text": "Gemma 3 をベースにした新しいオープン翻訳モデルコレクションで、55 の言語をまたいでコミュニケーションを支援します。"
+  },
+  "functiongemma": {
+    "source": "FunctionGemma is a specialized version of Google's Gemma 3 270M model fine-tuned explicitly for function calling.",
+    "sourceHash": "85768cb0400bbf42",
+    "text": "FunctionGemma は、Google の Gemma 3 270M モデルをベースにした特別バージョンで、機能呼び出しのために明示的にファインチューニングされています。"
+  },
+  "olmo-3.1": {
+    "source": "Olmo is a series of Open language models designed to enable the science of language models. These models are pre-trained on the Dolma 3 dataset and post-trained on the Dolci datasets.",
+    "sourceHash": "f66b312ce51b6523",
+    "text": "Olmo は、言語モデルの科学を可能にするために設計されたオープン言語モデルシリーズです。これらのモデルは、Dolma 3 データセットで事前学習され、Dolci データセットで事後学習されています。"
+  },
+  "olmo-3": {
+    "source": "Olmo is a series of Open language models designed to enable the science of language models. These models are pre-trained on the Dolma 3 dataset and post-trained on the Dolci datasets.",
+    "sourceHash": "f66b312ce51b6523",
+    "text": "Olmo は、言語モデルの科学を可能にするために設計されたオープン言語モデルシリーズです。これらのモデルは、Dolma 3 データセットで事前学習され、Dolci データセットで事後学習されています。"
+  },
+  "devstral-small-2": {
+    "source": "24B model that excels at using tools to explore codebases, editing multiple files and power software engineering agents.",
+    "sourceHash": "a39432f0ed2f753e",
+    "text": "240 億パラメータのモデルで、コードベースを探索するツール使用、複数ファイルの編集、およびソフトウェアエンジニアリングエージェントの駆動において優れています。"
+  },
+  "ministral-3": {
+    "source": "The Ministral 3 family is designed for edge deployment, capable of running on a wide range of hardware.",
+    "sourceHash": "543ab827f97a4671",
+    "text": "Ministral 3 ファミリーは、エッジ展開用に設計されており、幅広いハードウェア上で動作可能です。"
+  },
+  "devstral-2": {
+    "source": "123B model that excels at using tools to explore codebases, editing multiple files and power software engineering agents.",
+    "sourceHash": "7ff8a04e64d0ee67",
+    "text": "1230 億パラメータのモデルで、コードベースを探索するツール使用、複数ファイルの編集、およびソフトウェアエンジニアリングエージェントの駆動において優れています。"
+  },
+  "nomic-embed-text-v2-moe": {
+    "source": "nomic-embed-text-v2-moe is a multilingual MoE text embedding model that excels at multilingual retrieval.",
+    "sourceHash": "e89bb8f8b927bcce",
+    "text": "nomic-embed-text-v2-moe は、マルチリンガル検索において優れるマルチリンガル MoE テキスト埋め込みモデルです。"
+  },
+  "rnj-1": {
+    "source": "Rnj-1 is a family of 8B parameter open-weight, dense models trained from scratch by Essential AI, optimized for code and STEM with capabilities on par with SOTA open-weight models.",
+    "sourceHash": "5ae0e67886c8e348",
+    "text": "Rnj-1 は、Essential AI によってゼロから訓練された 80 億パラメータのオープンウェイト、デンスモデルファミリーで、コードと STEM に最適化されており、SOTA オープンウェイトモデルと同等の能力を備えています。"
+  },
+  "qwen3-next": {
+    "source": "The first installment in the Qwen3-Next series with strong performance in terms of both parameter efficiency and inference speed.",
+    "sourceHash": "06d5d89d247c9af9",
+    "text": "Qwen3-Next シリーズの第一弾であり、パラメータ効率と推論速度の両面で優れたパフォーマンスを発揮します。"
+  },
+  "mistral-large-3": {
+    "source": "A general-purpose multimodal mixture-of-experts model for production-grade tasks and enterprise workloads.",
+    "sourceHash": "a367796ff994f321",
+    "text": "生産環境向けのタスクおよびエンタープライズワークロードに対応した汎用マルチモーダルミキシング・オブ・エキスパートモデルです。"
+  },
+  "deepseek-ocr": {
+    "source": "DeepSeek-OCR is a vision-language model that can perform token-efficient OCR.",
+    "sourceHash": "0227456583e5f7a5",
+    "text": "DeepSeek-OCR は、トークン効率的な OCR を実行できるビジョン・ランゲージモデルです。"
+  },
+  "cogito-2.1": {
+    "source": "The Cogito v2.1 LLMs are instruction tuned generative models. All models are released under MIT license for commercial use.",
+    "sourceHash": "f9dd258ed51b8ff0",
+    "text": "Cogito v2.1 LLMs は、指示チューニング済みの生成モデルです。すべてのモデルは商用利用を目的とした MIT ライセンスの下でリリースされています。"
+  },
+  "qwen3-vl": {
+    "source": "The most powerful vision-language model in the Qwen model family to date.",
+    "sourceHash": "4322431763b7a2a5",
+    "text": "Qwen モデルファミリーにおいて現在最も強力なビジョン・ランゲージモデルです。"
+  },
+  "granite4": {
+    "source": "Granite 4 features improved instruction following (IF) and tool-calling capabilities, making them more effective in enterprise applications.",
+    "sourceHash": "35991bb42656340e",
+    "text": "Granite 4 は、指示フォロー（IF）およびツールコール機能の向上により、エンタープライズアプリケーションにおいてより効果的に動作します。"
+  },
+  "gpt-oss-safeguard": {
+    "source": "gpt-oss-safeguard-20b and gpt-oss-safeguard-120b are safety reasoning models built-upon gpt-oss",
+    "sourceHash": "d10dad819d67a552",
+    "text": "gpt-oss-safeguard-20b および gpt-oss-safeguard-120b は、gpt-oss を基盤とした安全性推論モデルです。"
+  },
+  "qwen3": {
+    "source": "Qwen3 is the latest generation of large language models in Qwen series, offering a comprehensive suite of dense and mixture-of-experts (MoE) models.",
+    "sourceHash": "7e5a78d33d37b32a",
+    "text": "Qwen シリーズにおける最新世代の大規模言語モデルであり、高密度モデルとミキシング・オブ・エキスパート（MoE）モデルの包括的なスイートを提供します。"
+  },
+  "gpt-oss": {
+    "source": "OpenAI’s open-weight models designed for powerful reasoning, agentic tasks, and versatile developer use cases.",
+    "sourceHash": "a3a3e1783be91b41",
+    "text": "OpenAI のオープンウェイトモデルであり、強力な推論、エージェントタスク、多様な開発者ユースケース向けに設計されています。"
+  },
+  "deepseek-v3.1": {
+    "source": "DeepSeek-V3.1-Terminus is a hybrid model that supports both thinking mode and non-thinking mode.",
+    "sourceHash": "2792a86171ceffbd",
+    "text": "DeepSeek-V3.1-Terminus は、思考モードと非思考モードの両方をサポートするハイブリッドモデルです。"
+  },
+  "qwen3-embedding": {
+    "source": "Building upon the foundational models of the Qwen3 series, Qwen3 Embedding provides a comprehensive range of text embeddings models in various sizes",
+    "sourceHash": "5e48dabe55a45ac4",
+    "text": "Qwen3 シリーズの基礎モデルを基盤としており、さまざまなサイズのテキストエンベッディングモデルの包括的なラインナップを提供します。"
+  },
+  "qwen3-coder": {
+    "source": "Alibaba's performant long context models for agentic and coding tasks.",
+    "sourceHash": "15d78b42c74d3633",
+    "text": "Alibaba の高性能な長文脈モデルであり、エージェントおよびコーディングタスク向けに最適化されています。"
+  },
+  "embeddinggemma": {
+    "source": "EmbeddingGemma is a 300M parameter embedding model from Google.",
+    "sourceHash": "c213e479590bec60",
+    "text": "EmbeddingGemma は、Google から提供される 3 億パラメータのエンベッディングモデルです。"
+  },
+  "gemma3": {
+    "source": "The current, most capable model that runs on a single GPU.",
+    "sourceHash": "81dfb054168e0baa",
+    "text": "現在、単一の GPU で動作可能な最も能力の高いモデルです。"
+  },
+  "mistral-nemo": {
+    "source": "A state-of-the-art 12B model with 128k context length, built by Mistral AI in collaboration with NVIDIA.",
+    "sourceHash": "ac151b2a2b9923ef",
+    "text": "Mistral AI が NVIDIA と協力して構築した、128k コンテキスト長を持つ最先端の 12B モデルです。"
+  },
+  "mistral": {
+    "source": "The 7B model released by Mistral AI, updated to version 0.3.",
+    "sourceHash": "415ddf5240c7ce33",
+    "text": "Mistral AI がリリースした 7B モデルで、バージョン 0.3 に更新されています。"
+  },
+  "devstral": {
+    "source": "Devstral: the best open source model for coding agents",
+    "sourceHash": "c49aa3003c20c783",
+    "text": "Devstral：コーディングエージェント向けの最高のオープンソースモデルです。"
+  },
+  "deepseek-r1": {
+    "source": "DeepSeek-R1 is a family of open reasoning models with performance approaching that of leading models, such as O3 and Gemini 2.5 Pro.",
+    "sourceHash": "f7799bc336e2f5f7",
+    "text": "DeepSeek-R1 は、O3 や Gemini 2.5 Pro などのリーディングモデルに匹敵する性能を持つオープンな推論モデルファミリーです。"
+  },
+  "gemma3n": {
+    "source": "Gemma 3n models are designed for efficient execution on everyday devices such as laptops, tablets or phones.",
+    "sourceHash": "01dbbedcf2eac87e",
+    "text": "Gemma 3n モデルは、ラップトップ、タブレット、またはスマートフォンなどの日常デバイスでの効率的な実行を目的として設計されています。"
+  },
+  "mistral-small3.2": {
+    "source": "An update to Mistral Small that improves on function calling, instruction following, and less repetition errors.",
+    "sourceHash": "4656d97bd465e074",
+    "text": "Mistral Small のアップデート版で、関数呼び出し、指示従順性、および反復エラーの削減において改善されています。"
+  },
+  "magistral": {
+    "source": "Magistral is a small, efficient reasoning model with 24B parameters.",
+    "sourceHash": "65afa9fae855413e",
+    "text": "Magistral は、24B パラメータを持つ小型で効率的な推論モデルです。"
+  },
+  "llama4": {
+    "source": "Meta's latest collection of multimodal models.",
+    "sourceHash": "a5285bdae7ad32ec",
+    "text": "Meta の最新のマルチモーダルモデルコレクションです。"
+  },
+  "qwen2.5-coder": {
+    "source": "The latest series of Code-Specific Qwen models, with significant improvements in code generation, code reasoning, and code fixing.",
+    "sourceHash": "5bb7984691c0997c",
+    "text": "コード生成、コード推論、およびコード修正において大幅な改善が見られる、最新のコード専用 Qwen モデルシリーズです。"
+  },
+  "qwen2.5vl": {
+    "source": "Flagship vision-language model of Qwen and also a significant leap from the previous Qwen2-VL.",
+    "sourceHash": "658f10a93c99a476",
+    "text": "Qwen の旗艦ビジョン・ランゲージモデルであり、以前の Qwen2-VL からの大きな飛躍です。"
+  },
+  "llama3.2-vision": {
+    "source": "Llama 3.2 Vision is a collection of instruction-tuned image reasoning generative models in 11B and 90B sizes.",
+    "sourceHash": "03edeb0632b41bcf",
+    "text": "Llama 3.2 Vision は、11B および 90B サイズの指示チューニング済み画像推論生成モデルコレクションです。"
+  },
+  "phi4-reasoning": {
+    "source": "Phi 4 reasoning and reasoning plus are 14-billion parameter open-weight reasoning models that rival much larger models on complex reasoning tasks.",
+    "sourceHash": "dcb5191c9ac62f22",
+    "text": "Phi 4 reasoning および reasoning plus は、複雑な推論タスクにおいてはるかに大きなモデルと競合する 140 億パラメータのオープンウェイト推論モデルです。"
+  },
+  "phi4-mini-reasoning": {
+    "source": "Phi 4 mini reasoning is a lightweight open model that balances efficiency with advanced reasoning ability.",
+    "sourceHash": "7e7c6c638429050b",
+    "text": "Phi 4 mini reasoning は、効率性と高度な推論能力のバランスを重視した軽量オープンモデルです。"
+  },
+  "granite3.3": {
+    "source": "IBM Granite 2B and 8B models are 128K context length language models that have been fine-tuned for improved reasoning and instruction-following capabilities.",
+    "sourceHash": "fe2954ecd37ee531",
+    "text": "IBM Granite 2B および 8B モデルは、推論および指示従順性の向上のためにファインチューニングされた 128K コンテキスト長の言語モデルです。"
+  },
+  "deepcoder": {
+    "source": "DeepCoder is a fully open-Source 14B coder model at O3-mini level, with a 1.5B version also available.",
+    "sourceHash": "eeb56721ebc738ad",
+    "text": "DeepCoder は、O3-mini レベルの完全オープンソース 14B コーダーモデルであり、1.5B バージョンも利用可能です。"
+  },
+  "cogito": {
+    "source": "Cogito v1 Preview is a family of hybrid reasoning models by Deep Cogito that outperform the best available open models of the same size, including counterparts from LLaMA, DeepSeek, and Qwen across most standard benchmarks.",
+    "sourceHash": "c9ab206753c8e514",
+    "text": "Cogito v1 Preview は、Deep Cogito によるハイブリッド推論モデルファミリーで、LLaMA、DeepSeek、および Qwen からの同等サイズの最良のオープンモデルを上回る性能を示し、ほとんどの標準ベンチマークで優れています。"
+  },
+  "mistral-small3.1": {
+    "source": "Building upon Mistral Small 3, Mistral Small 3.1 (2503) adds state-of-the-art vision understanding and enhances long context capabilities up to 128k tokens without compromising text performance.",
+    "sourceHash": "3c87ad42739835b1",
+    "text": "Mistral Small 3 を基盤とし、Mistral Small 3.1 (2503) は最先端のビジョン理解を追加し、テキスト性能を損なうことなく 128k トークンまでの長コンテキスト能力を強化します。"
+  },
+  "openthinker": {
+    "source": "A fully open-source family of reasoning models built using a dataset derived by distilling DeepSeek-R1.",
+    "sourceHash": "7a415d638fe5a7e5",
+    "text": "DeepSeek-R1 を蒸留して導出されたデータセットを使用して構築された、完全にオープンソースの推論モデルファミリーです。"
+  },
+  "exaone-deep": {
+    "source": "EXAONE Deep exhibits superior capabilities in various reasoning tasks including math and coding benchmarks, ranging from 2.4B to 32B parameters developed and released by LG AI Research.",
+    "sourceHash": "c14fcc098e1b6ab1",
+    "text": "LG AI Research が開発・リリースした EXAONE Deep は、2.4B から 32B パラメータにわたる数学やコーディングを含む多様な推論タスクにおいて優れた能力を発揮します。"
+  },
+  "qwq": {
+    "source": "QwQ is the reasoning model of the Qwen series.",
+    "sourceHash": "407bf57d24400d89",
+    "text": "QwQ は Qwen シリーズの推論モデルです。"
+  },
+  "command-a": {
+    "source": "111 billion parameter model optimized for demanding enterprises that require fast, secure, and high-quality AI",
+    "sourceHash": "0c9cd6a5dd4a32d4",
+    "text": "1110 億パラメータを持つモデルで、高速かつ安全で高品質な AI を必要とする高度な企業向けに最適化されています。"
+  },
+  "command-r7b-arabic": {
+    "source": "A new state-of-the-art version of the lightweight Command R7B model that excels in advanced Arabic language capabilities for enterprises in the Middle East and Northern Africa.",
+    "sourceHash": "8ba9eaa1636e4810",
+    "text": "中東および北アフリカの企業向けに、高度なアラビア語能力に優れる軽量 Command R7B モデルの新しい最先端バージョンです。"
+  },
+  "phi4-mini": {
+    "source": "Phi-4-mini brings significant enhancements in multilingual support, reasoning, and mathematics, and now, the long-awaited function calling feature is finally supported.",
+    "sourceHash": "7eda9c9ab3214ce2",
+    "text": "Phi-4-mini は、多言語サポート、推論、数学において大幅な向上をもたらし、今ようやくサポートされる待ち望まれた関数呼び出し機能を実装しています。"
+  },
+  "granite3.2-vision": {
+    "source": "A compact and efficient vision-language model, specifically designed for visual document understanding, enabling automated content extraction from tables, charts, infographics, plots, diagrams, and more.",
+    "sourceHash": "7918cdb411e1e03f",
+    "text": "テーブル、チャート、インフォグラフィック、プロット、図などから自動でコンテンツを抽出することを可能にする、視覚ドキュメント理解に特化したコンパクトで効率的なビジョン・ランゲージモデルです。"
+  },
+  "granite3.2": {
+    "source": "Granite-3.2 is a family of long-context AI models from IBM Granite fine-tuned for thinking capabilities.",
+    "sourceHash": "d747a21e2c5bddfb",
+    "text": "Granite-3.2 は、思考能力に最適化された IBM Granite の長文脈 AI モデルファミリーです。"
+  },
+  "r1-1776": {
+    "source": "A version of the DeepSeek-R1 model that has been post trained to provide unbiased, accurate, and factual information by Perplexity.",
+    "sourceHash": "750b5b1a2d866fa5",
+    "text": "Perplexity によってポストトレーニングされ、偏りのない正確で事実に基づいた情報を提供する DeepSeek-R1 モデルのバージョンです。"
+  },
+  "deepscaler": {
+    "source": "A fine-tuned version of Deepseek-R1-Distilled-Qwen-1.5B that surpasses the performance of OpenAI’s o1-preview with just 1.5B parameters on popular math evaluations.",
+    "sourceHash": "d1c7cc6aa2dd7952",
+    "text": "OpenAI の o1-preview の性能を、人気のある数学評価においてわずか 1.5B パラメータで凌駕する、Deepseek-R1-Distilled-Qwen-1.5B のファインチューニングバージョンです。"
+  },
+  "mistral-small": {
+    "source": "Mistral Small 3 sets a new benchmark in the “small” Large Language Models category below 70B.",
+    "sourceHash": "4e80035575f32af5",
+    "text": "Mistral Small 3 は、70B 未満の「小型」大規模言語モデルカテゴリにおいて新たなベンチマークを設定します。"
+  },
+  "granite3.1-dense": {
+    "source": "The IBM Granite 2B and 8B models are text-only dense LLMs trained on over 12 trillion tokens of data, demonstrated significant improvements over their predecessors in performance and speed in IBM’s initial testing.",
+    "sourceHash": "39244f0dcc69a3c0",
+    "text": "IBM Granite の 2B および 8B モデルは、12 兆トークンのデータでトレーニングされたテキスト専用高密度 LLM で、IBM の初期テストにおいて性能と速度で先行モデルに比べて顕著な向上を示しました。"
+  },
+  "granite3.1-moe": {
+    "source": "The IBM Granite 1B and 3B models are long-context mixture of experts (MoE) Granite models from IBM designed for low latency usage.",
+    "sourceHash": "5356cc9b0adc5611",
+    "text": "IBM Granite の 1B および 3B モデルは、低遅延使用を目的とした IBM から設計された長文脈ミキシング・オブ・エキスパート（MoE）Granite モデルです。"
+  },
+  "command-r7b": {
+    "source": "The smallest model in Cohere's R series delivers top-tier speed, efficiency, and quality to build powerful AI applications on commodity GPUs and edge devices.",
+    "sourceHash": "05714e5c83b6c6f8",
+    "text": "Cohere の R シリーズで最も小さいモデルであり、汎用 GPU およびエッジデバイス上で強力な AI アプリケーションを構築するためのトップクラスの速度、効率、品質を提供します。"
+  },
+  "deepseek-v3": {
+    "source": "A strong Mixture-of-Experts (MoE) language model with 671B total parameters with 37B activated for each token.",
+    "sourceHash": "0ef56a269356d33e",
+    "text": "671B の総パラメータを持ち、各トークンで 37B がアクティブ化される強力なミキシング・オブ・エキスパート（MoE）言語モデルです。"
+  },
+  "olmo2": {
+    "source": "OLMo 2 is a new family of 7B and 13B models trained on up to 5T tokens. These models are on par with or better than equivalently sized fully open models, and competitive with open-weight models such as Llama 3.1 on English academic benchmarks.",
+    "sourceHash": "c03aebd9df55bd1e",
+    "text": "OLMo 2 は、最大 5T トークンでトレーニングされた 7B および 13B モデルの新しいファミリーです。これらのモデルは同等サイズの完全にオープンなモデルと同等かそれ以上であり、Llama 3.1 などのオープンウェイトモデルと英語の学術ベンチマークで競争力があります。"
+  },
+  "phi4": {
+    "source": "Phi-4 is a 14B parameter, state-of-the-art open model from Microsoft.",
+    "sourceHash": "25ba17b563457f8e",
+    "text": "Phi-4 は、Microsoft から提供される 14B パラメータを持つ最先端オープンモデルです。"
+  },
+  "dolphin3": {
+    "source": "Dolphin 3.0 Llama 3.1 8B 🐬 is the next generation of the Dolphin series of instruct-tuned models designed to be the ultimate general purpose local model, enabling coding, math, agentic, function calling, and general use cases.",
+    "sourceHash": "4945f6ba6a5f8d65",
+    "text": "Dolphin 3.0 Llama 3.1 8B 🐬 は、コーディング、数学、エージェント、関数呼び出し、および一般的なユースケースを可能にする究極の汎用ローカルモデルとして設計された Dolphin シリーズの次世代インストラクトチューニングモデルです。"
+  },
+  "smallthinker": {
+    "source": "A new small reasoning model fine-tuned from the Qwen 2.5 3B Instruct model.",
+    "sourceHash": "d4c61b0980bdd89c",
+    "text": "Qwen 2.5 3B Instruct モデルからファインチューニングされた新しい小規模推論モデルです。"
+  },
+  "tulu3": {
+    "source": "Tülu 3 is a leading instruction following model family, offering fully open-source data, code, and recipes by the The Allen Institute for AI.",
+    "sourceHash": "017d629a7a3fa520",
+    "text": "Tülu 3 は、The Allen Institute for AI によって完全にオープンソースのデータ、コード、レシピを提供するトップクラスのインストラクションフォローモデルファミリーです。"
+  },
+  "mixtral": {
+    "source": "A set of Mixture of Experts (MoE) model with open weights by Mistral AI in 8x7b and 8x22b parameter sizes.",
+    "sourceHash": "37292da737a25508",
+    "text": "Mistral AI によるオープンウェイトの Mixture of Experts (MoE) モデルのセットで、8x7b と 8x22b のパラメータサイズで利用可能です。"
+  },
+  "dolphin-mixtral": {
+    "source": "Uncensored, 8x7b and 8x22b fine-tuned models based on the Mixtral mixture of experts models that excels at coding tasks. Created by Eric Hartford.",
+    "sourceHash": "d1079b0b0e2c7ecf",
+    "text": "コーディングタスクに優れた Mixtral の混合専門家モデルを基盤とする、無検閲版の 8x7b および 8x22b ファインチューニングモデルです。Eric Hartford が作成しました。"
+  },
+  "nous-hermes2-mixtral": {
+    "source": "The Nous Hermes 2 model from Nous Research, now trained over Mixtral.",
+    "sourceHash": "32e60997000243fb",
+    "text": "Nous Research の Nous Hermes 2 モデルで、現在は Mixtral でトレーニングされています。"
+  },
+  "granite-embedding": {
+    "source": "The IBM Granite Embedding 30M and 278M models models are text-only dense biencoder embedding models, with 30M available in English only and 278M serving multilingual use cases.",
+    "sourceHash": "63bc1511adca904e",
+    "text": "IBM Granite Embedding 30M と 278M モデルは、テキスト専用の高密度バイエンコーダー埋め込みモデルであり、30M は英語専用で、278M は多言語ユースケースに対応しています。"
+  },
+  "falcon3": {
+    "source": "A family of efficient AI models under 10B parameters performant in science, math, and coding through innovative training techniques.",
+    "sourceHash": "dda7c108c234f3f4",
+    "text": "革新的なトレーニング技術により、科学、数学、コーディングにおいて 10B パラメータ未満で高性能な AI モデルファミリーです。"
+  },
+  "hermes3": {
+    "source": "Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous Research",
+    "sourceHash": "a4f597cffcf97988",
+    "text": "Hermes 3 は、Nous Research の旗艦 LLM シリーズである Hermes シリーズの最新バージョンです。"
+  },
+  "exaone3.5": {
+    "source": "EXAONE 3.5 is a collection of instruction-tuned bilingual (English and Korean) generative models ranging from 2.4B to 32B parameters, developed and released by LG AI Research.",
+    "sourceHash": "09089a83439b2ebd",
+    "text": "EXAONE 3.5 は、LG AI Research が開発およびリリースした、2.4B から 32B パラメータにわたる英韓語バイリンガルインストラクトチューニング生成モデルのコレクションです。"
+  },
+  "llama3.3": {
+    "source": "New state of the art 70B model. Llama 3.3 70B offers similar performance compared to the Llama 3.1 405B model.",
+    "sourceHash": "9919b2bcca7d05f3",
+    "text": "新しい最先端の 70B モデルです。Llama 3.3 70B は、Llama 3.1 405B モデルと同等のパフォーマンスを提供します。"
+  },
+  "snowflake-arctic-embed2": {
+    "source": "Snowflake's frontier embedding model. Arctic Embed 2.0 adds multilingual support without sacrificing English performance or scalability.",
+    "sourceHash": "3607dc1694934199",
+    "text": "Snowflake のフロンティア埋め込みモデルです。Arctic Embed 2.0 は、英語のパフォーマンスやスケーラビリティを損なうことなく多言語サポートを追加します。"
+  },
+  "marco-o1": {
+    "source": "An open large reasoning model for real-world solutions by the Alibaba International Digital Commerce Group (AIDC-AI).",
+    "sourceHash": "a708a0061a103cae",
+    "text": "Alibaba International Digital Commerce Group (AIDC-AI) による実世界ソリューション向けのオープン大規模推論モデルです。"
+  },
+  "sailor2": {
+    "source": "Sailor2 are multilingual language models made for South-East Asia. Available in 1B, 8B, and 20B parameter sizes.",
+    "sourceHash": "9c107b1c60ba76b0",
+    "text": "東南アジア向けに作られた多言語言語モデルです。1B、8B、および 20B パラメータサイズで利用可能です。"
+  },
+  "llama3.1": {
+    "source": "Llama 3.1 is a new state-of-the-art model from Meta available in 8B, 70B and 405B parameter sizes.",
+    "sourceHash": "fc8707348beb8b80",
+    "text": "Llama 3.1 は、8B、70B、および 405B パラメータサイズで利用可能な Meta からの新しい最先端モデルです。"
+  },
+  "mistral-large": {
+    "source": "Mistral Large 2 is Mistral's new flagship model that is significantly more capable in code generation, mathematics, and reasoning with 128k context window and support for dozens of languages.",
+    "sourceHash": "52d17bb50a60934d",
+    "text": "Mistral Large 2 は、コード生成、数学、推論において大幅に能力が向上し、128k コンテキストウィンドウと数十の言語をサポートする Mistral の新しい旗艦モデルです。"
+  },
+  "granite3-guardian": {
+    "source": "The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks in prompts and/or responses.",
+    "sourceHash": "2e93410c9c3c8af1",
+    "text": "IBM Granite Guardian 3.0 2B および 8B モデルは、プロンプトおよび/またはレスポンス内のリスクを検出するように設計されています。"
+  },
+  "granite3-dense": {
+    "source": "The IBM Granite 2B and 8B models are designed to support tool-based use cases and support for retrieval augmented generation (RAG), streamlining code generation, translation and bug fixing.",
+    "sourceHash": "e39d3e2653937627",
+    "text": "IBM Granite 2B および 8B モデルは、ツールベースの使用ケースをサポートし、検索拡張生成（RAG）をサポートすることで、コード生成、翻訳、バグ修正を合理化するように設計されています。"
+  },
+  "granite3-moe": {
+    "source": "The IBM Granite 1B and 3B models are the first mixture of experts (MoE) Granite models from IBM designed for low latency usage.",
+    "sourceHash": "4697b68ec460d04d",
+    "text": "IBM Granite 1B および 3B モデルは、低レイテンシ使用のために設計された IBM の最初の専門家混合（MoE）Granite モデルです。"
+  },
+  "opencoder": {
+    "source": "OpenCoder is an open and reproducible code LLM family which includes 1.5B and 8B models, supporting chat in English and Chinese languages.",
+    "sourceHash": "87e81c7fb399f4e6",
+    "text": "OpenCoder は、英語および中国語でのチャットをサポートする 1.5B および 8B モデルを含む、オープンで再現可能なコード LLM ファミリーです。"
+  },
+  "minicpm-v": {
+    "source": "A series of multimodal LLMs (MLLMs) designed for vision-language understanding.",
+    "sourceHash": "44ffd218508e2ec3",
+    "text": "ビジョン・言語理解のために設計されたマルチモーダル LLM（MLLM）シリーズです。"
+  },
+  "athene-v2": {
+    "source": "Athene-V2 is a 72B parameter model which excels at code completion, mathematics, and log extraction tasks.",
+    "sourceHash": "5a0f0ac3dfaf12f2",
+    "text": "Athene-V2 は、コード補完、数学、ログ抽出タスクで優れている 72B パラメータモデルです。"
+  },
+  "smollm2": {
+    "source": "SmolLM2 is a family of compact language models available in three size: 135M, 360M, and 1.7B parameters.",
+    "sourceHash": "0eae89f49b079546",
+    "text": "SmolLM2 は、135M、360M、および 1.7B パラメータの 3 つのサイズで利用可能なコンパクトな言語モデルファミリーです。"
+  },
+  "aya-expanse": {
+    "source": "Cohere For AI's language models trained to perform well across 23 different languages.",
+    "sourceHash": "42e0cc1565e51971",
+    "text": "Cohere For AI の 23 の異なる言語で良好なパフォーマンスを発揮するようにトレーニングされた言語モデルです。"
+  },
+  "nemotron": {
+    "source": "Llama-3.1-Nemotron-70B-Instruct is a large language model customized by NVIDIA to improve the helpfulness of LLM generated responses to user queries.",
+    "sourceHash": "0f4cd5401e960f37",
+    "text": "Llama-3.1-Nemotron-70B-Instruct は、ユーザークエリに対する LLM 生成レスポンスの有用性を改善するために NVIDIA によってカスタマイズされた大規模言語モデルです。"
+  },
+  "shieldgemma": {
+    "source": "ShieldGemma is set of instruction tuned models for evaluating the safety of text prompt input and text output responses against a set of defined safety policies.",
+    "sourceHash": "7dd2265749061ff3",
+    "text": "ShieldGemma は、定義された一連の安全性ポリシーに対してテキストプロンプト入力およびテキスト出力レスポンスの安全性を評価するための指示チューニング済みモデルのセットです。"
+  },
+  "llama-guard3": {
+    "source": "Llama Guard 3 is a series of models fine-tuned for content safety classification of LLM inputs and responses.",
+    "sourceHash": "1907310ce925a4e1",
+    "text": "Llama Guard 3 は、LLM 入力およびレスポンスのコンテンツ安全性分類のために微調整されたモデルシリーズです。"
+  },
+  "llama3.2": {
+    "source": "Meta's Llama 3.2 goes small with 1B and 3B models.",
+    "sourceHash": "1bd844f1658dd887",
+    "text": "Meta の Llama 3.2 は、1B および 3B モデルで小型化されています。"
+  },
+  "qwen2.5": {
+    "source": "Qwen2.5 models are pretrained on Alibaba's latest large-scale dataset, encompassing up to 18 trillion tokens. The model supports up to 128K tokens and has multilingual support.",
+    "sourceHash": "1b386ab4ffd69175",
+    "text": "Qwen2.5 モデルは、最大 18 兆トークンに及ぶ Alibaba の最新の大規模データセットで事前トレーニングされており、最大 128K トークンをサポートし、多言語サポートを提供します。"
+  },
+  "solar-pro": {
+    "source": "Solar Pro Preview: an advanced large language model (LLM) with 22 billion parameters designed to fit into a single GPU",
+    "sourceHash": "f2254891a4d387c9",
+    "text": "Solar Pro Preview：単一の GPU に収まるように設計された 220 億パラメータを持つ高度な大規模言語モデル（LLM）です。"
+  },
+  "nemotron-mini": {
+    "source": "A commercial-friendly small language model by NVIDIA optimized for roleplay, RAG QA, and function calling.",
+    "sourceHash": "830495afd9d0c7f4",
+    "text": "ロールプレイ、RAG QA、および関数呼び出しに最適化された NVIDIA による商業利用可能な小型言語モデルです。"
+  },
+  "bespoke-minicheck": {
+    "source": "A state-of-the-art fact-checking model developed by Bespoke Labs.",
+    "sourceHash": "cfe12cf98fda2f36",
+    "text": "Bespoke Labs によって開発された最先端の事実確認モデルです。"
+  },
+  "deepseek-v2.5": {
+    "source": "An upgraded version of DeekSeek-V2 that integrates the general and coding abilities of both DeepSeek-V2-Chat and DeepSeek-Coder-V2-Instruct.",
+    "sourceHash": "f6ffa78bd93bc3f8",
+    "text": "DeepSeek-V2 のアップグレード版であり、DeepSeek-V2-Chat と DeepSeek-Coder-V2-Instruct の両方の汎用能力とコーディング能力を統合したものです。"
+  },
+  "reader-lm": {
+    "source": "A series of models that convert HTML content to Markdown content, which is useful for content conversion tasks.",
+    "sourceHash": "aa96b5d265dc6a1a",
+    "text": "HTML コンテンツを Markdown コンテンツに変換するモデルシリーズであり、コンテンツ変換タスクに役立ちます。"
+  },
+  "yi-coder": {
+    "source": "Yi-Coder is a series of open-source code language models that delivers state-of-the-art coding performance with fewer than 10 billion parameters.",
+    "sourceHash": "7368bacd57ba95fd",
+    "text": "Yi-Coder は、100 億パラメータ未満で最先端のコーディングパフォーマンスを実現するオープンソースコード言語モデルシリーズです。"
+  },
+  "qwen2": {
+    "source": "Qwen2 is a new series of large language models from Alibaba group",
+    "sourceHash": "97744f8379b9b29a",
+    "text": "アリババグループから登場した新しい大規模言語モデルシリーズです。"
+  },
+  "reflection": {
+    "source": "A high-performing model trained with a new technique called Reflection-tuning that teaches a LLM to detect mistakes in its reasoning and correct course.",
+    "sourceHash": "6174acd155cc8709",
+    "text": "LLM に推論中のミスを検出し、コースを修正することを教える新しい技術である Reflection-tuning でトレーニングされた高性能モデルです。"
+  },
+  "starcoder2": {
+    "source": "StarCoder2 is the next generation of transparently trained open code LLMs that comes in three sizes: 3B, 7B and 15B parameters.",
+    "sourceHash": "2b40690c191c2a1b",
+    "text": "StarCoder2 は、3B、7B、15B パラメータの 3 つのサイズで提供される、透明にトレーニングされたオープンコード LLM の次世代製品です。"
+  },
+  "deepseek-coder-v2": {
+    "source": "An open-source Mixture-of-Experts code language model that achieves performance comparable to GPT4-Turbo in code-specific tasks.",
+    "sourceHash": "44facb8237dffd32",
+    "text": "コード固有のタスクにおいて GPT4-Turbo と同等のパフォーマンスを達成するオープンソースの Mixture-of-Experts コード言語モデルです。"
+  },
+  "phi3.5": {
+    "source": "A lightweight AI model with 3.8 billion parameters with performance overtaking similarly and larger sized models.",
+    "sourceHash": "7d0007b9129485cf",
+    "text": "38 億パラメータを持つ軽量 AI モデルで、同規模およびより大きなモデルを上回るパフォーマンスを発揮します。"
+  },
+  "codestral": {
+    "source": "Codestral is Mistral AI’s first-ever code model designed for code generation tasks.",
+    "sourceHash": "aa3c0f58a1908c9a",
+    "text": "Codestral は、コード生成タスク用に設計された Mistral AI の初のコードモデルです。"
+  },
+  "granite-code": {
+    "source": "A family of open foundation models by IBM for Code Intelligence",
+    "sourceHash": "14b624fbaa3121cd",
+    "text": "IBM によるコードインテリジェンス向けのオープンファウンデーションモデルファミリーです。"
+  },
+  "command-r-plus": {
+    "source": "Command R+ is a powerful, scalable large language model purpose-built to excel at real-world enterprise use cases.",
+    "sourceHash": "deda19c31094fba0",
+    "text": "Command R+ は、実世界のエンタープライズユースケースで優れるように特別に設計された強力なスケーラブル大規模言語モデルです。"
+  },
+  "command-r": {
+    "source": "Command R is a Large Language Model optimized for conversational interaction and long context tasks.",
+    "sourceHash": "0f85ed62b9b6cfb8",
+    "text": "対話型インタラクションおよび長文脈タスクに最適化された大規模言語モデルです。"
+  },
+  "qwen2-math": {
+    "source": "Qwen2 Math is a series of specialized math language models built upon the Qwen2 LLMs, which significantly outperforms the mathematical capabilities of open-source models and even closed-source models (e.g., GPT4o).",
+    "sourceHash": "aa74398f817f0a1b",
+    "text": "Qwen2 LLMs を基盤とした専門的な数学言語モデルシリーズであり、オープンソースモデルおよびクローズドソースモデル（例：GPT4o）の数学的能力を大幅に上回ります。"
+  },
+  "smollm": {
+    "source": "🪐 A family of small models with 135M, 360M, and 1.7B parameters, trained on a new high-quality dataset.",
+    "sourceHash": "15b0bebccec684a5",
+    "text": "🪐 135M、360M、および 1.7B パラメータを持つ小型モデルファミリーで、新しい高品質データセットでトレーニングされています。"
+  },
+  "internlm2": {
+    "source": "InternLM2.5 is a 7B parameter model tailored for practical scenarios with outstanding reasoning capability.",
+    "sourceHash": "0fb8d5d42b9015b5",
+    "text": "InternLM2.5 は、優れた推論能力を持つ実用的なシナリオ向けに調整された 70 億パラメータモデルです。"
+  },
+  "bge-m3": {
+    "source": "BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-Functionality, Multi-Linguality, and Multi-Granularity.",
+    "sourceHash": "0c1e720a766ff7ed",
+    "text": "BGE-M3 は、多機能性、多言語性、および多粒度性における汎用性が際立つ BAAI から登場した新しいモデルです。"
+  },
+  "paraphrase-multilingual": {
+    "source": "Sentence-transformers model that can be used for tasks like clustering or semantic search.",
+    "sourceHash": "efc27e1aff7d2741",
+    "text": "文書変換モデルであり、クラスタリングや意味検索などのタスクに使用できます。"
+  },
+  "bge-large": {
+    "source": "Embedding model from BAAI mapping texts to vectors.",
+    "sourceHash": "ca4a60bc2f7ae40d",
+    "text": "BAAI 由来の埋め込みモデルで、テキストをベクトルに変換します。"
+  },
+  "gemma2": {
+    "source": "Google Gemma 2 is a high-performing and efficient model available in three sizes: 2B, 9B, and 27B.",
+    "sourceHash": "e4d5971f05027d3f",
+    "text": "Google Gemma 2 は、2B、9B、27B の 3 つのサイズで利用可能な高性能かつ効率的なモデルです。"
+  },
+  "phi3": {
+    "source": "Phi-3 is a family of lightweight 3B (Mini) and 14B (Medium) state-of-the-art open models by Microsoft.",
+    "sourceHash": "c616ea6ec21be447",
+    "text": "Phi-3 は、Microsoft による軽量な 3B（Mini）および 14B（Medium）の最先端オープンモデルファミリーです。"
+  },
+  "llama3-groq-tool-use": {
+    "source": "A series of models from Groq that represent a significant advancement in open-source AI capabilities for tool use/function calling.",
+    "sourceHash": "d061bcd0147494e5",
+    "text": "Groq 由来のモデルシリーズで、ツール使用/関数呼び出しにおけるオープンソース AI 能力の大幅な進歩を表しています。"
+  },
+  "nuextract": {
+    "source": "A 3.8B model fine-tuned on a private high-quality synthetic dataset for information extraction, based on Phi-3.",
+    "sourceHash": "5e9445c5119d2f8c",
+    "text": "Phi-3 をベースに、情報抽出のためにプライベートの高品質な合成データセットで微調整された 3.8B モデルです。"
+  },
+  "codegemma": {
+    "source": "CodeGemma is a collection of powerful, lightweight models that can perform a variety of coding tasks like fill-in-the-middle code completion, code generation, natural language understanding, mathematical reasoning, and instruction following.",
+    "sourceHash": "54371ad799a308a3",
+    "text": "CodeGemma は、埋め込み中間コード補完、コード生成、自然言語理解、数学的推論、指示従順など、多様なコーディングタスクを実行できる強力な軽量モデルのコレクションです。"
+  },
+  "codellama": {
+    "source": "A large language model that can use text prompts to generate and discuss code.",
+    "sourceHash": "60458936db8cf3c9",
+    "text": "テキストプロンプトを使用してコードを生成し、議論できる大規模言語モデルです。"
+  },
+  "firefunction-v2": {
+    "source": "An open weights function calling model based on Llama 3, competitive with GPT-4o function calling capabilities.",
+    "sourceHash": "74cf776f8f3b85b6",
+    "text": "Llama 3 をベースにしたオープンウェイトの関数呼び出しモデルで、GPT-4o の関数呼び出し能力と競合します。"
+  },
+  "mathstral": {
+    "source": "MathΣtral: a 7B model designed for math reasoning and scientific discovery by Mistral AI.",
+    "sourceHash": "d4eea9c78b9b10f2",
+    "text": "MathΣtral：Mistral AI によって開発された、数学的推論と科学的発見のために設計された 7B モデルです。"
+  },
+  "codegeex4": {
+    "source": "A versatile model for AI software development scenarios, including code completion.",
+    "sourceHash": "17e37773293ff4ec",
+    "text": "コード補完を含む AI ソフトウェア開発シナリオに柔軟に対応できるモデルです。"
+  },
+  "glm4": {
+    "source": "A strong multi-lingual general language model with competitive performance to Llama 3.",
+    "sourceHash": "56c043fa61deee34",
+    "text": "Llama 3 と競合する性能を持つ強力な多言語汎用言語モデルです。"
+  },
+  "codeqwen": {
+    "source": "CodeQwen1.5 is a large language model pretrained on a large amount of code data.",
+    "sourceHash": "8b72080e3367753a",
+    "text": "CodeQwen1.5 は、大量のコードデータで事前学習された大規模言語モデルです。"
+  },
+  "deepseek-v2": {
+    "source": "A strong, economical, and efficient Mixture-of-Experts language model.",
+    "sourceHash": "01f932876fac6c10",
+    "text": "強力、経済的かつ効率的なエキスパート混合（Mixture-of-Experts）言語モデルです。"
+  },
+  "aya": {
+    "source": "Aya 23, released by Cohere, is a new family of state-of-the-art, multilingual models that support 23 languages.",
+    "sourceHash": "32478b228482835f",
+    "text": "Cohere によってリリースされた Aya 23 は、23 の言語をサポートする新しい最先端多言語モデルファミリーです。"
+  },
+  "llama3": {
+    "source": "Meta Llama 3: The most capable openly available LLM to date",
+    "sourceHash": "9702cf968b16d77c",
+    "text": "Meta Llama 3：現在最も能力のあるオープンに利用可能な LLM です。"
+  },
+  "falcon2": {
+    "source": "Falcon2 is an 11B parameters causal decoder-only model built by TII and trained over 5T tokens.",
+    "sourceHash": "ced6abee37aa5d33",
+    "text": "Falcon2 は、TII が構築した 110 億パラメータを持つ因果関係のみを扱うデコーダーモデルであり、5T トークンにわたってトレーニングされています。"
+  },
+  "yi": {
+    "source": "Yi 1.5 is a high-performing, bilingual language model.",
+    "sourceHash": "9158c030af4eb39c",
+    "text": "Yi 1.5 は、バイリンガル言語モデルとして高いパフォーマンスを発揮します。"
+  },
+  "llama3-chatqa": {
+    "source": "A model from NVIDIA based on Llama 3 that excels at conversational question answering (QA) and retrieval-augmented generation (RAG).",
+    "sourceHash": "650c47edcb5158b4",
+    "text": "NVIDIA から提供される Llama 3 ベースのモデルで、対話型質問応答（QA）および検索拡張生成（RAG）において優れています。"
+  },
+  "dolphin-llama3": {
+    "source": "Dolphin 2.9 is a new model with 8B and 70B sizes by Eric Hartford based on Llama 3 that has a variety of instruction, conversational, and coding skills.",
+    "sourceHash": "92942986f62d6145",
+    "text": "Dolphin 2.9 は、Eric Hartford によって開発された Llama 3 ベースの新しいモデルで、80 億パラメータおよび 700 億パラメータのサイズがあり、多様な指示、対話、コーディングスキルを備えています。"
+  },
+  "llava-phi3": {
+    "source": "A new small LLaVA model fine-tuned from Phi 3 Mini.",
+    "sourceHash": "5e282bc15fd541f0",
+    "text": "Phi 3 Mini からファインチューニングされた新しい小型 LLaVA モデルです。"
+  },
+  "moondream": {
+    "source": "moondream2 is a small vision language model designed to run efficiently on edge devices.",
+    "sourceHash": "cc170033098f83bf",
+    "text": "moondream2 は、エッジデバイス上で効率的に動作するように設計された小型ビジョン言語モデルです。"
+  },
+  "llava-llama3": {
+    "source": "A LLaVA model fine-tuned from Llama 3 Instruct with better scores in several benchmarks.",
+    "sourceHash": "ac80f903aa2d3cfa",
+    "text": "Llama 3 Instruct からファインチューニングされた LLaVA モデルで、複数のベンチマークにおいてより高いスコアを記録しています。"
+  },
+  "stablelm2": {
+    "source": "Stable LM 2 is a state-of-the-art 1.6B and 12B parameter language model trained on multilingual data in English, Spanish, German, Italian, French, Portuguese, and Dutch.",
+    "sourceHash": "214206582c1e504c",
+    "text": "Stable LM 2 は、英語、スペイン語、ドイツ語、イタリア語、フランス語、ポルトガル語、オランダ語の多言語データでトレーニングされた最先端の 16 億パラメータおよび 120 億パラメータを持つ言語モデルです。"
+  },
+  "all-minilm": {
+    "source": "Embedding models on very large sentence level datasets.",
+    "sourceHash": "c357d95ea5435e99",
+    "text": "非常に大きな文レベルのデータセット上で動作する埋め込みモデルです。"
+  },
+  "mxbai-embed-large": {
+    "source": "State-of-the-art large embedding model from mixedbread.ai",
+    "sourceHash": "25d96aa059db979d",
+    "text": "mixedbread.ai から提供される最先端の大型埋め込みモデルです。"
+  },
+  "llama3-gradient": {
+    "source": "This model extends LLama-3 8B's context length from 8k to over 1m tokens.",
+    "sourceHash": "2e912238d9c4757e",
+    "text": "このモデルは、LLama-3 8B のコンテキスト長を 8k から 100 万トークン以上に拡張します。"
+  },
+  "qwen": {
+    "source": "Qwen 1.5 is a series of large language models by Alibaba Cloud spanning from 0.5B to 110B parameters",
+    "sourceHash": "e83c33a9a3a81870",
+    "text": "Qwen 1.5 は、Alibaba Cloud によって開発された 0.5B から 110B パラメータにわたる大規模言語モデルシリーズです。"
+  },
+  "snowflake-arctic-embed": {
+    "source": "A suite of text embedding models by Snowflake, optimized for performance.",
+    "sourceHash": "635824601449783d",
+    "text": "Snowflake によって開発され、パフォーマンスの最適化が図られたテキスト埋め込みモデルのスイートです。"
+  },
+  "dbrx": {
+    "source": "DBRX is an open, general-purpose LLM created by Databricks.",
+    "sourceHash": "10b4c5f6c7049029",
+    "text": "DBRX は、Databricks によって作成されたオープンな汎用 LLM です。"
+  },
+  "wizardlm2": {
+    "source": "State of the art large language model from Microsoft AI with improved performance on complex chat, multilingual, reasoning and agent use cases.",
+    "sourceHash": "e1210854dfaa8915",
+    "text": "Microsoft AI から提供される最先端の大規模言語モデルで、複雑なチャット、多言語、推論、エージェントユースケースにおいてパフォーマンスが向上しています。"
+  },
+  "zephyr": {
+    "source": "Zephyr is a series of fine-tuned versions of the Mistral and Mixtral models that are trained to act as helpful assistants.",
+    "sourceHash": "2adc591b8970719d",
+    "text": "Zephyr は、Mistral および Mixtral モデルのファインチューニングバージョンシリーズで、役立つアシスタントとして動作するようにトレーニングされています。"
+  },
+  "gemma": {
+    "source": "Gemma is a family of lightweight, state-of-the-art open models built by Google DeepMind. Updated to version 1.1",
+    "sourceHash": "bdabff15dfa05fc0",
+    "text": "Gemma は、Google DeepMind が構築した軽量で最先端のオープンモデルファミリーです。バージョン 1.1 に更新されました。"
+  },
+  "dolphincoder": {
+    "source": "A 7B and 15B uncensored variant of the Dolphin model family that excels at coding, based on StarCoder2.",
+    "sourceHash": "1ea53051cbf00fb8",
+    "text": "StarCoder2 をベースにした Dolphin モデルファミリーの 7B および 15B のアンセンスード（uncensored）バリエーションで、コーディングにおいて優れています。"
+  },
+  "starling-lm": {
+    "source": "Starling is a large language model trained by reinforcement learning from AI feedback focused on improving chatbot helpfulness.",
+    "sourceHash": "3dd8c585cf8bcd9f",
+    "text": "Starling は、チャットボットの有用性を向上させることに焦点を当てた AI フィードバックからの強化学習でトレーニングされた大規模言語モデルです。"
+  },
+  "dolphin-mistral": {
+    "source": "The uncensored Dolphin model based on Mistral that excels at coding tasks. Updated to version 2.8.",
+    "sourceHash": "d7c94185b5de5415",
+    "text": "コーディングタスクにおいて優れる Mistral ベースのアンセンスード Dolphin モデルです。バージョン 2.8 に更新されました。"
+  },
+  "stable-code": {
+    "source": "Stable Code 3B is a coding model with instruct and code completion variants on par with models such as Code Llama 7B that are 2.5x larger.",
+    "sourceHash": "8e5d94cbf17f9476",
+    "text": "Stable Code 3B は、Code Llama 7B のような 2.5 倍大きいモデルと同等の性能を持ち、インストラクト版とコード補完版を備えたコーディングモデルです。"
+  },
+  "nomic-embed-text": {
+    "source": "A high-performing open embedding model with a large token context window.",
+    "sourceHash": "23b36e2cf2dd6616",
+    "text": "大きなトークンコンテキストウィンドウを備えた高性能なオープン埋め込みモデルです。"
+  },
+  "llava": {
+    "source": "🌋 LLaVA is a novel end-to-end trained large multimodal model that combines a vision encoder and Vicuna for general-purpose visual and language understanding. Updated to version 1.6.",
+    "sourceHash": "da1bfcd140848820",
+    "text": "🌋 LLaVA は、一般用途の視覚および言語理解のためにビジョンエンコーダーと Vicuna を組み合わせるエンドツーエンドでトレーニングされた新規大規模マルチモーダルモデルです。バージョン 1.6 に更新されました。"
+  },
+  "sqlcoder": {
+    "source": "SQLCoder is a code completion model fined-tuned on StarCoder for SQL generation tasks",
+    "sourceHash": "2d3d5c7fefe6be4a",
+    "text": "StarCoder でファインチューニングされた SQL 生成タスク向けのコード補完モデルです。"
+  },
+  "tinydolphin": {
+    "source": "An experimental 1.1B parameter model trained on the new Dolphin 2.8 dataset by Eric Hartford and based on TinyLlama.",
+    "sourceHash": "58732488a6edb66f",
+    "text": "Eric Hartford によってトレーニングされた新しい Dolphin 2.8 データセットに基づいた実験的な 1.1B パラメータモデルで、TinyLlama をベースにしています。"
+  },
+  "duckdb-nsql": {
+    "source": "7B parameter text-to-SQL model made by MotherDuck and Numbers Station.",
+    "sourceHash": "80236b644d066037",
+    "text": "MotherDuck および Numbers Station によって作成された 7B パラメータのテキストから SQL への変換モデルです。"
+  },
+  "nexusraven": {
+    "source": "Nexus Raven is a 13B instruction tuned model for function calling tasks.",
+    "sourceHash": "19986b3612666b4f",
+    "text": "関数呼び出しタスク向けの 13B 指示チューニングモデルです。"
+  },
+  "megadolphin": {
+    "source": "MegaDolphin-2.2-120b is a transformation of Dolphin-2.2-70b created by interleaving the model with itself.",
+    "sourceHash": "18f691cb17feba10",
+    "text": "Dolphin-2.2-70b をモデル自身と交互に配置することで作成された MegaDolphin-2.2-120b は、その変形です。"
+  },
+  "openchat": {
+    "source": "A family of open-source models trained on a wide variety of data, surpassing ChatGPT on various benchmarks. Updated to version 3.5-0106.",
+    "sourceHash": "cd2a035675c32814",
+    "text": "多様なデータでトレーニングされたオープンソースモデルファミリーで、各種ベンチマークにおいて ChatGPT を凌駕します。バージョン 3.5-0106 に更新されました。"
+  },
+  "llama-pro": {
+    "source": "An expansion of Llama 2 that specializes in integrating both general language understanding and domain-specific knowledge, particularly in programming and mathematics.",
+    "sourceHash": "55a852689361211b",
+    "text": "Llama 2 の拡張版で、特にプログラミングおよび数学における一般言語理解とドメイン固有知識の両方を統合することに特化しています。"
+  },
+  "phi": {
+    "source": "Phi-2: a 2.7B language model by Microsoft Research that demonstrates outstanding reasoning and language understanding capabilities.",
+    "sourceHash": "60a2bbaefbbcffb5",
+    "text": "Phi-2 は、Microsoft Research による 2.7B の言語モデルで、優れた推論および言語理解能力を示しています。"
+  },
+  "wizardcoder": {
+    "source": "State-of-the-art code generation model",
+    "sourceHash": "85249a737c23e76d",
+    "text": "最先端のコード生成モデルです。"
+  },
+  "nous-hermes2": {
+    "source": "The powerful family of models by Nous Research that excels at scientific discussion and coding tasks.",
+    "sourceHash": "1fbfd42cde7d6a17",
+    "text": "Nous Research 社から登場した、科学的議論やコーディングタスクに優れる強力なモデルファミリーです。"
+  },
+  "tinyllama": {
+    "source": "The TinyLlama project is an open endeavor to train a compact 1.1B Llama model on 3 trillion tokens.",
+    "sourceHash": "2ce95469e84e0355",
+    "text": "TinyLlama プロジェクトは、3 兆トークンでコンパクトな 11 億パラメータの Llama モデルを訓練するためのオープンな取り組みです。"
+  },
+  "notus": {
+    "source": "A 7B chat model fine-tuned with high-quality data and based on Zephyr.",
+    "sourceHash": "fabb6c1c2baab5ca",
+    "text": "Zephyr をベースに、高品質なデータでファインチューニングされた 70 億パラメータのチャットモデルです。"
+  },
+  "openhermes": {
+    "source": "OpenHermes 2.5 is a 7B model fine-tuned by Teknium on Mistral with fully open datasets.",
+    "sourceHash": "ea003367b80df2fe",
+    "text": "Teknium 社によって Mistral をベースに、完全にオープンなデータセットでファインチューニングされた 70 億パラメータの OpenHermes 2.5 です。"
+  },
+  "notux": {
+    "source": "A top-performing mixture of experts model, fine-tuned with high-quality data.",
+    "sourceHash": "6fe3b904f95d8658",
+    "text": "高品質なデータでファインチューニングされた、トップクラスの性能を持つエキスパート混合モデルです。"
+  },
+  "phind-codellama": {
+    "source": "Code generation model based on Code Llama.",
+    "sourceHash": "33ab4c515457d245",
+    "text": "Code Llama をベースにしたコード生成モデルです。"
+  },
+  "deepseek-coder": {
+    "source": "DeepSeek Coder is a capable coding model trained on two trillion code and natural language tokens.",
+    "sourceHash": "7175eb86bf144149",
+    "text": "DeepSeek Coder は、2 兆のコードおよび自然言語トークンで訓練された能力のあるコーディングモデルです。"
+  },
+  "llama2": {
+    "source": "Llama 2 is a collection of foundation language models ranging from 7B to 70B parameters.",
+    "sourceHash": "8ecb63a58c14b608",
+    "text": "Llama 2 は、70 億パラメータから 700 億パラメータまで範囲を持つ基礎言語モデルのコレクションです。"
+  },
+  "stablelm-zephyr": {
+    "source": "A lightweight chat model allowing accurate, and responsive output without requiring high-end hardware.",
+    "sourceHash": "a462c8d5c0a4effd",
+    "text": "高エンドハードウェアを必要とせず、正確でレスポンシブな出力を可能にする軽量チャットモデルです。"
+  },
+  "everythinglm": {
+    "source": "Uncensored Llama2 based model with support for a 16K context window.",
+    "sourceHash": "692c70c936ae4559",
+    "text": "16K コンテキストウィンドウをサポートする、Uncensored Llama2 ベースのモデルです。"
+  },
+  "dolphin-phi": {
+    "source": "2.7B uncensored Dolphin model by Eric Hartford, based on the Phi language model by Microsoft Research.",
+    "sourceHash": "023362d7a05e3a0f",
+    "text": "Eric Hartford 氏による 27 億パラメータの Uncensored Dolphin モデルで、Microsoft Research の Phi 言語モデルをベースにしています。"
+  },
+  "neural-chat": {
+    "source": "A fine-tuned model based on Mistral with good coverage of domain and language.",
+    "sourceHash": "2b6843458a72192a",
+    "text": "Mistral をベースにファインチューニングされたモデルで、ドメインと言語の対応範囲が広いことが特長です。"
+  },
+  "wizard-math": {
+    "source": "Model focused on math and logic problems",
+    "sourceHash": "6ff8b21d1d10abd1",
+    "text": "数学および論理問題に特化したモデルです。"
+  },
+  "solar": {
+    "source": "A compact, yet powerful 10.7B large language model designed for single-turn conversation.",
+    "sourceHash": "9de01574755caf00",
+    "text": "単一ターン会話用に設計された、コンパクトでありながら強力な 107 億パラメータの大規模言語モデルです。"
+  },
+  "bakllava": {
+    "source": "BakLLaVA is a multimodal model consisting of the Mistral 7B base model augmented with the LLaVA architecture.",
+    "sourceHash": "9f3e6e9cd5dbc179",
+    "text": "LLaVA アーキテクチャで拡張された Mistral 7B ベースモデルからなるマルチモーダルモデル BakLLaVA です。"
+  },
+  "deepseek-llm": {
+    "source": "An advanced language model crafted with 2 trillion bilingual tokens.",
+    "sourceHash": "2184985cfbf5a533",
+    "text": "2 兆のバイリンガルトークンで製作された高度な言語モデルです。"
+  },
+  "magicoder": {
+    "source": "🎩 Magicoder is a family of 7B parameter models trained on 75K synthetic instruction data using OSS-Instruct, a novel approach to enlightening LLMs with open-source code snippets.",
+    "sourceHash": "c0a1e45f52bb0416",
+    "text": "🎩 Magicoder は、OSS-Instruct という手法を用いて 75K の合成指示データでトレーニングされた 7B パラメータを持つモデルファミリーであり、オープンソースのコードスニペットを用いて LLM を啓発する革新的なアプローチです。"
+  },
+  "meditron": {
+    "source": "Open-source medical large language model adapted from Llama 2 to the medical domain.",
+    "sourceHash": "02060a6338f63b2f",
+    "text": "Llama 2 から医療分野に適応させたオープンソースの医療系大規模言語モデルです。"
+  },
+  "orca2": {
+    "source": "Orca 2 is built by Microsoft research, and are a fine-tuned version of Meta's Llama 2 models. The model is designed to excel particularly in reasoning.",
+    "sourceHash": "6e17781f31948333",
+    "text": "Microsoft Research が構築した Orca 2 は、Meta の Llama 2 モデルのファインチューニング版であり、特に推論能力に優れるように設計されています。"
+  },
+  "alfred": {
+    "source": "A robust conversational model designed to be used for both chat and instruct use cases.",
+    "sourceHash": "0879ad12a4a5907e",
+    "text": "チャットおよび指示用途の両方に使用することを目的とした堅牢な対話型モデルです。"
+  },
+  "goliath": {
+    "source": "A language model created by combining two fine-tuned Llama 2 70B models into one.",
+    "sourceHash": "8d1079e78bb6ff8f",
+    "text": "2 つのファインチューニングされた Llama 2 70B モデルを 1 つに結合して作成された言語モデルです。"
+  },
+  "yarn-llama2": {
+    "source": "An extension of Llama 2 that supports a context of up to 128k tokens.",
+    "sourceHash": "9edefc76b7b6a573",
+    "text": "最大 128k トークンのコンテキストを対応する Llama 2 の拡張版です。"
+  },
+  "xwinlm": {
+    "source": "Conversational model based on Llama 2 that performs competitively on various benchmarks.",
+    "sourceHash": "fe2cae1b12965930",
+    "text": "Llama 2 をベースにした対話型モデルであり、各種ベンチマークで競争力のある性能を発揮します。"
+  },
+  "yarn-mistral": {
+    "source": "An extension of Mistral to support context windows of 64K or 128K.",
+    "sourceHash": "442742b93d81e032",
+    "text": "64K または 128K のコンテキストウィンドウをサポートする Mistral の拡張版です。"
+  },
+  "mistrallite": {
+    "source": "MistralLite is a fine-tuned model based on Mistral with enhanced capabilities of processing long contexts.",
+    "sourceHash": "54ea61cc376f30e8",
+    "text": "Mistral をベースにしたファインチューニングモデルであり、長文脈処理能力が強化されています。"
+  },
+  "wizardlm": {
+    "source": "General use model based on Llama 2.",
+    "sourceHash": "90ad11cccc06714f",
+    "text": "Llama 2 をベースにした汎用用途モデルです。"
+  },
+  "stable-beluga": {
+    "source": "Llama 2 based model fine tuned on an Orca-style dataset. Originally called Free Willy.",
+    "sourceHash": "40b994b6b4e1a021",
+    "text": "Orca スタイルのデータセットでファインチューニングされた Llama 2 ベースのモデルで、当初は Free Willy と呼ばれていました。"
+  },
+  "nous-hermes": {
+    "source": "General use models based on Llama and Llama 2 from Nous Research.",
+    "sourceHash": "61d316a2d634733f",
+    "text": "Nous Research から提供される Llama および Llama 2 をベースにした汎用用途モデルです。"
+  },
+  "codebooga": {
+    "source": "A high-performing code instruct model created by merging two existing code models.",
+    "sourceHash": "e27c2034b7d3217b",
+    "text": "既存の 2 つのコードモデルをマージして作成された高性能なコード指示モデルです。"
+  },
+  "open-orca-platypus2": {
+    "source": "Merge of the Open Orca OpenChat model and the Garage-bAInd Platypus 2 model. Designed for chat and code generation.",
+    "sourceHash": "c5784fc9591a2a7a",
+    "text": "Open Orca OpenChat モデルと Garage-bAInd Platypus 2 モデルのマージ版であり、チャットおよびコード生成用に設計されています。"
+  },
+  "codeup": {
+    "source": "Great code generation model based on Llama2.",
+    "sourceHash": "cdfde4ef8908e0c6",
+    "text": "Llama2 をベースにした優れたコード生成モデルです。"
+  },
+  "medllama2": {
+    "source": "Fine-tuned Llama 2 model to answer medical questions based on an open source medical dataset.",
+    "sourceHash": "ae02a24e9eda465d",
+    "text": "オープンソースの医療データセットに基づいて医療質問に答えるためにファインチューニングされた Llama 2 モデルです。"
+  },
+  "orca-mini": {
+    "source": "A general-purpose model ranging from 3 billion parameters to 70 billion, suitable for entry-level hardware.",
+    "sourceHash": "777a341bbaa35fc0",
+    "text": "30 億パラメータから 700 億パラメータまでの汎用モデルであり、エントリーレベルのハードウェアに適しています。"
+  },
+  "llama2-uncensored": {
+    "source": "Uncensored Llama 2 model by George Sung and Jarrad Hope.",
+    "sourceHash": "216785d7789d1084",
+    "text": "George Sung と Jarrad Hope による Uncensored Llama 2 モデルです。"
+  },
+  "llama2-chinese": {
+    "source": "Llama 2 based model fine tuned to improve Chinese dialogue ability.",
+    "sourceHash": "8f0342eda37d414f",
+    "text": "Llama 2 をベースに、中国語対話能力の向上を目的としてファインチューニングされたモデルです。"
+  },
+  "wizard-vicuna": {
+    "source": "Wizard Vicuna is a 13B parameter model based on Llama 2 trained by MelodysDreamj.",
+    "sourceHash": "778747e9dd671f14",
+    "text": "MelodysDreamj によってトレーニングされた、Llama 2 ベースの 130 億パラメータモデルです。"
+  },
+  "wizard-vicuna-uncensored": {
+    "source": "Wizard Vicuna Uncensored is a 7B, 13B, and 30B parameter model based on Llama 2 uncensored by Eric Hartford.",
+    "sourceHash": "ad56064ce4300cd0",
+    "text": "Eric Hartford によって Uncensored された Llama 2 ベースの 70 億、130 億、および 300 億パラメータモデルです。"
+  },
+  "vicuna": {
+    "source": "General use chat model based on Llama and Llama 2 with 2K to 16K context sizes.",
+    "sourceHash": "d16776acd9d2e133",
+    "text": "Llama と Llama 2 をベースにした汎用チャットモデルで、2K から 16K のコンテキストサイズに対応しています。"
+  },
+  "wizardlm-uncensored": {
+    "source": "Uncensored version of Wizard LM model",
+    "sourceHash": "f7c41b7de014195c",
+    "text": "Wizard LM モデルの Uncensored バージョンです。"
+  },
+  "falcon": {
+    "source": "A large language model built by the Technology Innovation Institute (TII) for use in summarization, text generation, and chat bots.",
+    "sourceHash": "1c67a075dbc5dcf7",
+    "text": "Technology Innovation Institute (TII) によって構築された大規模言語モデルで、要約、テキスト生成、チャットボットへの利用を目的としています。"
+  },
+  "starcoder": {
+    "source": "StarCoder is a code generation model trained on 80+ programming languages.",
+    "sourceHash": "d547e486541d568d",
+    "text": "80 以上のプログラミング言語でトレーニングされたコード生成モデル StarCoder です。"
+  },
+  "samantha-mistral": {
+    "source": "A companion assistant trained in philosophy, psychology, and personal relationships. Based on Mistral.",
+    "sourceHash": "a246b7b61cbf8d42",
+    "text": "哲学、心理学、および人間関係においてトレーニングされたコンパニオンアシスタントで、Mistral をベースとしています。"
+  },
+  "mistral-openorca": {
+    "source": "Mistral OpenOrca is a 7 billion parameter model, fine-tuned on top of the Mistral 7B model using the OpenOrca dataset.",
+    "sourceHash": "e72788b65d212f9b",
+    "text": "OpenOrca データセットを使用してファインチューニングされた Mistral 7B モデルをベースにした 70 億パラメータモデル Mistral OpenOrca です。"
+  }
+}

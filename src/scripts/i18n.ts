@@ -8,10 +8,12 @@ const LANGUAGE_KEY = "ailocalclick:language:v1";
 const supportedLocales = new Set<SupportedLocale>(["en", "ru", "ko", "ja", "zh-CN"]);
 const originalText = new WeakMap<Text, string>();
 const originalAttributes = new WeakMap<Element, Map<string, string>>();
+const originalModelDescriptions = new WeakMap<Element, string>();
 const translatableAttributes = ["aria-label", "placeholder", "title"];
 
 let locale: SupportedLocale = "en";
 let messages: MessageMap = {};
+let modelDescriptions: Record<string, ModelDescriptionEntry> = {};
 let localeRequest = 0;
 
 function supportedLocale(value: string | null | undefined): SupportedLocale | null {
@@ -32,6 +34,31 @@ async function loadMessages(nextLocale: SupportedLocale): Promise<MessageMap> {
   if (nextLocale === "ko") return (await import("../i18n/ko")).default;
   if (nextLocale === "ja") return (await import("../i18n/ja")).default;
   return (await import("../i18n/zh-CN")).default;
+}
+
+interface ModelDescriptionEntry {
+  source: string;
+  sourceHash: string;
+  text: string;
+}
+
+const modelDescriptionFallbacks: Record<Exclude<SupportedLocale, "en">, string> = {
+  ru: "Перевод описания этой модели обновляется. Точные сведения смотрите на официальной странице Ollama.",
+  ko: "이 모델의 번역 설명을 업데이트하고 있습니다. 정확한 정보는 공식 Ollama 페이지에서 확인하세요.",
+  ja: "このモデルの翻訳説明は更新中です。正確な情報はOllama公式ページでご確認ください。",
+  "zh-CN": "该模型的翻译说明正在更新中。准确信息请查看 Ollama 官方页面。"
+};
+
+async function loadModelDescriptions(nextLocale: SupportedLocale): Promise<Record<string, ModelDescriptionEntry>> {
+  if (nextLocale === "en") return {};
+  const entries: Record<string, ModelDescriptionEntry> = nextLocale === "ru"
+    ? (await import("../i18n/model-descriptions/ru.json")).default
+    : nextLocale === "ko"
+      ? (await import("../i18n/model-descriptions/ko.json")).default
+      : nextLocale === "ja"
+        ? (await import("../i18n/model-descriptions/ja.json")).default
+        : (await import("../i18n/model-descriptions/zh-CN.json")).default;
+  return entries;
 }
 
 function withVariables(value: string, variables: Record<string, string | number>): string {
@@ -106,6 +133,27 @@ export function refreshTranslations(root: ParentNode = document): void {
     }
   }
 
+  for (const element of root.querySelectorAll<HTMLElement>("[data-model-description][data-model-slug]")) {
+    if (!originalModelDescriptions.has(element)) {
+      originalModelDescriptions.set(element, element.textContent ?? "");
+    }
+    const source = originalModelDescriptions.get(element) ?? element.textContent ?? "";
+    const slug = element.dataset.modelSlug ?? "";
+    const entry = modelDescriptions[slug];
+    element.textContent = locale === "en"
+      ? source
+      : entry?.source === source
+        ? entry.text
+        : modelDescriptionFallbacks[locale];
+    const row = element.closest<HTMLElement>("[data-model-row]");
+    if (row) {
+      row.dataset.search = [row.dataset.name, element.textContent, row.dataset.caps, row.dataset.modelSizes]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+    }
+  }
+
   const originalTitle = document.documentElement.dataset.englishTitle ?? document.title;
   document.documentElement.dataset.englishTitle = originalTitle;
   const modelTitle = originalTitle.match(/^(.*) — Copy & run with Ollama \| ailocal\.click$/);
@@ -116,9 +164,13 @@ export function refreshTranslations(root: ParentNode = document): void {
 
 export async function setLocale(nextLocale: SupportedLocale): Promise<void> {
   const request = ++localeRequest;
-  const nextMessages = await loadMessages(nextLocale);
+  const [nextMessages, nextModelDescriptions] = await Promise.all([
+    loadMessages(nextLocale),
+    loadModelDescriptions(nextLocale)
+  ]);
   if (request !== localeRequest) return;
   messages = nextMessages;
+  modelDescriptions = nextModelDescriptions;
   locale = nextLocale;
   document.documentElement.lang = nextLocale;
   document.documentElement.dir = "ltr";
@@ -129,8 +181,19 @@ export async function setLocale(nextLocale: SupportedLocale): Promise<void> {
   } catch {
     // Language still works when storage is blocked.
   }
+  updateHomepageLocalePath(nextLocale);
   refreshTranslations();
   window.dispatchEvent(new CustomEvent(LANGUAGE_CHANGE_EVENT, { detail: { locale: nextLocale } }));
+}
+
+function updateHomepageLocalePath(nextLocale: SupportedLocale): void {
+  const basePath = document.documentElement.dataset.basePath ?? "";
+  const path = window.location.pathname.slice(basePath.length) || "/";
+  if (!/^\/(?:ru|ko|ja|zh-cn)?\/?$/i.test(path)) return;
+  const localePath = nextLocale === "en" ? "/" : `/${nextLocale.toLowerCase()}/`;
+  const next = new URL(window.location.href);
+  next.pathname = `${basePath}${localePath}`.replace(/\/+/g, "/");
+  window.history.replaceState({}, "", next);
 }
 
 export async function initializeI18n(): Promise<void> {
@@ -141,7 +204,9 @@ export async function initializeI18n(): Promise<void> {
   } catch {
     // Use browser language when storage is blocked.
   }
-  const initial = supportedLocale(stored)
+  const routeLocale = supportedLocale(document.documentElement.dataset.localeRoute);
+  const initial = routeLocale
+    ?? supportedLocale(stored)
     ?? navigator.languages.map((value) => supportedLocale(value)).find(Boolean)
     ?? "en";
   if (selector) {
