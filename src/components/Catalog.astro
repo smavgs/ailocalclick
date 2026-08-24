@@ -1,0 +1,74 @@
+---
+import ModelRow from "./ModelRow.astro";
+import type { Model } from "../lib/catalog";
+
+interface Props {
+  models: Model[];
+}
+
+const { models } = Astro.props;
+const capabilities = ["all", "vision", "tools", "thinking", "embedding", "audio", "cloud"];
+---
+
+<section class="directory" id="directory" aria-labelledby="directory-title" data-catalog>
+  <div class="directory-heading">
+    <div>
+      <p class="eyebrow">Official library directory</p>
+      <h2 id="directory-title">Find a model</h2>
+    </div>
+    <p class="directory-scope">Base models from Ollama’s official library. Exact downloads and licenses stay on Ollama.</p>
+  </div>
+
+  <div class="catalog-controls">
+    <div class="search-wrap">
+      <label for="model-search">Search all models</label>
+      <input
+        id="model-search"
+        type="search"
+        inputmode="search"
+        autocomplete="off"
+        placeholder="Try qwen, vision, 7b…"
+        data-catalog-search
+      />
+      <span class="search-key" aria-hidden="true">/</span>
+    </div>
+
+    <fieldset class="capability-filters">
+      <legend>Capability</legend>
+      <div class="filter-scroll">
+        {capabilities.map((capability) => (
+          <button
+            type="button"
+            data-capability={capability}
+            aria-pressed={capability === "all" ? "true" : "false"}
+          >
+            {capability === "all" ? "All" : capability}
+          </button>
+        ))}
+      </div>
+    </fieldset>
+
+    <div class="sort-control">
+      <label for="model-sort">Sort</label>
+      <select id="model-sort" data-catalog-sort>
+        <option value="newest">Newest</option>
+        <option value="popular">Most pulled</option>
+        <option value="name">Name A–Z</option>
+      </select>
+    </div>
+
+    <div class="result-line">
+      <p><strong data-result-count>{models.length}</strong> <span data-result-label>models</span></p>
+      <button type="button" class="clear-button" data-catalog-clear hidden>Clear filters</button>
+    </div>
+  </div>
+
+  <div class="model-list" data-model-list>
+    {models.map((model) => <ModelRow model={model} />)}
+  </div>
+
+  <div class="empty-state" data-empty-state hidden>
+    <p>No official-library models match those filters.</p>
+    <button type="button" data-empty-clear>Show every model</button>
+  </div>
+</section>

@@ -1,0 +1,25 @@
+{
+  "name": "ailocalclick",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A fast, beginner-friendly directory of every model in Ollama's official library.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "sync": "./scripts/sync_catalog.sh",
+    "test:data": "python3 -m unittest discover -s tests -p 'test_*.py'",
+    "verify": "./scripts/verify.sh"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@types/node": "26.2.0",
+    "astro": "7.2.4",
+    "typescript": "6.0.3"
+  }
+}

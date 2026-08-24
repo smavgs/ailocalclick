@@ -1,0 +1,61 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { catalog, formatSyncDate } from "../lib/catalog";
+
+const synced = formatSyncDate(catalog.source.generatedAt);
+---
+
+<BaseLayout
+  title="Data, scope, and safety — ailocal.click"
+  description="How ailocal.click sources Ollama model data, what the directory covers, and why the site copies commands instead of silently running them."
+  canonicalPath="/about/"
+  pageClass="about-page"
+>
+  <article class="about-shell">
+    <header class="about-hero">
+      <p class="eyebrow">Transparent by default</p>
+      <h1>What this directory is—and what it is not.</h1>
+      <p>ailocal.click is an independent, static index of base models in Ollama’s official library. It is designed for discovery and education, not invisible control of your computer.</p>
+    </header>
+
+    <section class="about-row">
+      <div><span>01</span><h2>One official catalog source</h2></div>
+      <div>
+        <p>The catalog synchronizer reads <a href={catalog.source.url}>Ollama’s official library sorted by newest</a>. The current snapshot contains <strong>{catalog.source.modelCount} base models</strong> and was generated <strong>{synced} UTC</strong>.</p>
+        <p>Community/user namespaces form an open-ended search surface and are not represented as a supposedly complete list.</p>
+      </div>
+    </section>
+
+    <section class="about-row">
+      <div><span>02</span><h2>Fresh, but never disguised as live</h2></div>
+      <div>
+        <p>GitHub Pages rebuilds the site every six hours. Pull totals and update labels can still change between synchronizations, so the timestamp remains visible.</p>
+        <p>Exact variants, licenses, context lengths, modalities, and file sizes must be confirmed on the linked Ollama model page.</p>
+      </div>
+    </section>
+
+    <section class="about-row">
+      <div><span>03</span><h2>Commands, not surprise downloads</h2></div>
+      <div>
+        <p>Copy buttons place a visible command on your clipboard. This website does not post directly to your local Ollama API, install software, start a pull, or weaken Ollama’s origin protections.</p>
+        <p>You choose the exact model and execute the command yourself after checking its requirements.</p>
+      </div>
+    </section>
+
+    <section class="about-row">
+      <div><span>04</span><h2>No account and no profile theatre</h2></div>
+      <div>
+        <p>There is no ailocal.click sign-in, simulated OAuth, or server-side profile. The deployed site is static. Search and filtering happen in your browser.</p>
+        <p>Links to Ollama and GitHub are external and follow those services’ own policies.</p>
+      </div>
+    </section>
+
+    <section class="about-row">
+      <div><span>05</span><h2>Built for inspection</h2></div>
+      <div>
+        <p>Astro and TypeScript generate static pages. CSS handles the adaptive visual system. A small JavaScript enhancement powers search and command copying. Python synchronizes the catalog, and Shell runs verification.</p>
+        <p><a href="https://github.com/smavgs/ailocalclick">Read the source on GitHub ↗</a></p>
+      </div>
+    </section>
+  </article>
+</BaseLayout>

@@ -1,0 +1,97 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import {
+  capabilityDefinitions,
+  capabilityLabels,
+  formatUpdatedDate,
+  models,
+  type Model
+} from "../../lib/catalog";
+
+export function getStaticPaths() {
+  return models.map((model) => ({ params: { slug: model.slug }, props: { model } }));
+}
+
+interface Props {
+  model: Model;
+}
+
+const { model } = Astro.props;
+const basePath = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL.replace(/\/$/, "");
+const href = (path: string) => `${basePath}${path}`;
+const related = models
+  .filter((candidate) => candidate.slug !== model.slug && candidate.capabilities.some((capability) => model.capabilities.includes(capability)))
+  .slice(0, 5);
+const title = `${model.name} — run with Ollama | ailocal.click`;
+---
+
+<BaseLayout title={title} description={model.description} canonicalPath={`/model/${model.slug}/`} pageClass="model-page">
+  <article class="model-shell">
+    <a class="breadcrumb" href={href("/#directory")}><span aria-hidden="true">←</span> All models</a>
+
+    <header class="model-hero">
+      <div>
+        <p class="eyebrow">Ollama model</p>
+        <h1>{model.name}</h1>
+        <p>{model.description}</p>
+      </div>
+      <a class="button button-line" href={model.officialUrl} target="_blank" rel="noreferrer">Official Ollama page ↗</a>
+    </header>
+
+    <div class="model-facts">
+      <dl>
+        <div><dt>Pulls</dt><dd>{model.pulls}</dd></div>
+        <div><dt>Tags</dt><dd>{model.tagCount}</dd></div>
+        <div><dt>Updated</dt><dd>{formatUpdatedDate(model.updatedAt, model.updatedLabel)}</dd></div>
+        <div><dt>Listed sizes</dt><dd>{model.sizes.length ? model.sizes.join(" · ") : "See Ollama"}</dd></div>
+      </dl>
+    </div>
+
+    <section class="run-section" aria-labelledby="run-title">
+      <div class="run-copy">
+        <p class="eyebrow">Run locally</p>
+        <h2 id="run-title">Check the variant, then run it yourself.</h2>
+        <p>Ollama downloads the default tag if it is not installed. Confirm the exact file size, license, context, and hardware requirement on the official page first.</p>
+      </div>
+      <div class="primary-command">
+        <span class="terminal-prompt" aria-hidden="true">$</span>
+        <code>{model.runCommand}</code>
+        <button type="button" data-copy-command={model.runCommand}>Copy command</button>
+      </div>
+      <ol class="run-steps">
+        <li><span>1</span><p><strong>Install Ollama</strong> from the official download.</p></li>
+        <li><span>2</span><p><strong>Review this model’s Ollama page</strong> and choose a compatible tag.</p></li>
+        <li><span>3</span><p><strong>Paste the command</strong> into Terminal or use the Ollama app.</p></li>
+      </ol>
+    </section>
+
+    {model.capabilities.length > 0 && (
+      <section class="capability-section" aria-labelledby="capability-title">
+        <p class="eyebrow">Capabilities</p>
+        <h2 id="capability-title">What its library labels mean</h2>
+        <dl>
+          {model.capabilities.map((capability) => (
+            <div>
+              <dt>{capabilityLabels[capability] ?? capability}</dt>
+              <dd>{capabilityDefinitions[capability] ?? "See the official model page for capability details."}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    )}
+
+    {related.length > 0 && (
+      <section class="related-section" aria-labelledby="related-title">
+        <p class="eyebrow">Keep exploring</p>
+        <h2 id="related-title">Related official-library models</h2>
+        <div class="related-links">
+          {related.map((candidate) => (
+            <a href={href(`/model/${encodeURIComponent(candidate.slug)}/`)}>
+              <strong>{candidate.name}</strong><span>{candidate.pulls} pulls</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </article>
+</BaseLayout>

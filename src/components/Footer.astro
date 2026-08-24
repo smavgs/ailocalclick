@@ -1,0 +1,19 @@
+---
+const basePath = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL.replace(/\/$/, "");
+const href = (path: string) => `${basePath}${path}`;
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <a class="footer-mark" href={href("/")}>ailocal.click</a>
+      <p>An independent, read-only directory for the official Ollama model library.</p>
+    </div>
+    <nav aria-label="Footer navigation">
+      <a href={href("/learn/")}>Beginner guide</a>
+      <a href={href("/about/")}>Data &amp; safety</a>
+      <a href="https://github.com/smavgs/ailocalclick" target="_blank" rel="noreferrer">Source code</a>
+      <a href="https://docs.ollama.com" target="_blank" rel="noreferrer">Ollama docs</a>
+    </nav>
+  </div>
+</footer>

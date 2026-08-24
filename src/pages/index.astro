@@ -1,0 +1,61 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Catalog from "../components/Catalog.astro";
+import { catalog, formatSyncDate, models } from "../lib/catalog";
+
+const basePath = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL.replace(/\/$/, "");
+const href = (path: string) => `${basePath}${path}`;
+const syncDate = formatSyncDate(catalog.source.generatedAt);
+---
+
+<BaseLayout
+  title="ailocal.click — every model in Ollama’s official library"
+  description="Search every base model in Ollama's official library, copy the right command, and learn local AI from the beginning."
+  canonicalPath="/"
+  pageClass="home-page"
+>
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-kicker">Open models, clearly indexed</p>
+      <h1><span>ailocal</span><em>.click</em></h1>
+      <p class="hero-promise">Every model in Ollama’s official library. One fast, searchable directory.</p>
+      <div class="hero-actions">
+        <a class="button button-accent" href="#directory">Browse {models.length} models</a>
+        <a class="button button-quiet-dark" href={href("/learn/")}>I’m new to Ollama</a>
+      </div>
+      <div class="terminal-line" aria-label="Example Ollama command">
+        <span class="terminal-prompt" aria-hidden="true">$</span>
+        <code>ollama run <span>gemma3</span></code>
+        <span class="terminal-status">local AI starts here</span>
+      </div>
+      <div class="hero-foot">
+        <span>{models.length} base models</span>
+        <span>Static Astro build</span>
+        <span>Synced {syncDate} UTC</span>
+      </div>
+    </div>
+  </section>
+
+  <Catalog models={models} />
+
+  <section class="novice-teaser" aria-labelledby="novice-title">
+    <div class="novice-intro">
+      <p class="eyebrow">Complete beginner?</p>
+      <h2 id="novice-title">Ollama lets your computer run different AI brains.</h2>
+      <p>Start with four ideas. No AI engineering knowledge required.</p>
+      <a class="text-link" href={href("/learn/")}>Open the complete beginner guide <span aria-hidden="true">→</span></a>
+    </div>
+    <ol class="starter-flow">
+      <li><span>01</span><strong>Install Ollama</strong><p>It is the engine that manages and runs models.</p></li>
+      <li><span>02</span><strong>Choose a model</strong><p>A model is the actual AI brain you want to use.</p></li>
+      <li><span>03</span><strong>Run one command</strong><p><code>ollama run gemma3</code> downloads and starts it.</p></li>
+      <li><span>04</span><strong>Start talking</strong><p>Ask questions locally in the app or Terminal.</p></li>
+    </ol>
+  </section>
+
+  <section class="trust-strip" aria-label="Site principles">
+    <p><strong>Fast by design.</strong> Static HTML, a small TypeScript enhancement, no UI framework.</p>
+    <p><strong>Safe by design.</strong> Commands are copied only; this website never silently downloads a model.</p>
+    <p><strong>Source-bounded.</strong> Catalog data comes from the <a href={catalog.source.url}>official Ollama library</a>.</p>
+  </section>
+</BaseLayout>

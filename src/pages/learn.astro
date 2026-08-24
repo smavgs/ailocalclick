@@ -1,0 +1,182 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const basePath = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL.replace(/\/$/, "");
+const href = (path: string) => `${basePath}${path}`;
+const commands = [
+  ["ollama", "Open Ollama’s interactive terminal menu."],
+  ["ollama run gemma3", "Download Gemma 3 if necessary, then start chatting."],
+  ["ollama pull gemma3", "Download a model without starting it."],
+  ["ollama ls", "List models stored on your computer."],
+  ["ollama ps", "See models currently loaded in memory."],
+  ["ollama stop gemma3", "Stop a loaded model."],
+  ["ollama rm gemma3", "Remove a downloaded model and recover its disk space."],
+  ["ollama signin", "Sign in when you want to use Ollama cloud features."],
+  ["ollama launch", "Connect a model to supported applications and coding agents."],
+  ["ollama serve", "Start the local Ollama server manually when needed."]
+];
+---
+
+<BaseLayout
+  title="Ollama for complete beginners — ailocal.click"
+  description="A plain-language guide to installing Ollama, choosing a model, chatting locally, using files, and understanding APIs and agents."
+  canonicalPath="/learn/"
+  pageClass="guide-page"
+>
+  <article class="guide-shell">
+    <header class="guide-hero">
+      <p class="eyebrow">Start from zero</p>
+      <h1>Ollama, explained for a complete beginner.</h1>
+      <p class="guide-lead">Ollama is an app that lets you download AI models and run them on your own computer—almost like installing different AI brains.</p>
+      <nav class="guide-jumps" aria-label="Guide sections">
+        <a href="#mental-model">The idea</a>
+        <a href="#first-run">First run</a>
+        <a href="#commands">Commands</a>
+        <a href="#local-cloud">Local vs cloud</a>
+        <a href="#advanced">What comes next</a>
+      </nav>
+    </header>
+
+    <section class="guide-section mental-section" id="mental-model">
+      <div class="section-number">01</div>
+      <div class="guide-content">
+        <p class="eyebrow">The one idea to remember</p>
+        <h2>Ollama is the engine. The model is the AI.</h2>
+        <div class="mental-flow" aria-label="Your computer sends a prompt through Ollama to an AI model, which returns an answer">
+          <span>Your computer</span><i aria-hidden="true">→</i><span>Ollama</span><i aria-hidden="true">→</i><span>AI model</span><i aria-hidden="true">→</i><span>Answer</span>
+        </div>
+        <p>Gemma, Qwen, DeepSeek, GPT-OSS, and Llama are model families. Ollama downloads, stores, starts, stops, and connects them to other software.</p>
+        <dl class="plain-terms">
+          <div><dt>Model</dt><dd>The AI brain.</dd></div>
+          <div><dt>Pull</dt><dd>Download a brain.</dd></div>
+          <div><dt>Run</dt><dd>Start a brain.</dd></div>
+          <div><dt>Prompt</dt><dd>What you say to it.</dd></div>
+          <div><dt>API</dt><dd>A way for software to talk to it.</dd></div>
+          <div><dt>Local</dt><dd>It runs on your computer.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="guide-section" id="first-run">
+      <div class="section-number">02</div>
+      <div class="guide-content">
+        <p class="eyebrow">Your first ten minutes</p>
+        <h2>Install, choose, run, chat.</h2>
+        <ol class="instruction-list">
+          <li><strong>Install Ollama.</strong><span>Use the official download for macOS, Windows, or Linux.</span><a href="https://ollama.com/download" target="_blank" rel="noreferrer">Open official download ↗</a></li>
+          <li><strong>Open Ollama.</strong><span>On macOS and Windows, the desktop app provides a graphical chat experience. Terminal is optional for a beginner.</span></li>
+          <li><strong>Choose a sensible model.</strong><span>Check the exact download size on its official page before choosing. Larger is not automatically better for your computer.</span></li>
+          <li><strong>Start it.</strong><span>In Terminal, enter the command below. If the model is not installed, Ollama downloads it first.</span><div class="guide-command"><code>ollama run gemma3</code><button type="button" data-copy-command="ollama run gemma3">Copy</button></div></li>
+          <li><strong>Talk naturally.</strong><span>Try: “Explain artificial intelligence like I am ten years old.” Continue the conversation, then exit when finished.</span></li>
+        </ol>
+        <div class="callout">
+          <strong>Before downloading:</strong>
+          <p>Model files can range from hundreds of megabytes to hundreds of gigabytes. Confirm the exact tag, file size, memory requirement, and license on Ollama first.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section" id="capabilities">
+      <div class="section-number">03</div>
+      <div class="guide-content">
+        <p class="eyebrow">What the labels mean</p>
+        <h2>Models are good at different things.</h2>
+        <dl class="capability-explainer">
+          <div><dt>Vision</dt><dd>Understands compatible images and visual input.</dd></div>
+          <div><dt>Tools</dt><dd>Can request functions, searches, or actions supplied by another program.</dd></div>
+          <div><dt>Thinking</dt><dd>Supports reasoning controls on compatible requests.</dd></div>
+          <div><dt>Embedding</dt><dd>Turns text into vectors for search, recommendations, and RAG.</dd></div>
+          <div><dt>Audio</dt><dd>Accepts audio on supported variants.</dd></div>
+          <div><dt>Cloud</dt><dd>Runs on Ollama’s servers, not entirely on your computer.</dd></div>
+        </dl>
+        <p>Some vision models can inspect photographs, screenshots, charts, diagrams, and documents. The desktop app can also accept supported files, but document length and context settings affect memory use.</p>
+      </div>
+    </section>
+
+    <section class="guide-section" id="commands">
+      <div class="section-number">04</div>
+      <div class="guide-content">
+        <p class="eyebrow">The ten useful commands</p>
+        <h2>You do not need to memorize them today.</h2>
+        <div class="command-table">
+          {commands.map(([command, meaning]) => (
+            <div class="command-row">
+              <code>{command}</code>
+              <p>{meaning}</p>
+              <button type="button" data-copy-command={command} aria-label={`Copy ${command}`}>Copy</button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section" id="local-cloud">
+      <div class="section-number">05</div>
+      <div class="guide-content">
+        <p class="eyebrow">A crucial distinction</p>
+        <h2>Local and cloud models are not the same.</h2>
+        <div class="local-cloud-grid">
+          <section>
+            <p class="mode-label">Local</p>
+            <h3>Your hardware does the work.</h3>
+            <ul>
+              <li>Can work offline after downloading.</li>
+              <li>Prompts can stay on your machine.</li>
+              <li>No per-message API charge for local inference.</li>
+              <li>Your memory, storage, and compute set the limit.</li>
+            </ul>
+          </section>
+          <section>
+            <p class="mode-label">Cloud</p>
+            <h3>Ollama’s servers do the work.</h3>
+            <ul>
+              <li>Requires an internet connection and Ollama account.</li>
+              <li>Runs models too large for many personal computers.</li>
+              <li>Uses cloud infrastructure rather than only local hardware.</li>
+              <li>Policies and availability can change; check Ollama.</li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section" id="localhost">
+      <div class="section-number">06</div>
+      <div class="guide-content">
+        <p class="eyebrow">When software talks to Ollama</p>
+        <h2><code>localhost:11434</code> means “Ollama on this computer.”</h2>
+        <p><code>localhost</code> is your own machine. <code>11434</code> is the default local network port Ollama listens on. Together, <code>http://localhost:11434/api</code> is the local API address programs can use.</p>
+        <div class="api-flow">
+          <span>Your app</span><i aria-hidden="true">→</i><span>Ollama API</span><i aria-hidden="true">→</i><span>Local model</span>
+        </div>
+        <p>Ollama also offers official Python and JavaScript libraries and partial OpenAI-compatible endpoints. This is how document tools, editors, agents, and your own applications can use a local model underneath.</p>
+      </div>
+    </section>
+
+    <section class="guide-section" id="advanced">
+      <div class="section-number">07</div>
+      <div class="guide-content">
+        <p class="eyebrow">A calm learning path</p>
+        <h2>Go one level at a time.</h2>
+        <ol class="learning-ladder">
+          <li><span>Level 1</span><strong>Use AI</strong><p>Install Ollama, choose one model, and chat.</p></li>
+          <li><span>Level 2</span><strong>Learn the basic commands</strong><p>Run, pull, list, stop, and remove models.</p></li>
+          <li><span>Level 3</span><strong>Try files and images</strong><p>Use compatible vision models and understand context limits.</p></li>
+          <li><span>Level 4</span><strong>Connect software</strong><p>Learn localhost, APIs, Python, JavaScript, and supported integrations.</p></li>
+          <li><span>Level 5</span><strong>Build systems</strong><p>Explore tools, RAG, embeddings, custom models, and coding agents.</p></li>
+          <li><span>Level 6</span><strong>Operate responsibly</strong><p>Measure quality, privacy, hardware use, provenance, and production reliability.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="guide-finish">
+      <p class="eyebrow">Ready to choose?</p>
+      <h2>Start small. Check the size. Keep the official page open.</h2>
+      <div class="hero-actions">
+        <a class="button button-accent" href={href("/#directory")}>Browse all models</a>
+        <a class="button button-line" href="https://docs.ollama.com/quickstart" target="_blank" rel="noreferrer">Official quickstart ↗</a>
+      </div>
+      <p class="source-note">Primary references: <a href="https://docs.ollama.com/quickstart">Quickstart</a>, <a href="https://docs.ollama.com/cli">CLI reference</a>, <a href="https://docs.ollama.com/api/introduction">API introduction</a>, and <a href="https://docs.ollama.com/cloud">Cloud documentation</a>.</p>
+    </section>
+  </article>
+</BaseLayout>

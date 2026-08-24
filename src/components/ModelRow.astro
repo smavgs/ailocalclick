@@ -1,0 +1,51 @@
+---
+import type { Model } from "../lib/catalog";
+import { capabilityLabels, formatUpdatedDate } from "../lib/catalog";
+
+interface Props {
+  model: Model;
+}
+
+const { model } = Astro.props;
+const basePath = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL.replace(/\/$/, "");
+const detailHref = `${basePath}/model/${encodeURIComponent(model.slug)}/`;
+const searchable = [model.name, model.description, ...model.capabilities, ...model.sizes].join(" ").toLowerCase();
+const updatedNumber = model.updatedAt ? Date.parse(model.updatedAt) : 0;
+---
+
+<article
+  class="model-row"
+  data-model-row
+  data-name={model.name.toLowerCase()}
+  data-search={searchable}
+  data-caps={model.capabilities.join(" ")}
+  data-pulls={model.pullCount}
+  data-updated={updatedNumber}
+>
+  <a class="model-primary" href={detailHref}>
+    <div class="model-copy">
+      <h3>{model.name}</h3>
+      <p>{model.description}</p>
+      <div class="badges" aria-label="Model attributes">
+        {model.capabilities.map((capability) => (
+          <span class:list={["badge", `badge-${capability}`]}>{capabilityLabels[capability] ?? capability}</span>
+        ))}
+        {model.sizes.slice(0, 8).map((size) => <span class="badge badge-size">{size}</span>)}
+      </div>
+    </div>
+    <dl class="model-meta">
+      <div><dt>Pulls</dt><dd>{model.pulls}</dd></div>
+      <div><dt>Tags</dt><dd>{model.tagCount}</dd></div>
+      <div>
+        <dt>Updated</dt>
+        <dd><time datetime={model.updatedAt ?? undefined}>{formatUpdatedDate(model.updatedAt, model.updatedLabel)}</time></dd>
+      </div>
+    </dl>
+  </a>
+  <div class="row-command">
+    <code>{model.runCommand}</code>
+    <button type="button" class="copy-button" data-copy-command={model.runCommand} aria-label={`Copy ${model.runCommand}`}>
+      Copy
+    </button>
+  </div>
+</article>

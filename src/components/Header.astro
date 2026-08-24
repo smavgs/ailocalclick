@@ -1,0 +1,22 @@
+---
+const basePath = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL.replace(/\/$/, "");
+const href = (path: string) => `${basePath}${path}`;
+const current = Astro.url.pathname.replace(basePath, "") || "/";
+const active = (path: string) => path === "/" ? current === "/" : current.startsWith(path);
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="wordmark" href={href("/")} aria-label="ailocal.click home">
+      <span>ailocal</span><span class="wordmark-dot">.click</span>
+    </a>
+    <nav class="main-nav" aria-label="Primary navigation">
+      <a href={href("/")} aria-current={active("/") ? "page" : undefined}>Models</a>
+      <a href={href("/learn/")} aria-current={active("/learn/") ? "page" : undefined}>Beginner guide</a>
+      <a href={href("/about/")} aria-current={active("/about/") ? "page" : undefined}>About</a>
+    </nav>
+    <a class="header-source" href="https://ollama.com/library" target="_blank" rel="noreferrer">
+      Ollama library <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+</header>
