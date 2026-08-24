@@ -12,7 +12,7 @@ Fallback: [smavgs.github.io/ailocalclick](https://smavgs.github.io/ailocalclick/
 - synchronizes the complete official Ollama library listing with a standard-library Python script;
 - builds one searchable directory and one static detail page per model with Astro and TypeScript;
 - explains Ollama from first use through local APIs and coding-agent integrations;
-- privately synchronizes signed-in users through Supabase with row-level security;
+- supports email, Google, and GitHub sign-in, then privately synchronizes each user through Supabase with row-level security;
 - provides profiles with avatars, selected model tags, notes, operating system, RAM/GPU preferences, filters, remove, and JSON/CSV export;
 - supports English, Russian, Korean, Japanese, and Simplified Chinese without duplicating the static catalog;
 - copies a visible `ollama run <model>` command and shows OS-aware Terminal steps;
