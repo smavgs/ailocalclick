@@ -12,6 +12,8 @@ const messages: MessageMap = {
   "Saved": "Сохранённые",
   "I'm new": "Я новичок",
   "About": "О сайте",
+  "Privacy": "Конфиденциальность",
+  "Terms": "Условия",
   "Language": "Язык",
   "Ollama library": "Библиотека Ollama",
   "Sign in": "Войти",

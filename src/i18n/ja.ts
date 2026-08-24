@@ -12,6 +12,8 @@ const messages: MessageMap = {
   "Saved": "保存済み",
   "I'm new": "初めてです",
   "About": "概要",
+  "Privacy": "プライバシー",
+  "Terms": "利用規約",
   "Language": "言語",
   "Ollama library": "Ollamaライブラリ",
   "Sign in": "ログイン",

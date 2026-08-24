@@ -1,0 +1,58 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Privacy policy — ailocal.click"
+  description="How ailocal.click handles account, profile, saved-model, security, and local browser data."
+  canonicalPath="/privacy/"
+  pageClass="about-page"
+>
+  <article class="about-shell">
+    <header class="about-hero">
+      <p class="eyebrow">Privacy policy</p>
+      <h1>Your model list belongs to you.</h1>
+      <p>Effective 24 August 2026. This policy explains the limited data used to operate ailocal.click.</p>
+    </header>
+
+    <section class="about-row">
+      <div><span>01</span><h2>Data we process</h2></div>
+      <div>
+        <p>If you create an account, Supabase Auth processes your email address and authentication records. Google or GitHub sign-in may also provide your verified email, display name, and avatar.</p>
+        <p>Your optional profile can include a name, avatar URL, operating system, RAM, and GPU information. Your private model list can include saved model names, selected tags, and personal notes.</p>
+      </div>
+    </section>
+
+    <section class="about-row">
+      <div><span>02</span><h2>How data is used</h2></div>
+      <div>
+        <p>Account data is used only to sign you in, synchronize your profile and saved models, provide compatibility guidance, secure the service, and answer support requests.</p>
+        <p>Each signed-in account is restricted to its own profile and saved-model records through row-level security. We do not sell personal data or use it for advertising.</p>
+      </div>
+    </section>
+
+    <section class="about-row">
+      <div><span>03</span><h2>Service providers</h2></div>
+      <div>
+        <p>Supabase hosts authentication and private account records. Brevo delivers confirmation and recovery email. Cloudflare hosts the site and provides Turnstile abuse protection. Google and GitHub process social sign-in when you choose them.</p>
+        <p>Those providers process technical and security data under their own privacy policies. ailocal.click does not receive your Google or GitHub password.</p>
+      </div>
+    </section>
+
+    <section class="about-row">
+      <div><span>04</span><h2>Browser and command data</h2></div>
+      <div>
+        <p>The browser may keep your language choice and temporary interface preferences on your device. A legacy device-only saved list can be imported once after sign-in and is then removed.</p>
+        <p>Copy &amp; run only copies the visible Ollama command. The website cannot inspect Terminal, see local models, or know whether you pasted or ran the command.</p>
+      </div>
+    </section>
+
+    <section class="about-row">
+      <div><span>05</span><h2>Your choices</h2></div>
+      <div>
+        <p>You can edit profile details, remove saved models, clear your model list, and export saved data from your account pages.</p>
+        <p>To request account deletion, data access, correction, or privacy help, email <a href="mailto:corporate@agentmail.to">corporate@agentmail.to</a>.</p>
+      </div>
+    </section>
+  </article>
+</BaseLayout>

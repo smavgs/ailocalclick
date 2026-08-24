@@ -12,6 +12,8 @@ const messages: MessageMap = {
   "Saved": "已保存",
   "I'm new": "我是新手",
   "About": "关于",
+  "Privacy": "隐私",
+  "Terms": "条款",
   "Language": "语言",
   "Ollama library": "Ollama 模型库",
   "Sign in": "登录",
