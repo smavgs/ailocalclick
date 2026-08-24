@@ -57,8 +57,7 @@ configured. When Turnstile protection is enabled in Supabase Auth, the matching
 public site key must be present in every production build.
 
 For Cloudflare Pages, use `npm run build`, publish `dist`, and set
-`PUBLIC_SITE_URL` to the production origin with `PUBLIC_BASE_PATH=/`. The
-`wrangler.jsonc` file also supports direct Pages deployment from the CLI.
+`PUBLIC_SITE_URL` to the production origin with `PUBLIC_BASE_PATH=/`.
 
 ## Verification
 
