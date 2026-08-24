@@ -71,7 +71,7 @@ const turnstileEnabled = Boolean(import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#10110f" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0b0c0a" media="(prefers-color-scheme: dark)" />
-    <meta name="description" content={description} />
+    <meta name="description" content={description} data-i18n-content={description} />
     <meta name="generator" content={Astro.generator} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="ailocal.click" />
@@ -79,8 +79,8 @@ const turnstileEnabled = Boolean(import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim
     {localizedHome && homeAlternates.filter((alternate) => alternate.locale !== locale).map((alternate) => (
       <meta property="og:locale:alternate" content={openGraphLocales[alternate.locale]} />
     ))}
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={title} data-i18n-content={title} />
+    <meta property="og:description" content={description} data-i18n-content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={socialImage} />
     <meta property="og:image:secure_url" content={socialImage} />
@@ -89,8 +89,8 @@ const turnstileEnabled = Boolean(import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={socialImageAlt[locale]} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:title" content={title} data-i18n-content={title} />
+    <meta name="twitter:description" content={description} data-i18n-content={description} />
     <meta name="twitter:image" content={socialImage} />
     <meta name="twitter:image:alt" content={socialImageAlt[locale]} />
     <link rel="canonical" href={canonical} />

@@ -49,6 +49,14 @@ const modelDescriptionFallbacks: Record<Exclude<SupportedLocale, "en">, string> 
   "zh-CN": "该模型的翻译说明正在更新中。准确信息请查看 Ollama 官方页面。"
 };
 
+const openGraphLocales: Record<SupportedLocale, string> = {
+  en: "en_US",
+  ru: "ru_RU",
+  ko: "ko_KR",
+  ja: "ja_JP",
+  "zh-CN": "zh_CN"
+};
+
 async function loadModelDescriptions(nextLocale: SupportedLocale): Promise<Record<string, ModelDescriptionEntry>> {
   if (nextLocale === "en") return {};
   const entries: Record<string, ModelDescriptionEntry> = nextLocale === "ru"
@@ -132,6 +140,12 @@ export function refreshTranslations(root: ParentNode = document): void {
       element.setAttribute(name, tr(originals.get(name) ?? current));
     }
   }
+
+  for (const element of root.querySelectorAll<HTMLMetaElement>("meta[data-i18n-content]")) {
+    const source = element.dataset.i18nContent ?? element.content;
+    element.content = tr(source);
+  }
+  document.querySelector<HTMLMetaElement>('meta[property="og:locale"]')?.setAttribute("content", openGraphLocales[locale]);
 
   for (const element of root.querySelectorAll<HTMLElement>("[data-model-description][data-model-slug]")) {
     if (!originalModelDescriptions.has(element)) {

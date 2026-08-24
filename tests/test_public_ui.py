@@ -1,5 +1,6 @@
 from pathlib import Path
 import hashlib
+import html
 import json
 import re
 import unittest
@@ -120,6 +121,49 @@ class PublicUiContractTests(unittest.TestCase):
         header = (ROOT / "src/components/Header.astro").read_text()
         for locale in ("en", "ru", "ko", "ja", "zh-CN"):
             self.assertIn(f'value="{locale}"', header)
+
+    def test_privacy_and_terms_are_fully_localized(self) -> None:
+        legal_sources: set[str] = set()
+        for page_name in ("privacy.astro", "terms.astro"):
+            page = (ROOT / "src/pages" / page_name).read_text(encoding="utf-8")
+            for attribute in ("title", "description"):
+                legal_sources.update(
+                    html.unescape(value)
+                    for value in re.findall(rf'\b{attribute}="([^"]+)"', page)
+                )
+            for raw_value in re.findall(r">([^<>{]+)<", page):
+                value = html.unescape(" ".join(raw_value.split()))
+                if re.search(r"[A-Za-z]", value) and value != "corporate@agentmail.to":
+                    legal_sources.add(value)
+
+        self.assertEqual(40, len(legal_sources))
+        scripts = {
+            "ru": re.compile(r"[А-Яа-яЁё]"),
+            "ko": re.compile(r"[가-힣]"),
+            "ja": re.compile(r"[ぁ-んァ-ン一-龯]"),
+            "zh-CN": re.compile(r"[\u3400-\u9fff]"),
+        }
+        pair_pattern = re.compile(
+            r'^\s*"((?:[^"\\]|\\.)+)":\s*"((?:[^"\\]|\\.)*)",?$',
+            re.MULTILINE,
+        )
+        for locale, script in scripts.items():
+            source = (ROOT / f"src/i18n/{locale}.ts").read_text(encoding="utf-8")
+            translations = {
+                json.loads(f'"{key}"'): json.loads(f'"{value}"')
+                for key, value in pair_pattern.findall(source)
+            }
+            self.assertTrue(legal_sources.issubset(translations), f"missing {locale} legal translations")
+            for legal_source in legal_sources:
+                translated = translations[legal_source]
+                self.assertNotEqual(legal_source, translated, f"untranslated {locale} legal copy: {legal_source}")
+                self.assertRegex(translated, script, f"non-native {locale} legal copy: {legal_source}")
+
+        layout = (ROOT / "src/layouts/BaseLayout.astro").read_text(encoding="utf-8")
+        i18n = (ROOT / "src/scripts/i18n.ts").read_text(encoding="utf-8")
+        self.assertGreaterEqual(layout.count("data-i18n-content"), 5)
+        self.assertIn('meta[data-i18n-content]', i18n)
+        self.assertIn("openGraphLocales[locale]", i18n)
 
     def test_every_model_description_has_current_native_translations(self) -> None:
         catalog = json.loads((ROOT / "src/data/models.json").read_text(encoding="utf-8"))
