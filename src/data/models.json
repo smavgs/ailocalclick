@@ -2,11 +2,32 @@
   "source": {
     "name": "Ollama official model library",
     "url": "https://ollama.com/library?sort=newest",
-    "generatedAt": "2026-09-30T12:29:27.653573Z",
+    "generatedAt": "2026-09-30T22:12:03.393501Z",
     "modelCount": 240,
     "scope": "Base models listed in Ollama's official library; community search namespaces are not enumerated."
   },
   "models": [
+    {
+      "slug": "qwen3.6",
+      "name": "qwen3.6",
+      "description": "Qwen3.6 delivers substantial upgrades in agentic coding and thinking preservation than previous Qwen models.",
+      "capabilities": [
+        "vision",
+        "tools",
+        "thinking"
+      ],
+      "sizes": [
+        "27b",
+        "35b"
+      ],
+      "pulls": "6.9M",
+      "pullCount": 6900000,
+      "tagCount": 35,
+      "updatedAt": "2026-09-30T20:29:00Z",
+      "updatedLabel": "2 hours ago",
+      "officialUrl": "https://ollama.com/library/qwen3.6",
+      "runCommand": "ollama run qwen3.6"
+    },
     {
       "slug": "gemma4",
       "name": "gemma4",
@@ -25,11 +46,11 @@
         "26b",
         "31b"
       ],
-      "pulls": "26M",
-      "pullCount": 26000000,
+      "pulls": "26.1M",
+      "pullCount": 26100000,
       "tagCount": 51,
       "updatedAt": "2026-09-30T02:36:00Z",
-      "updatedLabel": "10 hours ago",
+      "updatedLabel": "20 hours ago",
       "officialUrl": "https://ollama.com/library/gemma4",
       "runCommand": "ollama run gemma4"
     },
@@ -42,11 +63,11 @@
         "0.8b",
         "4b"
       ],
-      "pulls": "995",
-      "pullCount": 995,
+      "pulls": "706",
+      "pullCount": 706,
       "tagCount": 8,
       "updatedAt": "2026-09-29T23:34:00Z",
-      "updatedLabel": "13 hours ago",
+      "updatedLabel": "23 hours ago",
       "officialUrl": "https://ollama.com/library/tev1",
       "runCommand": "ollama run tev1"
     },
@@ -58,11 +79,11 @@
       "sizes": [
         "9b"
       ],
-      "pulls": "012",
-      "pullCount": 12,
+      "pulls": "863",
+      "pullCount": 863,
       "tagCount": 5,
       "updatedAt": "2026-09-29T21:12:00Z",
-      "updatedLabel": "15 hours ago",
+      "updatedLabel": "yesterday",
       "officialUrl": "https://ollama.com/library/nimble",
       "runCommand": "ollama run nimble"
     },
@@ -97,8 +118,8 @@
         "cloud"
       ],
       "sizes": [],
-      "pulls": "59.3K",
-      "pullCount": 59300,
+      "pulls": "60.1K",
+      "pullCount": 60100,
       "tagCount": 1,
       "updatedAt": "2026-09-10T03:00:00Z",
       "updatedLabel": "2 weeks ago",
@@ -115,34 +136,13 @@
         "thinking"
       ],
       "sizes": [],
-      "pulls": "171.1K",
-      "pullCount": 171100,
+      "pulls": "171.5K",
+      "pullCount": 171500,
       "tagCount": 6,
       "updatedAt": "2026-09-05T17:55:00Z",
       "updatedLabel": "3 weeks ago",
       "officialUrl": "https://ollama.com/library/qwen3.8-flash-next",
       "runCommand": "ollama run qwen3.8-flash-next"
-    },
-    {
-      "slug": "qwen3.6",
-      "name": "qwen3.6",
-      "description": "Qwen3.6 delivers substantial upgrades in agentic coding and thinking preservation than previous Qwen models.",
-      "capabilities": [
-        "vision",
-        "tools",
-        "thinking"
-      ],
-      "sizes": [
-        "27b",
-        "35b"
-      ],
-      "pulls": "6.9M",
-      "pullCount": 6900000,
-      "tagCount": 35,
-      "updatedAt": "2026-09-01T17:04:00Z",
-      "updatedLabel": "4 weeks ago",
-      "officialUrl": "https://ollama.com/library/qwen3.6",
-      "runCommand": "ollama run qwen3.6"
     },
     {
       "slug": "qwen3.5",
@@ -162,8 +162,8 @@
         "35b",
         "122b"
       ],
-      "pulls": "21.2M",
-      "pullCount": 21200000,
+      "pulls": "21.3M",
+      "pullCount": 21300000,
       "tagCount": 62,
       "updatedAt": "2026-09-01T16:30:00Z",
       "updatedLabel": "4 weeks ago",
@@ -181,11 +181,11 @@
       "sizes": [
         "30b"
       ],
-      "pulls": "194.1K",
-      "pullCount": 194100,
+      "pulls": "195.5K",
+      "pullCount": 195500,
       "tagCount": 11,
       "updatedAt": "2026-08-31T21:05:00Z",
-      "updatedLabel": "4 weeks ago",
+      "updatedLabel": "1 month ago",
       "officialUrl": "https://ollama.com/library/nemotron-3.5-lightning",
       "runCommand": "ollama run nemotron-3.5-lightning"
     },
@@ -198,11 +198,11 @@
         "thinking"
       ],
       "sizes": [],
-      "pulls": "121.2K",
-      "pullCount": 121200,
+      "pulls": "121.4K",
+      "pullCount": 121400,
       "tagCount": 7,
       "updatedAt": "2026-08-31T20:58:00Z",
-      "updatedLabel": "4 weeks ago",
+      "updatedLabel": "1 month ago",
       "officialUrl": "https://ollama.com/library/laguna-xs-2.1",
       "runCommand": "ollama run laguna-xs-2.1"
     },
@@ -218,8 +218,8 @@
       "sizes": [
         "30b"
       ],
-      "pulls": "244.2K",
-      "pullCount": 244200,
+      "pulls": "245.9K",
+      "pullCount": 245900,
       "tagCount": 15,
       "updatedAt": "2026-08-28T19:09:00Z",
       "updatedLabel": "1 month ago",
@@ -235,8 +235,8 @@
         "thinking"
       ],
       "sizes": [],
-      "pulls": "168.1K",
-      "pullCount": 168100,
+      "pulls": "168.2K",
+      "pullCount": 168200,
       "tagCount": 8,
       "updatedAt": "2026-08-28T18:53:00Z",
       "updatedLabel": "1 month ago",
@@ -253,8 +253,8 @@
         "cloud"
       ],
       "sizes": [],
-      "pulls": "64.9K",
-      "pullCount": 64900,
+      "pulls": "65.4K",
+      "pullCount": 65400,
       "tagCount": 1,
       "updatedAt": "2026-08-28T15:00:00Z",
       "updatedLabel": "1 month ago",
@@ -271,8 +271,8 @@
         "8b",
         "30b"
       ],
-      "pulls": "97.8K",
-      "pullCount": 97800,
+      "pulls": "99K",
+      "pullCount": 99000,
       "tagCount": 49,
       "updatedAt": "2026-08-27T21:41:00Z",
       "updatedLabel": "1 month ago",
@@ -290,8 +290,8 @@
         "cloud"
       ],
       "sizes": [],
-      "pulls": "158.7K",
-      "pullCount": 158700,
+      "pulls": "159.3K",
+      "pullCount": 159300,
       "tagCount": 1,
       "updatedAt": "2026-08-26T14:00:00Z",
       "updatedLabel": "1 month ago",
@@ -310,8 +310,8 @@
         "35b",
         "397b"
       ],
-      "pulls": "355.4K",
-      "pullCount": 355400,
+      "pulls": "356.2K",
+      "pullCount": 356200,
       "tagCount": 3,
       "updatedAt": "2026-08-19T18:06:00Z",
       "updatedLabel": "1 month ago",
@@ -328,8 +328,8 @@
         "cloud"
       ],
       "sizes": [],
-      "pulls": "433.5K",
-      "pullCount": 433500,
+      "pulls": "434.2K",
+      "pullCount": 434200,
       "tagCount": 2,
       "updatedAt": "2026-08-13T15:00:00Z",
       "updatedLabel": "1 month ago",
@@ -347,8 +347,8 @@
         "cloud"
       ],
       "sizes": [],
-      "pulls": "94.6K",
-      "pullCount": 94600,
+      "pulls": "95K",
+      "pullCount": 95000,
       "tagCount": 1,
       "updatedAt": "2026-07-27T15:53:00Z",
       "updatedLabel": "2 months ago",
@@ -364,8 +364,8 @@
         "thinking"
       ],
       "sizes": [],
-      "pulls": "32.3K",
-      "pullCount": 32299,
+      "pulls": "32.4K",
+      "pullCount": 32400,
       "tagCount": 7,
       "updatedAt": "2026-07-25T18:19:00Z",
       "updatedLabel": "2 months ago",
@@ -384,8 +384,8 @@
         "9b",
         "35b"
       ],
-      "pulls": "547.2K",
-      "pullCount": 547200,
+      "pulls": "549.8K",
+      "pullCount": 549800,
       "tagCount": 9,
       "updatedAt": "2026-06-27T20:45:00Z",
       "updatedLabel": "3 months ago",
@@ -401,8 +401,8 @@
         "thinking"
       ],
       "sizes": [],
-      "pulls": "61.2K",
-      "pullCount": 61200,
+      "pulls": "61.4K",
+      "pullCount": 61400,
       "tagCount": 7,
       "updatedAt": "2026-06-18T01:39:00Z",
       "updatedLabel": "3 months ago",
@@ -419,8 +419,8 @@
         "cloud"
       ],
       "sizes": [],
-      "pulls": "361.2K",
-      "pullCount": 361200,
+      "pulls": "361.6K",
+      "pullCount": 361600,
       "tagCount": 1,
       "updatedAt": "2026-06-16T17:39:00Z",
       "updatedLabel": "3 months ago",
@@ -438,8 +438,8 @@
         "cloud"
       ],
       "sizes": [],
-      "pulls": "244.8K",
-      "pullCount": 244800,
+      "pulls": "245K",
+      "pullCount": 245000,
       "tagCount": 1,
       "updatedAt": "2026-06-13T00:26:00Z",
       "updatedLabel": "3 months ago",
@@ -457,8 +457,8 @@
       "sizes": [
         "8b"
       ],
-      "pulls": "28.8K",
-      "pullCount": 28800,
+      "pulls": "29K",
+      "pullCount": 29000,
       "tagCount": 16,
       "updatedAt": "2026-06-10T21:07:00Z",
       "updatedLabel": "3 months ago",
@@ -492,8 +492,8 @@
         "cloud"
       ],
       "sizes": [],
-      "pulls": "111.1K",
-      "pullCount": 111100,
+      "pulls": "111.6K",
+      "pullCount": 111600,
       "tagCount": 1,
       "updatedAt": "2026-06-04T00:00:00Z",
       "updatedLabel": "3 months ago",
@@ -510,8 +510,8 @@
       "sizes": [
         "8b"
       ],
-      "pulls": "46.3K",
-      "pullCount": 46300,
+      "pulls": "46.5K",
+      "pullCount": 46500,
       "tagCount": 13,
       "updatedAt": "2026-06-02T08:02:00Z",
       "updatedLabel": "4 months ago",
@@ -528,8 +528,8 @@
       "sizes": [
         "1b"
       ],
-      "pulls": "57.9K",
-      "pullCount": 57900,
+      "pulls": "58.1K",
+      "pullCount": 58100,
       "tagCount": 13,
       "updatedAt": "2026-06-02T07:54:00Z",
       "updatedLabel": "4 months ago",
@@ -547,8 +547,8 @@
         "cloud"
       ],
       "sizes": [],
-      "pulls": "517.5K",
-      "pullCount": 517500,
+      "pulls": "517.6K",
+      "pullCount": 517600,
       "tagCount": 1,
       "updatedAt": "2026-06-01T01:34:00Z",
       "updatedLabel": "4 months ago",
@@ -566,8 +566,8 @@
       "sizes": [
         "8b"
       ],
-      "pulls": "168.8K",
-      "pullCount": 168800,
+      "pulls": "170K",
+      "pullCount": 170000,
       "tagCount": 5,
       "updatedAt": "2026-05-31T04:16:00Z",
       "updatedLabel": "4 months ago",
@@ -586,8 +586,8 @@
         "8b",
         "30b"
       ],
-      "pulls": "490.7K",
-      "pullCount": 490700,
+      "pulls": "492.2K",
+      "pullCount": 492200,
       "tagCount": 48,
       "updatedAt": "2026-05-19T21:58:00Z",
       "updatedLabel": "4 months ago",
@@ -606,8 +606,8 @@
       "sizes": [
         "128b"
       ],
-      "pulls": "419.2K",
-      "pullCount": 419200,
+      "pulls": "419.3K",
+      "pullCount": 419300,
       "tagCount": 5,
       "updatedAt": "2026-05-05T23:14:00Z",
       "updatedLabel": "4 months ago",
@@ -626,8 +626,8 @@
       "sizes": [
         "33b"
       ],
-      "pulls": "671K",
-      "pullCount": 671000,
+      "pulls": "671.1K",
+      "pullCount": 671100,
       "tagCount": 4,
       "updatedAt": "2026-04-27T20:26:00Z",
       "updatedLabel": "5 months ago",
@@ -645,8 +645,8 @@
         "cloud"
       ],
       "sizes": [],
-      "pulls": "483.7K",
-      "pullCount": 483700,
+      "pulls": "484K",
+      "pullCount": 484000,
       "tagCount": 1,
       "updatedAt": "2026-04-20T20:09:00Z",
       "updatedLabel": "5 months ago",
@@ -664,8 +664,8 @@
         "4b",
         "27b"
       ],
-      "pulls": "438K",
-      "pullCount": 438000,
+      "pulls": "438.3K",
+      "pullCount": 438300,
       "tagCount": 9,
       "updatedAt": "2026-04-16T00:08:00Z",
       "updatedLabel": "5 months ago",
@@ -682,11 +682,11 @@
       "sizes": [
         "4b"
       ],
-      "pulls": "206.6K",
-      "pullCount": 206600,
+      "pulls": "206.8K",
+      "pullCount": 206800,
       "tagCount": 5,
       "updatedAt": "2026-04-16T00:04:00Z",
-      "updatedLabel": "version of the MedGemma 4B model. vision 4b 206.6K Pulls 5 Tags Updated 5 months ago",
+      "updatedLabel": "version of the MedGemma 4B model. vision 4b 206.8K Pulls 5 Tags Updated 5 months ago",
       "officialUrl": "https://ollama.com/library/medgemma1.5",
       "runCommand": "ollama run medgemma1.5"
     },
@@ -701,8 +701,8 @@
       "sizes": [
         "30b"
       ],
-      "pulls": "150.2K",
-      "pullCount": 150200,
+      "pulls": "150.4K",
+      "pullCount": 150400,
       "tagCount": 3,
       "updatedAt": "2026-03-20T20:10:00Z",
       "updatedLabel": "6 months ago",
@@ -740,11 +740,11 @@
         "4b",
         "30b"
       ],
-      "pulls": "870.6K",
-      "pullCount": 870600,
+      "pulls": "871.7K",
+      "pullCount": 871700,
       "tagCount": 9,
       "updatedAt": "2026-03-16T15:34:00Z",
-      "updatedLabel": "with a 4B parameter count model. tools thinking cloud 4b 30b 870.6K Pulls 9 Tags Updated 6 months ago",
+      "updatedLabel": "with a 4B parameter count model. tools thinking cloud 4b 30b 871.7K Pulls 9 Tags Updated 6 months ago",
       "officialUrl": "https://ollama.com/library/nemotron-3-nano",
       "runCommand": "ollama run nemotron-3-nano"
     },
@@ -868,8 +868,8 @@
       "sizes": [
         "270m"
       ],
-      "pulls": "194K",
-      "pullCount": 194000,
+      "pulls": "194.1K",
+      "pullCount": 194100,
       "tagCount": 4,
       "updatedAt": "2025-12-18T07:03:00Z",
       "updatedLabel": "9 months ago",
@@ -887,8 +887,8 @@
       "sizes": [
         "32b"
       ],
-      "pulls": "293.8K",
-      "pullCount": 293800,
+      "pulls": "293.9K",
+      "pullCount": 293900,
       "tagCount": 10,
       "updatedAt": "2025-12-16T05:56:00Z",
       "updatedLabel": "9 months ago",
@@ -907,8 +907,8 @@
         "7b",
         "32b"
       ],
-      "pulls": "463.5K",
-      "pullCount": 463500,
+      "pulls": "463.6K",
+      "pullCount": 463600,
       "tagCount": 15,
       "updatedAt": "2025-12-16T05:55:00Z",
       "updatedLabel": "9 months ago",
@@ -965,8 +965,8 @@
       "sizes": [
         "123b"
       ],
-      "pulls": "358.7K",
-      "pullCount": 358700,
+      "pulls": "358.8K",
+      "pullCount": 358800,
       "tagCount": 5,
       "updatedAt": "2025-12-12T01:21:00Z",
       "updatedLabel": "9 months ago",
@@ -999,8 +999,8 @@
       "sizes": [
         "8b"
       ],
-      "pulls": "511.6K",
-      "pullCount": 511600,
+      "pulls": "511.7K",
+      "pullCount": 511700,
       "tagCount": 5,
       "updatedAt": "2025-12-09T07:48:00Z",
       "updatedLabel": "9 months ago",
@@ -1018,8 +1018,8 @@
       "sizes": [
         "80b"
       ],
-      "pulls": "593.8K",
-      "pullCount": 593800,
+      "pulls": "593.9K",
+      "pullCount": 593900,
       "tagCount": 9,
       "updatedAt": "2025-12-05T04:37:00Z",
       "updatedLabel": "9 months ago",
@@ -1036,8 +1036,8 @@
         "cloud"
       ],
       "sizes": [],
-      "pulls": "124K",
-      "pullCount": 124000,
+      "pulls": "124.4K",
+      "pullCount": 124400,
       "tagCount": 1,
       "updatedAt": "2025-12-02T23:19:00Z",
       "updatedLabel": "10 months ago",
@@ -1054,8 +1054,8 @@
       "sizes": [
         "3b"
       ],
-      "pulls": "542.2K",
-      "pullCount": 542200,
+      "pulls": "542.5K",
+      "pullCount": 542500,
       "tagCount": 3,
       "updatedAt": "2025-11-19T20:26:00Z",
       "updatedLabel": "10 months ago",
@@ -1135,8 +1135,8 @@
         "20b",
         "120b"
       ],
-      "pulls": "159.1K",
-      "pullCount": 159100,
+      "pulls": "159.2K",
+      "pullCount": 159200,
       "tagCount": 3,
       "updatedAt": "2025-10-29T02:04:00Z",
       "updatedLabel": "11 months ago",
@@ -1161,8 +1161,8 @@
         "32b",
         "235b"
       ],
-      "pulls": "38.4M",
-      "pullCount": 38400000,
+      "pulls": "38.5M",
+      "pullCount": 38500000,
       "tagCount": 58,
       "updatedAt": "2025-10-10T20:18:00Z",
       "updatedLabel": "11 months ago",
@@ -1182,8 +1182,8 @@
         "20b",
         "120b"
       ],
-      "pulls": "13.3M",
-      "pullCount": 13300000,
+      "pulls": "13.4M",
+      "pullCount": 13400000,
       "tagCount": 5,
       "updatedAt": "2025-10-09T19:47:00Z",
       "updatedLabel": "11 months ago",
@@ -1201,8 +1201,8 @@
       "sizes": [
         "671b"
       ],
-      "pulls": "730.9K",
-      "pullCount": 730900,
+      "pulls": "731K",
+      "pullCount": 731000,
       "tagCount": 7,
       "updatedAt": "2025-09-27T00:46:00Z",
       "updatedLabel": "1 year ago",
@@ -1316,11 +1316,11 @@
       "sizes": [
         "7b"
       ],
-      "pulls": "33.7M",
-      "pullCount": 33700000,
+      "pulls": "33.8M",
+      "pullCount": 33800000,
       "tagCount": 84,
       "updatedAt": "2025-07-13T00:56:00Z",
-      "updatedLabel": "to version 0.3. tools 7b 33.7M Pulls 84 Tags Updated 1 year ago",
+      "updatedLabel": "to version 0.3. tools 7b 33.8M Pulls 84 Tags Updated 1 year ago",
       "officialUrl": "https://ollama.com/library/mistral",
       "runCommand": "ollama run mistral"
     },
@@ -1529,8 +1529,8 @@
       "sizes": [
         "3.8b"
       ],
-      "pulls": "315.1K",
-      "pullCount": 315100,
+      "pulls": "315.2K",
+      "pullCount": 315200,
       "tagCount": 5,
       "updatedAt": "2025-05-01T03:53:00Z",
       "updatedLabel": "1 year ago",
@@ -1565,8 +1565,8 @@
         "1.5b",
         "14b"
       ],
-      "pulls": "958.1K",
-      "pullCount": 958100,
+      "pulls": "958.2K",
+      "pullCount": 958200,
       "tagCount": 9,
       "updatedAt": "2025-04-08T22:53:00Z",
       "updatedLabel": "1 year ago",
@@ -1606,8 +1606,8 @@
       "sizes": [
         "24b"
       ],
-      "pulls": "793.8K",
-      "pullCount": 793800,
+      "pulls": "794K",
+      "pullCount": 794000,
       "tagCount": 5,
       "updatedAt": "2025-04-07T16:59:00Z",
       "updatedLabel": "1 year ago",
@@ -1641,8 +1641,8 @@
         "7.8b",
         "32b"
       ],
-      "pulls": "773.6K",
-      "pullCount": 773600,
+      "pulls": "773.7K",
+      "pullCount": 773700,
       "tagCount": 13,
       "updatedAt": "2025-03-19T17:04:00Z",
       "updatedLabel": "1 year ago",
@@ -1677,8 +1677,8 @@
       "sizes": [
         "111b"
       ],
-      "pulls": "231.3K",
-      "pullCount": 231300,
+      "pulls": "231.4K",
+      "pullCount": 231400,
       "tagCount": 5,
       "updatedAt": "2025-03-13T12:39:00Z",
       "updatedLabel": "1 year ago",
@@ -1751,8 +1751,8 @@
         "2b",
         "8b"
       ],
-      "pulls": "461.8K",
-      "pullCount": 461800,
+      "pulls": "461.9K",
+      "pullCount": 461900,
       "tagCount": 9,
       "updatedAt": "2025-02-26T05:48:00Z",
       "updatedLabel": "1 year ago",
@@ -1768,8 +1768,8 @@
         "70b",
         "671b"
       ],
-      "pulls": "426.2K",
-      "pullCount": 426200,
+      "pulls": "426.3K",
+      "pullCount": 426300,
       "tagCount": 9,
       "updatedAt": "2025-02-21T15:28:00Z",
       "updatedLabel": "1 year ago",
@@ -1859,8 +1859,8 @@
       "sizes": [
         "7b"
       ],
-      "pulls": "329.1K",
-      "pullCount": 329100,
+      "pulls": "329.3K",
+      "pullCount": 329300,
       "tagCount": 5,
       "updatedAt": "2025-01-16T22:27:00Z",
       "updatedLabel": "1 year ago",
@@ -1940,8 +1940,8 @@
       "sizes": [
         "3b"
       ],
-      "pulls": "262.7K",
-      "pullCount": 262700,
+      "pulls": "262.8K",
+      "pullCount": 262800,
       "tagCount": 5,
       "updatedAt": "2024-12-30T21:33:00Z",
       "updatedLabel": "1 year ago",
@@ -1957,8 +1957,8 @@
         "8b",
         "70b"
       ],
-      "pulls": "404.4K",
-      "pullCount": 404400,
+      "pulls": "404.5K",
+      "pullCount": 404500,
       "tagCount": 9,
       "updatedAt": "2024-12-21T03:58:00Z",
       "updatedLabel": "1 year ago",
@@ -2009,8 +2009,8 @@
       "sizes": [
         "8x7b"
       ],
-      "pulls": "599.1K",
-      "pullCount": 599100,
+      "pulls": "599.2K",
+      "pullCount": 599200,
       "tagCount": 18,
       "updatedAt": "2024-12-20T01:05:00Z",
       "updatedLabel": "1 year ago",
@@ -2028,8 +2028,8 @@
         "30m",
         "278m"
       ],
-      "pulls": "377.2K",
-      "pullCount": 377200,
+      "pulls": "377.5K",
+      "pullCount": 377500,
       "tagCount": 6,
       "updatedAt": "2024-12-18T04:11:00Z",
       "updatedLabel": "1 year ago",
@@ -2086,8 +2086,8 @@
         "7.8b",
         "32b"
       ],
-      "pulls": "567.6K",
-      "pullCount": 567600,
+      "pulls": "567.8K",
+      "pullCount": 567800,
       "tagCount": 13,
       "updatedAt": "2024-12-10T08:03:00Z",
       "updatedLabel": "1 year ago",
@@ -2122,8 +2122,8 @@
       "sizes": [
         "568m"
       ],
-      "pulls": "460K",
-      "pullCount": 460000,
+      "pulls": "460.2K",
+      "pullCount": 460200,
       "tagCount": 3,
       "updatedAt": "2024-12-04T23:57:00Z",
       "updatedLabel": "1 year ago",
@@ -2156,8 +2156,8 @@
         "8b",
         "20b"
       ],
-      "pulls": "420.8K",
-      "pullCount": 420800,
+      "pulls": "420.9K",
+      "pullCount": 420900,
       "tagCount": 13,
       "updatedAt": "2024-12-04T08:10:00Z",
       "updatedLabel": "1 year ago",
@@ -2211,8 +2211,8 @@
         "2b",
         "8b"
       ],
-      "pulls": "342.1K",
-      "pullCount": 342100,
+      "pulls": "342.2K",
+      "pullCount": 342200,
       "tagCount": 10,
       "updatedAt": "2024-11-19T23:33:00Z",
       "updatedLabel": "1 year ago",
@@ -2249,8 +2249,8 @@
         "1b",
         "3b"
       ],
-      "pulls": "969.6K",
-      "pullCount": 969600,
+      "pulls": "969.8K",
+      "pullCount": 969800,
       "tagCount": 33,
       "updatedAt": "2024-11-19T22:33:00Z",
       "updatedLabel": "1 year ago",
@@ -2266,8 +2266,8 @@
         "1.5b",
         "8b"
       ],
-      "pulls": "656.9K",
-      "pullCount": 656900,
+      "pulls": "657.2K",
+      "pullCount": 657200,
       "tagCount": 9,
       "updatedAt": "2024-11-18T07:31:00Z",
       "updatedLabel": "1 year ago",
@@ -2302,8 +2302,8 @@
       "sizes": [
         "72b"
       ],
-      "pulls": "597.9K",
-      "pullCount": 597900,
+      "pulls": "598K",
+      "pullCount": 598000,
       "tagCount": 17,
       "updatedAt": "2024-11-15T23:37:00Z",
       "updatedLabel": "1 year ago",
@@ -2359,8 +2359,8 @@
       "sizes": [
         "70b"
       ],
-      "pulls": "632.8K",
-      "pullCount": 632800,
+      "pulls": "633K",
+      "pullCount": 633000,
       "tagCount": 17,
       "updatedAt": "2024-10-16T23:10:00Z",
       "updatedLabel": "1 year ago",
@@ -2377,8 +2377,8 @@
         "9b",
         "27b"
       ],
-      "pulls": "953.8K",
-      "pullCount": 953800,
+      "pulls": "954.1K",
+      "pullCount": 954100,
       "tagCount": 49,
       "updatedAt": "2024-10-11T05:58:00Z",
       "updatedLabel": "1 year ago",
@@ -2413,8 +2413,8 @@
         "1b",
         "3b"
       ],
-      "pulls": "84.6M",
-      "pullCount": 84600000,
+      "pulls": "84.7M",
+      "pullCount": 84700000,
       "tagCount": 63,
       "updatedAt": "2024-09-25T21:09:00Z",
       "updatedLabel": "2 years ago",
@@ -2437,8 +2437,8 @@
         "32b",
         "72b"
       ],
-      "pulls": "41.3M",
-      "pullCount": 41300000,
+      "pulls": "41.4M",
+      "pullCount": 41400000,
       "tagCount": 133,
       "updatedAt": "2024-09-19T16:42:00Z",
       "updatedLabel": "2 years ago",
@@ -2453,8 +2453,8 @@
       "sizes": [
         "22b"
       ],
-      "pulls": "567.2K",
-      "pullCount": 567200,
+      "pulls": "567.3K",
+      "pullCount": 567300,
       "tagCount": 18,
       "updatedAt": "2024-09-18T22:27:00Z",
       "updatedLabel": "2 years ago",
@@ -2471,8 +2471,8 @@
       "sizes": [
         "4b"
       ],
-      "pulls": "721.2K",
-      "pullCount": 721200,
+      "pulls": "721.4K",
+      "pullCount": 721400,
       "tagCount": 17,
       "updatedAt": "2024-09-18T20:21:00Z",
       "updatedLabel": "2 years ago",
@@ -2487,8 +2487,8 @@
       "sizes": [
         "7b"
       ],
-      "pulls": "537.7K",
-      "pullCount": 537700,
+      "pulls": "537.9K",
+      "pullCount": 537900,
       "tagCount": 17,
       "updatedAt": "2024-09-18T18:29:00Z",
       "updatedLabel": "2 years ago",
@@ -2520,8 +2520,8 @@
         "0.5b",
         "1.5b"
       ],
-      "pulls": "943.9K",
-      "pullCount": 943900,
+      "pulls": "944.1K",
+      "pullCount": 944100,
       "tagCount": 33,
       "updatedAt": "2024-09-11T19:13:00Z",
       "updatedLabel": "2 years ago",
@@ -2574,8 +2574,8 @@
       "sizes": [
         "70b"
       ],
-      "pulls": "624.6K",
-      "pullCount": 624600,
+      "pulls": "624.7K",
+      "pullCount": 624700,
       "tagCount": 17,
       "updatedAt": "2024-09-09T05:16:00Z",
       "updatedLabel": "2 years ago",
@@ -2678,8 +2678,8 @@
       "sizes": [
         "104b"
       ],
-      "pulls": "810.1K",
-      "pullCount": 810100,
+      "pulls": "810.2K",
+      "pullCount": 810200,
       "tagCount": 21,
       "updatedAt": "2024-08-31T07:16:00Z",
       "updatedLabel": "2 years ago",
@@ -2787,8 +2787,8 @@
       "sizes": [
         "278m"
       ],
-      "pulls": "944.3K",
-      "pullCount": 944300,
+      "pulls": "944.4K",
+      "pullCount": 944400,
       "tagCount": 3,
       "updatedAt": "2024-08-07T00:05:00Z",
       "updatedLabel": "2 years ago",
@@ -2805,8 +2805,8 @@
       "sizes": [
         "335m"
       ],
-      "pulls": "288K",
-      "pullCount": 288000,
+      "pulls": "288.1K",
+      "pullCount": 288100,
       "tagCount": 3,
       "updatedAt": "2024-08-07T00:04:00Z",
       "updatedLabel": "2 years ago",
@@ -2875,8 +2875,8 @@
       "sizes": [
         "3.8b"
       ],
-      "pulls": "558.8K",
-      "pullCount": 558800,
+      "pulls": "559K",
+      "pullCount": 559000,
       "tagCount": 17,
       "updatedAt": "2024-07-22T23:54:00Z",
       "updatedLabel": "2 years ago",
@@ -2929,8 +2929,8 @@
       "sizes": [
         "70b"
       ],
-      "pulls": "531.8K",
-      "pullCount": 531800,
+      "pulls": "532K",
+      "pullCount": 532000,
       "tagCount": 17,
       "updatedAt": "2024-07-18T16:39:00Z",
       "updatedLabel": "2 years ago",
@@ -2945,8 +2945,8 @@
       "sizes": [
         "7b"
       ],
-      "pulls": "557.9K",
-      "pullCount": 557900,
+      "pulls": "558K",
+      "pullCount": 558000,
       "tagCount": 17,
       "updatedAt": "2024-07-16T17:04:00Z",
       "updatedLabel": "2 years ago",
@@ -2961,8 +2961,8 @@
       "sizes": [
         "9b"
       ],
-      "pulls": "699.4K",
-      "pullCount": 699400,
+      "pulls": "699.5K",
+      "pullCount": 699500,
       "tagCount": 17,
       "updatedAt": "2024-07-09T01:33:00Z",
       "updatedLabel": "2 years ago",
@@ -3060,8 +3060,8 @@
       "sizes": [
         "11b"
       ],
-      "pulls": "548.3K",
-      "pullCount": 548300,
+      "pulls": "548.4K",
+      "pullCount": 548400,
       "tagCount": 17,
       "updatedAt": "2024-05-14T01:46:00Z",
       "updatedLabel": "2 years ago",
@@ -3130,8 +3130,8 @@
       "sizes": [
         "3.8b"
       ],
-      "pulls": "471.8K",
-      "pullCount": 471800,
+      "pulls": "476.1K",
+      "pullCount": 476100,
       "tagCount": 4,
       "updatedAt": "2024-05-07T21:20:00Z",
       "updatedLabel": "2 years ago",
@@ -3483,8 +3483,8 @@
       "sizes": [
         "1.1b"
       ],
-      "pulls": "735.3K",
-      "pullCount": 735300,
+      "pulls": "735.4K",
+      "pullCount": 735400,
       "tagCount": 18,
       "updatedAt": "2024-01-30T09:39:00Z",
       "updatedLabel": "2 years ago",
@@ -3499,8 +3499,8 @@
       "sizes": [
         "7b"
       ],
-      "pulls": "535.5K",
-      "pullCount": 535500,
+      "pulls": "535.6K",
+      "pullCount": 535600,
       "tagCount": 17,
       "updatedAt": "2024-01-29T23:52:00Z",
       "updatedLabel": "2 years ago",
@@ -3515,8 +3515,8 @@
       "sizes": [
         "13b"
       ],
-      "pulls": "910.6K",
-      "pullCount": 910600,
+      "pulls": "910.8K",
+      "pullCount": 910800,
       "tagCount": 32,
       "updatedAt": "2024-01-17T19:53:00Z",
       "updatedLabel": "2 years ago",
@@ -3531,8 +3531,8 @@
       "sizes": [
         "120b"
       ],
-      "pulls": "577.4K",
-      "pullCount": 577400,
+      "pulls": "577.5K",
+      "pullCount": 577500,
       "tagCount": 19,
       "updatedAt": "2024-01-11T01:25:00Z",
       "updatedLabel": "2 years ago",
@@ -3561,8 +3561,8 @@
       "description": "An expansion of Llama 2 that specializes in integrating both general language understanding and domain-specific knowledge, particularly in programming and mathematics.",
       "capabilities": [],
       "sizes": [],
-      "pulls": "926K",
-      "pullCount": 926000,
+      "pulls": "926.3K",
+      "pullCount": 926300,
       "tagCount": 33,
       "updatedAt": "2024-01-09T03:30:00Z",
       "updatedLabel": "2 years ago",
@@ -3642,8 +3642,8 @@
       "sizes": [
         "7b"
       ],
-      "pulls": "548K",
-      "pullCount": 548000,
+      "pulls": "548.1K",
+      "pullCount": 548100,
       "tagCount": 18,
       "updatedAt": "2023-12-29T22:06:00Z",
       "updatedLabel": "2 years ago",
@@ -3672,8 +3672,8 @@
       "sizes": [
         "8x7b"
       ],
-      "pulls": "546.8K",
-      "pullCount": 546800,
+      "pulls": "546.9K",
+      "pullCount": 546900,
       "tagCount": 18,
       "updatedAt": "2023-12-29T03:35:00Z",
       "updatedLabel": "2 years ago",
@@ -3688,8 +3688,8 @@
       "sizes": [
         "34b"
       ],
-      "pulls": "995.4K",
-      "pullCount": 995400,
+      "pulls": "995.7K",
+      "pullCount": 995700,
       "tagCount": 49,
       "updatedAt": "2023-12-28T02:53:00Z",
       "updatedLabel": "2 years ago",
@@ -3740,8 +3740,8 @@
       "sizes": [
         "3b"
       ],
-      "pulls": "540.8K",
-      "pullCount": 540800,
+      "pulls": "540.9K",
+      "pullCount": 540900,
       "tagCount": 17,
       "updatedAt": "2023-12-27T20:51:00Z",
       "updatedLabel": "2 years ago",
@@ -3756,8 +3756,8 @@
       "sizes": [
         "13b"
       ],
-      "pulls": "574.5K",
-      "pullCount": 574500,
+      "pulls": "574.6K",
+      "pullCount": 574600,
       "tagCount": 18,
       "updatedAt": "2023-12-27T20:51:00Z",
       "updatedLabel": "2 years ago",
@@ -3822,8 +3822,8 @@
       "sizes": [
         "10.7b"
       ],
-      "pulls": "980.7K",
-      "pullCount": 980700,
+      "pulls": "980.9K",
+      "pullCount": 980900,
       "tagCount": 32,
       "updatedAt": "2023-12-18T03:00:00Z",
       "updatedLabel": "2 years ago",
@@ -3840,8 +3840,8 @@
       "sizes": [
         "7b"
       ],
-      "pulls": "896K",
-      "pullCount": 896000,
+      "pulls": "896.2K",
+      "pullCount": 896200,
       "tagCount": 17,
       "updatedAt": "2023-12-13T19:04:00Z",
       "updatedLabel": "2 years ago",
@@ -3873,8 +3873,8 @@
       "sizes": [
         "7b"
       ],
-      "pulls": "563.9K",
-      "pullCount": 563900,
+      "pulls": "564.1K",
+      "pullCount": 564100,
       "tagCount": 18,
       "updatedAt": "2023-12-05T23:59:00Z",
       "updatedLabel": "2 years ago",
@@ -3890,8 +3890,8 @@
         "7b",
         "70b"
       ],
-      "pulls": "906.7K",
-      "pullCount": 906700,
+      "pulls": "906.9K",
+      "pullCount": 906900,
       "tagCount": 22,
       "updatedAt": "2023-12-05T18:31:00Z",
       "updatedLabel": "2 years ago",
@@ -3907,8 +3907,8 @@
         "7b",
         "13b"
       ],
-      "pulls": "952.3K",
-      "pullCount": 952300,
+      "pulls": "952.5K",
+      "pullCount": 952500,
       "tagCount": 33,
       "updatedAt": "2023-11-22T22:13:00Z",
       "updatedLabel": "2 years ago",
@@ -3923,8 +3923,8 @@
       "sizes": [
         "40b"
       ],
-      "pulls": "275.9K",
-      "pullCount": 275900,
+      "pulls": "276.2K",
+      "pullCount": 276200,
       "tagCount": 7,
       "updatedAt": "2023-11-19T13:58:00Z",
       "updatedLabel": "2 years ago",
@@ -3937,8 +3937,8 @@
       "description": "A language model created by combining two fine-tuned Llama 2 70B models into one.",
       "capabilities": [],
       "sizes": [],
-      "pulls": "486.6K",
-      "pullCount": 486600,
+      "pulls": "486.8K",
+      "pullCount": 486800,
       "tagCount": 16,
       "updatedAt": "2023-11-17T21:54:00Z",
       "updatedLabel": "2 years ago",
@@ -3987,8 +3987,8 @@
       "sizes": [
         "7b"
       ],
-      "pulls": "916.4K",
-      "pullCount": 916400,
+      "pulls": "916.6K",
+      "pullCount": 916600,
       "tagCount": 33,
       "updatedAt": "2023-11-04T04:20:00Z",
       "updatedLabel": "2 years ago",
@@ -4003,8 +4003,8 @@
       "sizes": [
         "7b"
       ],
-      "pulls": "531.4K",
-      "pullCount": 531400,
+      "pulls": "531.5K",
+      "pullCount": 531500,
       "tagCount": 17,
       "updatedAt": "2023-11-02T22:27:00Z",
       "updatedLabel": "2 years ago",
@@ -4017,8 +4017,8 @@
       "description": "General use model based on Llama 2.",
       "capabilities": [],
       "sizes": [],
-      "pulls": "937.5K",
-      "pullCount": 937500,
+      "pulls": "938K",
+      "pullCount": 938000,
       "tagCount": 73,
       "updatedAt": "2023-10-30T02:54:00Z",
       "updatedLabel": "2 years ago",
@@ -4035,8 +4035,8 @@
         "13b",
         "70b"
       ],
-      "pulls": "963.6K",
-      "pullCount": 963600,
+      "pulls": "963.9K",
+      "pullCount": 963900,
       "tagCount": 49,
       "updatedAt": "2023-10-29T21:57:00Z",
       "updatedLabel": "2 years ago",
@@ -4068,8 +4068,8 @@
       "sizes": [
         "34b"
       ],
-      "pulls": "507.6K",
-      "pullCount": 507600,
+      "pulls": "507.8K",
+      "pullCount": 507800,
       "tagCount": 16,
       "updatedAt": "2023-10-29T10:48:00Z",
       "updatedLabel": "2 years ago",
@@ -4084,8 +4084,8 @@
       "sizes": [
         "13b"
       ],
-      "pulls": "517.6K",
-      "pullCount": 517600,
+      "pulls": "517.7K",
+      "pullCount": 517700,
       "tagCount": 17,
       "updatedAt": "2023-10-29T07:52:00Z",
       "updatedLabel": "2 years ago",
@@ -4100,8 +4100,8 @@
       "sizes": [
         "13b"
       ],
-      "pulls": "603.8K",
-      "pullCount": 603800,
+      "pulls": "603.9K",
+      "pullCount": 603900,
       "tagCount": 19,
       "updatedAt": "2023-10-29T06:38:00Z",
       "updatedLabel": "2 years ago",
@@ -4116,8 +4116,8 @@
       "sizes": [
         "7b"
       ],
-      "pulls": "736.8K",
-      "pullCount": 736800,
+      "pulls": "736.9K",
+      "pullCount": 736900,
       "tagCount": 17,
       "updatedAt": "2023-10-29T06:00:00Z",
       "updatedLabel": "2 years ago",
@@ -4185,8 +4185,8 @@
       "sizes": [
         "13b"
       ],
-      "pulls": "525.7K",
-      "pullCount": 525700,
+      "pulls": "525.8K",
+      "pullCount": 525800,
       "tagCount": 17,
       "updatedAt": "2023-10-28T19:41:00Z",
       "updatedLabel": "2 years ago",
@@ -4237,8 +4237,8 @@
       "sizes": [
         "13b"
       ],
-      "pulls": "654.2K",
-      "pullCount": 654200,
+      "pulls": "654.3K",
+      "pullCount": 654300,
       "tagCount": 18,
       "updatedAt": "2023-10-28T15:29:00Z",
       "updatedLabel": "2 years ago",
@@ -4306,8 +4306,8 @@
       "sizes": [
         "7b"
       ],
-      "pulls": "812.1K",
-      "pullCount": 812100,
+      "pulls": "816.2K",
+      "pullCount": 816200,
       "tagCount": 17,
       "updatedAt": "2023-10-11T22:00:00Z",
       "updatedLabel": "2 years ago",
